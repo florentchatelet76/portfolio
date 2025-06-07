@@ -3,7 +3,7 @@ const listingProjects = [
         id: "1",
         title: "Somewhere Between",
         image: "/assets/medias/somewhereBetweenCover.png",
-        image2 : "/assets/medias/img_test1.jpg",
+        image2 : "/assets/medias/somewhereBetweenCover.png",
         descriptionPreview: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
         descriptions: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore eee eee aazer"],
         roles : ["Intégrateur 3D", "UX UI Designer", "Motion designer"],
