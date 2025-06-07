@@ -1,0 +1,33 @@
+/*
+* Variables for breakpoints
+*/
+$mobile-landscape: 568px;
+$tablet: 768px;
+$desktop: 992px;
+
+/*
+* Map for breakpoints
+*/
+$breakpoints: (
+  "small": (
+    $mobile-landscape,
+  ),
+  "medium": (
+   $tablet,
+  ),
+  "large": (
+   $desktop,
+  ),
+); 
+
+
+@mixin respond-below($breakpoint-name) {
+    $value: map-get($breakpoints, $breakpoint-name);
+    @if $value {
+      @media screen and (max-width: $value) {
+        @content;
+      }
+    } @else {
+      @warn "Le breakpoint `#{$breakpoint-name}` n'existe pas.";
+    }
+  }

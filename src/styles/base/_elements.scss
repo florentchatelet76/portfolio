@@ -1,0 +1,17 @@
+.buttonContainer{
+    height: 4dvb;
+}
+
+.primaryButton{
+
+    margin: .5rem;
+    height: 100%;
+
+    &__inner {
+        border: solid 1px black;
+        border-radius: 10rem;
+        height: 100%;
+        padding: 0 2rem;
+        font-size: 1.6rem;
+    }
+}

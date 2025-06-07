@@ -1,0 +1,116 @@
+.overlayTransition {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  transform: translateY(100%);
+  z-index: 9999;
+}
+
+
+.noiseBG{
+    position: fixed;
+    left: 0;
+    top: 0%;
+    z-index: -10;
+    width: 100vw;
+    height : 100vh;
+    background-color: $TertiaryC1Light;
+
+
+}
+
+.noiseBG::after {
+    content: "";
+    position: fixed;         /* ou absolute selon ton besoin */
+    top: 0; left: 0;
+    width: 300vw;
+    height: 300vh;
+    background: url("/assets/medias/assets/graphics/noiseBG.png");
+    opacity: .5;
+    pointer-events: none;    /* pour que ça ne capte pas la souris */
+    z-index: -2;             /* sous .noiseBG */
+    animation: noise 9s steps(10) infinite;
+  }
+
+  @keyframes noise {
+    0%   { background-position:   0%   0%; }
+    10%  { background-position:  10%  20%; }
+    20%  { background-position: -20%  10%; }
+    30%  { background-position:  30% -10%; }
+    40%  { background-position: -40%  30%; }
+    50%  { background-position: -10% -10%; }
+    60%  { background-position:  20%   0%; }
+    70%  { background-position:   0%  20%; }
+    80%  { background-position:  10%  10%; }
+    90%  { background-position: -40%  40%; }
+    100% { background-position:   0%   0%; }
+  }
+  
+
+.svg-path {
+    position: relative;
+    top: -2rem;
+    left: -5rem;
+    fill: none;
+    stroke: $SecondaryC2Light;
+    stroke-width: 1;
+    stroke-miterlimit: 10;
+    height : 100%;
+    width: 100%;
+    opacity : .5;
+    /* L doit être >= la longueur max de tes paths */
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+  
+    /* enlève la même courbe de vitesse pour avoir un trace et un efface homogènes */
+    animation: drawReverseErase 5s linear infinite;
+  }
+  
+  @keyframes drawReverseErase {
+    /* trait complètement caché, tout en dashoffset positif */
+    0%   { stroke-dashoffset: 2000; }
+    /* trait complètement dessiné */
+    50%  { stroke-dashoffset:    0; }
+    /* trait complètement effacé dans l'autre sens */
+    100% { stroke-dashoffset: -2000; }
+  }
+  
+  /* Décaler le deuxième chemin pour la variation */
+  #trait1, #trait2, .svg-path {
+    animation-delay: 3s;
+  }
+  
+
+  .svg-path #trait2{
+    position: absolute;
+    top : 0;
+  }
+
+  .svg-path #trait1{
+    position: absolute;
+    top : 50%;
+  }
+
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $SecondaryC2Light;
+
+    width: 12px;
+
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $SecondaryC1Light;
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}

@@ -1,0 +1,72 @@
+.bgShape{
+    position: absolute;
+    border: .5rem solid $TertiaryC1Light;
+    border-radius: 3rem;
+    width: 30%;
+    height: 20%;
+    min-width: 20rem;
+    min-height: 5rem;
+    z-index: 0;
+}
+
+.gallerySmall{
+
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background-color: $SecondaryC2Light;
+    padding: 8rem 0 ;
+    position: relative;
+    overflow : hidden;
+    &__bgShape1{
+
+        right: -2rem;
+        top: 0rem;
+        transform: rotate(-45deg);
+
+        @include respond-below('medium') {
+            height: 10%;
+            }
+    }
+
+    &__bgShape2{
+        left: 4rem;
+        bottom: 0rem;
+        transform: rotate(-45deg);
+
+        @include respond-below('medium') {
+            height: 10%;
+            }
+    }
+
+      &__inner{
+
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap : 1rem;
+        padding: 0 $baseContentMargin;
+    
+        
+        @include respond-below('medium') {
+        flex-direction: column;
+        align-items: center;
+        gap : .5rem;
+        }
+      }
+
+    &__imgContainer{
+        width: 100%;
+        overflow: hidden;
+        min-height: 40rem;
+        position: relative;
+        border-radius: .5rem;
+    }
+
+    &__img{
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+        position: absolute;
+    }
+}

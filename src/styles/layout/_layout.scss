@@ -1,0 +1,109 @@
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.flex-column{
+    flex-direction: column;
+}
+
+.componentPadding1{
+    padding: 2rem 1rem;
+    border-radius: $borderRadius1;
+    margin-top: 5rem;
+}
+
+.mainContent{
+
+    width: 100%;
+    height: 100%;
+    &__container{
+
+    }
+}
+
+
+#root{
+    width: 100%;
+}
+
+.topContentMargin{
+    margin-top: $headerHeight;
+}
+
+.contentSpacing{
+    margin: $contentSpacingLaptop 0;
+
+    @include respond-below('medium') {
+        padding: 0 $baseContentPadding;
+      }
+}
+
+.contentPaddingLR{
+    padding: 0 $baseContentPaddingLaptop;
+
+    @include respond-below('large') {
+        padding: 0 $baseContentPadding;
+      }
+    
+    @include respond-below('medium') {
+        padding: 0 $baseContentPaddingMobile;
+      }
+}
+
+.site-wrapper {
+    width: 100%;
+    height : 100%;
+
+  }
+
+.content-wrapper {
+    height : 100%;
+    padding: 0 $baseContentPaddingLaptop;
+    margin: 0 ;
+
+    @include respond-below('large') {
+        padding: 0 $baseContentPadding;
+      }
+    
+    @include respond-below('medium') {
+        padding: 0 $baseContentPaddingMobile;
+      }
+
+
+}
+
+.content-overflow{
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  scroll-behavior: smooth;
+  height: calc(100vh - $headerHeight);
+  &__inner{
+    
+  }
+}
+
+.mr-8{
+    margin-left: .8rem;
+}
+
+.content-inside-padding-large{
+  padding: 4rem 1rem;
+}
+
+.content-inside-padding-medium{
+  padding: 3rem 5rem;
+}
+
+.mg-t-24{
+  margin: 2.4rem 0 0 0;
+}
+
+.mg-t-16{
+    margin: 1.6rem 0 0 0;
+}
