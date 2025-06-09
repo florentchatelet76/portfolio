@@ -213,7 +213,7 @@ function Home({ scrollContainerRef }) {
             <div className="mainProject__inner mainProject">
               <div className="mainProject__imgContainer">
                 <img
-                  src={homeMedia.image}
+                  src={projects[0].image}
                   className="mainProject__img"
                   alt=""
                 />
@@ -225,7 +225,7 @@ function Home({ scrollContainerRef }) {
                   </h2>
                 </div>
                 <div className="mainProjectContent__description mg-t-24">
-                  <p>{projects[0].descriptionPreview}</p>
+                  <p className='p-primColor'>{projects[0].descriptionPreview}</p>
                 </div>
                 <div className="mainProjectContent__link mg-t-16">
                   <a
@@ -278,7 +278,7 @@ function Home({ scrollContainerRef }) {
                       {project.title}
                     </h2>
                     <div className="secondaryProject__text">
-                      <p className="">{project.descriptionPreview}</p>
+                      <p className='p-primColor'>{project.descriptionPreview}</p>
                     </div>
                     <div className="secondaryProject__link mg-t-16">
                       <a
