@@ -33,31 +33,31 @@
 
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
     &__inner{
-        margin-bottom: 20rem;
+
+        margin: 4rem 0 0 0;
         display: flex;
-        gap: 3rem;
+        gap: 1.6rem;
     }
 
     &__sideText{
         margin-top: 2rem;
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 0rem;
     }
 }
 
 
 .topPageLogo{
     
-    width: 15rem;
-    min-width: 15rem;
+    width: 10rem;
+    min-width: 10rem;
 
     @include respond-below('medium') {
-    width: 8rem;
-    min-width: 8rem;
+    width: 6rem;
+    min-width: 6rem;
       }
     &__inner{
         width: 100%;
@@ -86,7 +86,7 @@ fill: #94a388;
     flex-direction: column;
 
     &__name{
-    font-size: 20rem;
+    font-size: 12rem;
     color: $SecondaryC2Light;
 
     @include respond-below('medium') {
@@ -98,12 +98,12 @@ fill: #94a388;
     }
 
     &__surname{
-    font-size: 16rem;
+    font-size: 10rem;
     -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: $SecondaryC2Light;
 
-    margin-top: -3rem;
+    margin-top: -1rem;
 
     @include respond-below('medium') {
     font-size: 8rem;
@@ -134,7 +134,7 @@ fill: #94a388;
 //----------- BOX CONTENT
 .boxContentContainer{
     position: absolute;
-    padding: 2rem 4rem;
+    padding: 2rem 2rem;
     bottom: 5rem;
     background-color: $SecondaryC2Light;
 
@@ -143,7 +143,8 @@ fill: #94a388;
     }         
     p{
         width: 22rem;
-        font-size: 1.6rem!important;
+        font-size: 1.2rem!important;
+        line-height: 1.6rem !important;
         color : white;
 
         @include respond-below('small') {
@@ -164,7 +165,7 @@ fill: #94a388;
 .circlesContainer{
     position: absolute;
     bottom: 5rem;
-    right: -15%;
+    right: -30%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -458,6 +459,10 @@ stroke-width: 1.68px;
     height: 40rem;
     width: 100vw;
     margin-left: calc(-2 * $baseContentPaddingLaptop);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     @include respond-below('medium') {
         margin-left: calc(-2 * $baseContentPadding);
@@ -467,5 +472,82 @@ stroke-width: 1.68px;
         margin-left: calc(-2 * $baseContentPaddingMobile);
     }
 
+    &__inner{
+        height: 100%;
+        width: 60%;
+        min-width: 45rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+    }
+
+}
+
+//------------------ ABOUT
+
+.h-about{
+
+    width: 100%;
+
+    &__inner{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap : 2rem;
+    }
+
+    &__imgToggleContainer, &__textContainer{
+        width: 50%;
+    }
+
+    &__text{
+        width: 100%;
+        max-width: 80%;
+    }
+
+    &__imgContainer{
+        width: 100%;
+        height: 100%;
+        max-height: 45rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    img{
+    height: 100% !important;
+    min-width: 100%;
+    object-fit: cover;
+    }
+    &__toggleContainer{
+        display: flex;
+        justify-content: flex-end;
+
+    }
+
+    &__toggle{
+        border: solid 1px $SecondaryC2Light ;
+        padding: 1rem 3rem;
+        color: $SecondaryC2Light;
+        transition: .3s ease-in;
+    }
+
+    &__toggle:first-child{
+        margin-right: -1px;
+    }
+
+    &__textContainer{
+        min-height: 80%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__toggleSelected{
+        background-color: $SecondaryC2Light;
+        color: white;
+    }
 }
 

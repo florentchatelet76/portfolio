@@ -59,6 +59,10 @@ p{
   color : $SecondaryC2Light;
 }
 
+.p-bgColor{
+  color: $SecondaryC1Light;
+}
+
 .lineHeight{
   line-height: $ParagraphlineHeight;
 }
@@ -98,6 +102,12 @@ p{
   color: $SecondaryC2Light;
 }
 
+.largeBoldText{
+  font-size: 6.9rem!important;
+  font-weight: 900!important;
+  text-transform: uppercase!important;
+  font-family: $TitleFontBlack;
+}
 
 .textBlock {
   max-width: 70%;     // ou 60ch pour une limite en nombre de caractères

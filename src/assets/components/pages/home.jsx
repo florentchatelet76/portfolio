@@ -1,16 +1,51 @@
 import medias from "../../../data/medias.js";
 import listingProjects from "../../../data/listingProjects";
 import { Link } from "react-router-dom";
-import { useRef, useLayoutEffect, useEffect } from "react";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function Home({ scrollContainerRef }) {
   const homeMedia = medias.find((item) => item.context === "home");
-
   const projects = [];
   const projectsNotFirst = [];
+
+  //--------------- about IMG FLIP 
+
+  const aboutImgDev = medias.find((item) => item.id === 2);
+  const aboutImgDesign = medias.find((item) => item.id === 3);
+
+  const [aboutSubject, setAboutSubject] = useState(true);
+
+  const ChangeAboutSubject = () => {
+    setAboutSubject(current => !current);
+    console.log('img : ' + aboutSubject)
+  }
+
+  const aboutTextDev = useRef(null);
+  const aboutTextDesign = useRef(null);
+
+  useEffect(() => {
+  const dev = aboutTextDev.current;
+  const design = aboutTextDesign.current;
+
+  if (aboutSubject) {
+    // Afficher texte Dev
+    gsap.to(design, { opacity: 0, y: 20, duration: 0.3, onComplete: () => {
+      design.style.display = "none";
+      dev.style.display = "block";
+      gsap.fromTo(dev, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
+    }});
+  } else {
+    // Afficher texte Design
+    gsap.to(dev, { opacity: 0, y: 20, duration: 0.3, onComplete: () => {
+      dev.style.display = "none";
+      design.style.display = "block";
+      gsap.fromTo(design, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
+    }});
+  }
+}, [aboutSubject]);
 
   //--------------- GSAP SCROLL PARALLAX
 
@@ -61,13 +96,16 @@ function Home({ scrollContainerRef }) {
     };
   }, [scrollContainerRef]);
 
+  //------------------ LISTING PROJECTS
+
   for (let i = 0; i < listingProjects.length; i++) {
     projects.push(listingProjects[i]);
   }
 
-  for (let i = 1; i < listingProjects.length; i++) {
+  for (let i = 1; i < 3; i++) {
     projectsNotFirst.push(listingProjects[i]);
   }
+
 
   return (
     <div className="home homeContainer">
@@ -117,11 +155,11 @@ function Home({ scrollContainerRef }) {
               </div>
               <div className="homeTopPageText">
                 <p class="p-primColor">
-                  Bonjour, je suis Florent Chatelet, développeur web front et
+                  Bonjour, je suis développeur web front et
                   full stack en devenir, avec un background en design graphique
-                  et motion design.
+                  et motion design. Curieux, je cherche constamment à apprendre de nouvelles compétences techniques.
                 </p>
-                <div className="homeTopPageNav">
+                {/* <div className="homeTopPageNav">
                   <div className="buttonContainer">
                     <Link to="/listing" className="PrimaryButtonLink">
                       <button className="primaryButton">Qui suis-je</button>
@@ -132,15 +170,14 @@ function Home({ scrollContainerRef }) {
                       <button className="primaryButton">Contactez-moi</button>
                     </Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
         <div className="boxContentContainer">
           <p>
-            Je cherche une alternance pour un niveau BAC+3 en 1 an, alors si mon
-            profil vous intéresse, n’hésitez surtout pas !
+            Je cherche une alternance pour un niveau BAC+3 en 1 an, n'hésitez pas à me contacter !
           </p>
         </div>
         <div className="circlesContainer">
@@ -207,11 +244,10 @@ function Home({ scrollContainerRef }) {
           {projectsNotFirst.map((project) => (
             <div key={project.id} className="secondaryProject contentSpacing">
               <div
-                className={`secondaryProject__inner ${
-                  project.id % 2 == 0
-                    ? "secondaryProject__flex"
-                    : "secondaryProject__flex-reverse"
-                } `}
+                className={`secondaryProject__inner ${project.id % 2 == 0
+                  ? "secondaryProject__flex"
+                  : "secondaryProject__flex-reverse"
+                  } `}
               >
                 <div className="secondaryProject__imgTextContainer content-inside-padding-medium">
                   <div className="secondaryProject__imgSpecifics">
@@ -257,11 +293,10 @@ function Home({ scrollContainerRef }) {
                 <div className="sideImgs">
                   <div className="sideImgs__inner">
                     <div
-                      className={`sideImgs__sideImg sideImgs__scroll-1 ${
-                        project.id % 2 == 0
-                          ? "sideImgs__sideImg1-reverse"
-                          : "sideImgs__sideImg1"
-                      } `}
+                      className={`sideImgs__sideImg sideImgs__scroll-1 ${project.id % 2 == 0
+                        ? "sideImgs__sideImg1-reverse"
+                        : "sideImgs__sideImg1"
+                        } `}
                     >
                       <img
                         src={project.image2}
@@ -271,11 +306,10 @@ function Home({ scrollContainerRef }) {
                     </div>
 
                     <div
-                      className={`sideImgs__sideImg sideImgs__scroll-2 ${
-                        project.id % 2 == 0
-                          ? "sideImgs__sideImg2-reverse"
-                          : "sideImgs__sideImg2"
-                      } `}
+                      className={`sideImgs__sideImg sideImgs__scroll-2 ${project.id % 2 == 0
+                        ? "sideImgs__sideImg2-reverse"
+                        : "sideImgs__sideImg2"
+                        } `}
                     >
                       <img
                         src={project.image2}
@@ -290,12 +324,66 @@ function Home({ scrollContainerRef }) {
           ))}
         </div>
         <div className="toListing">
-          <div className="toListing__inner">
-            <p className="toListing_LargeText"></p>
-            <p>
+          <div className="toListing__inner ">
+            <p className="toListing__largeText largeBoldText p-bgColor">
+              Et le reste ?
+            </p>
+            <p className="mg-t-32 p-bgColor">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
+            <div className="buttonContainer mg-t-24">
+              <Link to="/listing" className="PrimaryButtonLink">
+                <button className="primaryButton-light">Voir tous mes projets</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="h-about contentSpacing">
+          <div className="h-about__inner">
+            <div className="h-about__textContainer">
+              <h2 className="largeBoldText p-primColor"> Qui suis-je ?</h2>
+              <div className="h-about__text h-about-Developper mg-t-24" ref={aboutTextDev}>
+                <div className=" p-primColor">
+                  <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua.</p>
+
+                  <p className=" mg-t-24">Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua.</p>
+                </div>
+              </div>
+
+              <div className="h-about__text h-about-Designer mg-t-24" ref={aboutTextDesign}>
+                <div className=" p-primColor">
+                  <p className=""> DESIGN Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua.</p>
+
+                  <p className=" mg-t-24">Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua.</p>
+                </div>
+              </div>
+
+            </div>
+            <div className="h-about__imgToggleContainer">
+              <div className="h-about__imgContainer">
+                <img src={aboutSubject === true ? aboutImgDev.image : aboutImgDesign.image} alt="" />
+              </div>
+              <div className="h-about__toggleContainer">
+                <div onClick={ChangeAboutSubject} className={`h-about__toggle ${aboutSubject === true
+                  ? "h-about__toggleSelected"
+                  : ""
+                  } `}><p>Developpeur</p></div>
+                <div onClick={ChangeAboutSubject} className={`h-about__toggle ${aboutSubject === false
+                  ? "h-about__toggleSelected"
+                  : ""
+                  } `}><p>Designer</p></div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
