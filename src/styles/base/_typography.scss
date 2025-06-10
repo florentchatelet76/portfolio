@@ -1,88 +1,109 @@
-html { font-size: 62.5%; }
+html {
+  font-size: 62.5%;
+}
 @font-face {
-  font-family: "CabinetGrotesk-Bold";   /*Can be any text*/
+  font-family: "CabinetGrotesk-Bold"; /*Can be any text*/
   src: local("CabinetGrotesk-Bold"),
     url("../../fonts/cabinetGrotesk/CabinetGrotesk-Bold.otf") format("truetype");
 }
 @font-face {
-  font-family: "CabinetGrotesk-Black";   /*Can be any text*/
+  font-family: "CabinetGrotesk-Black"; /*Can be any text*/
   src: local("CabinetGrotesk-Black"),
-    url("../../fonts/cabinetGrotesk/CabinetGrotesk-Black.otf") format("truetype");
+    url("../../fonts/cabinetGrotesk/CabinetGrotesk-Black.otf")
+      format("truetype");
 }
 
-
-
-
-
 @font-face {
-  font-family: "PPHatton-Bold";   /*Can be any text*/
+  font-family: "PPHatton-Bold"; /*Can be any text*/
   src: local("PPHatton-Bold"),
     url("../../fonts/pphatton/PPHatton-Bold.otf") format("truetype");
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 @font-face {
-  font-family: "PPHatton-Ultralight";   /*Can be any text*/
+  font-family: "PPHatton-Ultralight"; /*Can be any text*/
   src: local("PPHatton-Ultralight"),
     url("../../fonts/pphatton/PPHatton-Ultralight.otf") format("truetype");
 }
 
-p, button, a{
-  font-family: $RegularText!important;
+p,
+button,
+a,
+label {
+  font-family: $RegularText !important;
 }
 
-h1, h2{
-  font-family: $TitleFontBlack!important;
-
+h1,
+h2,
+h3 {
+  font-family: $TitleFontBlack !important;
 }
 
-.linkBold{
-  font-family: $TitleFontBlack!important;
+.linkBold {
+  font-family: $TitleFontBlack !important;
 }
 
-.textBold{
-  letter-spacing: .1rem;
+.textBold {
+  letter-spacing: 0.1rem;
 }
 
-.textUppercase{
-    text-transform: uppercase;
+.textUppercase {
+  text-transform: uppercase;
 }
 
-p{
-  font-size: $sizeMainText!important;
-  font-weight: 400!important;
-  line-height: $ParagraphlineHeight!important;
+p,
+label {
+  font-size: $sizeMainText !important;
+  font-weight: 400 !important;
+  line-height: $ParagraphlineHeight !important;
 }
 
-.p-primColor{
-  color : $SecondaryC2Light;
+.p-primColor {
+  color: $SecondaryC2Light;
 }
 
-.p-bgColor{
+.p-white {
+  color: white;
+}
+
+.p-bgColor {
   color: $SecondaryC1Light;
 }
 
-.lineHeight{
+.lineHeight {
   line-height: $ParagraphlineHeight;
 }
 
-.TitleH2{
-  font-size: 6rem;
+.TitleH3 {
+  font-size: 3rem !important;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.TitleH1{
+.TitleH2 {
   font-size: 6rem;
   font-weight: bold;
   text-transform: uppercase;
-}
 
-.title-1{
-    color: blue;
+  @include respond-below("medium") {
+    font-size: 3.2rem;
   }
-  
+}
+
+.TitleH1 {
+  font-size: 6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  @include respond-below("medium") {
+    font-size: 4rem;
+  }
+}
+
+.title-1 {
+  color: blue;
+}
 
 .mainText {
   font-size: $sizeMainText;
@@ -90,52 +111,50 @@ p{
 
 .title2 {
   font-size: $sizeTitle2;
-
 }
 
-.title3 {
-  font-size: $sizeTitle2;
-
-}
-
-.titlePrimaryColor{
+.titlePrimaryColor {
   color: $SecondaryC2Light;
 }
 
-.largeBoldText{
-  font-size: 6.9rem!important;
-  font-weight: 900!important;
-  text-transform: uppercase!important;
-  font-family: $TitleFontBlack;
+.largeBoldText {
+  font-size: 6.9rem !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-family: $TitleFontBlack !important;
 }
 
 .textBlock {
-  max-width: 70%;     // ou 60ch pour une limite en nombre de caractères
+  max-width: 70%; // ou 60ch pour une limite en nombre de caractères
   margin-left: auto;
   margin-right: auto;
-  text-align: left;    // ou center si tu préfères centrer
+  text-align: left; // ou center si tu préfères centrer
   line-height: 1.6;
   font-size: 1.4rem;
 
-      
-  @include respond-below('medium') {
-    max-width: 100vw; 
+  @include respond-below("medium") {
+    max-width: 100vw;
   }
 }
 
-.textBold{
+.textBold {
   font-weight: 600;
 }
 
-.textLight{
+.textLight {
   font-weight: 300;
 }
 
-.smallUpperCase{
-    font-size : $smallUppercaseText!important;
-    text-transform: uppercase;
+.smallUpperCase {
+  font-size: 1.2rem !important;
+  text-transform: uppercase;
 }
 
-.textMarginBottomSmall{
+.textMarginBottomSmall {
   margin-bottom: $textMarginBottomSmall;
+}
+
+
+.textCenter{
+  text-align: center;
 }

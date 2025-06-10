@@ -1,134 +1,193 @@
-.listing{
-    display: flex;
-    flex-direction: column;
-
+.listing {
+  display: flex;
+  flex-direction: column;
 }
 
-.projectPreviewContainer{
-    height: 30rem;
-    position: relative;
-    display: flex;
-    // background: linear-gradient(45deg,rgba($PrimaryC2Light, 0) 51%, rgba($PrimaryC2Light, 1) 100%);
-    border-radius: 0 ; //2rem
-    position: relative;
-    z-index: 1;
-    // border: 1px solid linear-gradient(to right, transparent 50%, #000000 50%);
-    // border-image: linear-gradient(to right, transparent 50%, #bbbbbb 50%) 100% 1;
+.projectPreviewContainer {
+  height: 30rem;
+  position: relative;
+  display: flex;
+  // background: linear-gradient(45deg,rgba($PrimaryC2Light, 0) 51%, rgba($PrimaryC2Light, 1) 100%);
+  border-radius: 0; //2rem
+  position: relative;
+  z-index: 1;
+  // border: 1px solid linear-gradient(to right, transparent 50%, #000000 50%);
+  // border-image: linear-gradient(to right, transparent 50%, #bbbbbb 50%) 100% 1;
 }
 
-.projectPreviewContainer::after{
-    content: '';
-    position: absolute;
-    top: 50%;    /* à ajouter pour couvrir tout le conteneur */
-    left: 50%;   /* idem */
-    transform: translate(-50%, -50%);
-    width: calc(100% - 2px);
-    height: calc(100% - 2px);
-    border-radius: 2rem;
-    // background-color: $TertiaryC1Light;
-    z-index: -999;
+.projectPreviewContainer::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* à ajouter pour couvrir tout le conteneur */
+  left: 50%; /* idem */
+  transform: translate(-50%, -50%);
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border-radius: 2rem;
+  // background-color: $TertiaryC1Light;
+  z-index: -999;
 }
 
 .projectPreviewContainer > * {
-    position: relative;
-    z-index: 1;              /* tout le contenu au‑dessus du ::after */
+  position: relative;
+  z-index: 1; /* tout le contenu au‑dessus du ::after */
+}
+
+.projectPreview {
+  display: flex;
+  align-items: center;
+  min-height: 50rem;
+  @include respond-below("large") {
+    height: fit-content;
   }
 
-.projectPreview{
-
+  &__inner {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
-    min-height: 40rem;
+    align-content: center;
+    gap: 6rem;
+    padding: 3rem;
+    border: solid 1px $SecondaryC2Light;
 
-    &__inner{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        align-content: center;
+    @include respond-below("large") {
+      flex-direction: column;
+      gap: 2rem;
     }
+  }
 
-    &__imgContainer{
-        display: flex;
-        align-items: center;
-        height: 100%;
-
-        max-width: 40%;
-        width: 100%;
-    }
-
-    &__imgContainerInner{
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        z-index: 1;
-        position: relative;
-        border-radius: .5rem;
-    }
-
-
-    &__img{
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height : 100%;
-        object-fit: cover;
-    }
-}
-
-.projectPreview{
-
-
-    &__infosContainer{
-
-    }
-}
-
-
-.roles{
-    display : flex;
-    flex-direction : row; 
-    flex-wrap: wrap;
-    justify-content : flex-start;
-    text-transform : uppercase;
-    margin : 0 0 2rem 0;
-
-    &__roleText{
-        font-size : $smallUppercaseText!important
-    }
-
-    &__roleText{
-        margin : 0 1rem 0 0rem;
-    }
-}
-
-
-.infos{
-
+  &__imgContainer {
     display: flex;
     flex-direction: column;
     height: 100%;
-    margin: 0 0 0 6rem;
-    padding : 0rem 0 2rem 0;
-    
-    &__TitleContainer{
-        margin: 0 0 0 0;
-        text-transform : uppercase;
-    }
 
-    &__descriptionContainer{
-        height: 100%;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content : center;
-        margin : 0 2rem 1rem 0;
+    width: 100%;
 
+    @include respond-below("large") {
+      max-width: 100%;
     }
+  }
 
-    &__descriptionContainer p{
-    
-    }
+  &__imgContainerInner {
+    height: 100%;
+    min-height: 30rem;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+  }
+
+  &__img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__specifics {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  &__specificsInner {
+    display: flex;
+    flex-direction: row;
+    padding: 0.2rem 1rem;
+    gap: 1rem;
+    background-color: $SecondaryC2Light;
+    color: white !important;
+  }
+
+  &__infosContainer {
+    width: 100%;
+  }
+}
+
+.roles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  text-transform: uppercase;
+  margin: 0 0 2rem 0;
+
+  &__roleText {
+    font-size: $smallUppercaseText !important;
+  }
+
+  &__roleText {
+    margin: 0 1rem 0 0rem;
+  }
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  @include respond-below("large") {
+    align-items: center;
+  }
+
+  &__TitleContainer {
+    text-transform: uppercase;
+  }
+
+  &__descriptionContainer {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__text{
+    width: 100%;
+     @include respond-below("large") {
+    margin: 0 0 1.6rem 0;
+  } 
+  }
+}
+
+
+.listingBetweenContentGraphic {
+  width: 100%;
+  width: 100%;
+  height: 10rem;
+  display: flex;
+
+  &__inner {
+    width: 10rem;
+  }
+
+  &__circleRight {
+    border-right: solid 1px $SecondaryC2Light;
+  }
+
+  &__circleLeft {
+    border-left: solid 1px $SecondaryC2Light;
+  }
+
+  &__circle {
+    position: relative;
+    border: solid 1px $SecondaryC2Light;
+    border-radius: 10rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+    height: 1rem;
+    background-color: $SecondaryC2Light;
+    border-radius: 10rem;
+  }
 }

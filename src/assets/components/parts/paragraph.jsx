@@ -5,7 +5,7 @@ import React from 'react';
 function Paragraph({title, text}){
 
     return (
-        <div className="paragraph contentSpacing contentPadding textBlock">
+        <div className="paragraph contentSpacing contentPadding textBlock p-primColor">
             {title != '' &&(
             <h2 className='TitleH2'>{title}</h2>)}
             <p className="textTitleSpacing ">paragraphe : {text}</p>

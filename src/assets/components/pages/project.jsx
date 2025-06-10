@@ -21,7 +21,8 @@ const COMPONENTS = {
   GallerySmall,
 };
 
-function Project({ triggerSwipe }) {
+function Project({ triggerSwipe, scrollContainerRef }) {
+
   const { id } = useParams(); // on récupère `:id`
   const project = listingProjects.find((p) => p.id === id);
   if (!project) return <p>Projet introuvable</p>;
@@ -55,6 +56,32 @@ function Project({ triggerSwipe }) {
       "<+0.2"
     );
   }, [id]);
+
+  //----------- HEADIMG PARALLAX SCROLL 
+  useEffect(() => {
+    if (!headImgRef.current || !scrollContainerRef?.current) return;
+    console.log("oueeeee")
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headImgRef.current,
+        { y: "0rem" },
+        {
+          y: "5rem",
+          ease: "linear",
+          scrollTrigger: {
+            trigger: headImgRef.current,
+            start: "top top",     // dès que le haut de l'image atteint le haut du viewport
+            end: "bottom top",    // jusqu’à ce que le bas de l’image atteigne le haut du viewport
+            scrub: true,
+            scroller: scrollContainerRef.current,
+          },
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, [scrollContainerRef]);
+
 
   // ScrollTrigger pour le lien suivant
   useEffect(() => {
@@ -113,19 +140,21 @@ function Project({ triggerSwipe }) {
             src={project.image}
             alt=""
           />
-          <h1 className="TitleH1 projectTitle contentPaddingLR textBold">
+          <div className="projectTitle contentPaddingLR">
+          <h1 className="TitleH1 textBold">
             {project.title}
           </h1>
+          </div>
         </div>
       </div>
       <div className="projectHeadContent">
         <div className="projectHeadContent__link">
-          <a href="">Lien</a>
+          <a target="_blank" href={project.link}>Lien
           <img
             className="projectHeadContent__linkIcon mr-8"
             src={iconLink.media}
             alt=""
-          />
+          /></a>
         </div>
         <div className="projectHeadContent__textContainer">
           <div className="projectHeadContent__description">
@@ -134,7 +163,7 @@ function Project({ triggerSwipe }) {
                 <p key={index}>{description}</p>
               ))}
           </div>
-          <div className="projectHeadContent__specifics">
+          <div className="projectHeadContent__specifics p-primColor">
             <div className="projectHeadContent__roleTitle sticker">
               <p className="smallUpperCase textBold">Rôle</p>
             </div>

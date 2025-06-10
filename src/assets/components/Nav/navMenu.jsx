@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import medias from "../../../data/medias";
 
-function NavMenu() {
+function NavMenu({scrollContainerRef}) {
   const navLinksRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -156,6 +156,7 @@ function NavMenu() {
               </div>
               <Link
                 className="linkBold textBold"
+                scrollContainerRef={scrollContainerRef}
                 to={link.to}
                 onClick={() => setIsOpen(false)}
               >

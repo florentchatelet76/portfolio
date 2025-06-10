@@ -100,9 +100,9 @@ function App() {
           </div>
         </div>
 
-        <NavMenu />
+        <NavMenu scrollContainerRef={scrollContainerRef} />
         <div
-          className="content-overflow topContentMargin"
+          className="content-overflow topContentMargin contentPaddingLR"
           ref={scrollContainerRef}
         >
           <div className="content-overflow__inner content-wrapper">

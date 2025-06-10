@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import listingProjects from "../../../data/listingProjects";
 import gsap from "gsap";
 
-function Listing({ triggerSwipe }) {
+function Listing({ triggerSwipe, scrollContainerRef }) {
   const listingRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const items = listingRef.current.querySelectorAll(".projectPreview");
+    const items = listingRef.current.querySelectorAll(".projectPreviewref");
 
     gsap.fromTo(
       items,
@@ -33,51 +33,81 @@ function Listing({ triggerSwipe }) {
     });
   };
 
-
-
   return (
-    <div ref={listingRef} className="listing listingContainer">
+    <div ref={listingRef} className="listing listingContainer contentSpacing">
       {listingProjects.map((project) => (
-        <div
-          key={project.id}
-          className="projectPreviewContainer projectPreview contentSpacing"
-        >
-          <div className="projectPreview__inner">
-            <div className="projectPreview__imgContainer">
-              <div className="projectPreview__imgContainerInner">
-                <img
-                  className="projectPreview__img"
-                  src={project.image}
-                  alt=""
-                />
+        <div className="projectPreviewref">
+          <div
+            key={project.id}
+            className="projectPreviewContainer projectPreview "
+          >
+            <div className={` projectPreview__inner ${
+                  project.id % 2 == 0 ? "" : " rowReverse"
+                      }`}>
+              <div className="projectPreview__imgContainer">
+                <div className="projectPreview__specifics">
+                  <div className="projectPreview__specificsInner">
+                    {project.technologies &&
+                      project.technologies.map((technologie, index) => (
+                        <p className="smallUpperCase " key={index}>
+                          {technologie}
+                        </p>
+                      ))}
+                  </div>
+                </div>
+                <div className="projectPreview__imgContainerInner">
+                  <img
+                    className="projectPreview__img"
+                    src={project.image}
+                    alt=""
+                  />
+                </div>
               </div>
-            </div>
-            <div className="projectPreview__infosContainer infos">
-              <div className="infos__TitleContainer">
-                <h2 className="TitleH2 textBold titlePrimaryColor">{project.title}</h2>
-              </div>
+              <div className="projectPreview__infosContainer infos p-primColor">
+                <div className="infos__text">
+                  <div className="infos__date">
+                    <p className="">2024</p>
+                  </div>
+                  <div className="infos__TitleContainer mg-t-8">
+                    <h2 className="TitleH2 textBold titlePrimaryColor">
+                      {project.title}
+                    </h2>
+                  </div>
 
-              <div className="infos__descriptionContainer lineHeight">
-                <p>{project.descriptionPreview}</p>
-              </div>
-              <div className="rolesContainer roles">
+                  <div className="infos__descriptionContainer mg-t-16 lineHeight">
+                    <p className="p">{project.descriptionPreview}</p>
+                  </div>
+                </div>
+
+                {/* <div className="rolesContainer roles">
                 {project.roles &&
                   project.roles.map((role, index) => (
                     <p className="roles__roleText" key={index}>
                       {role}
                     </p>
                   ))}
-              </div>
-              <a
-                className="seeProjectLink primaryButton"
-                href={`/projects/${project.id}`}
+              </div> */}
+                <a
+                  className="seeProjectLink primaryButton"
+                  scrollContainerRef={scrollContainerRef}
+                  href={`/projects/${project.id}`}
                   onClick={(e) => {
                     e.preventDefault();
                     triggerSwipe(`/projects/${project.id}`);
                   }}
-              >
-                Voir le projet
-              </a>
+                >
+                  Voir le projet
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className= {` listingBetweenContentGraphic ${ 
+                  project.id % 2 == 0 ? "flexEnd listingBetweenContentGraphic__circleRight" : "flexStart listingBetweenContentGraphic__circleLeft"
+                      }`}>
+            <div className="listingBetweenContentGraphic__inner">
+              <div className="listingBetweenContentGraphic__circle">
+                <div className="listingBetweenContentGraphic__dot"></div>
+              </div>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ function CenteredText({text}){
 
     return (
         <div className="centeredText contentSpacing contentPadding textBlock">
-            <p>{text}</p>
+            <p className="p-primColor">{text}</p>
         </div>
     )
 }

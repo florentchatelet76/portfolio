@@ -13,11 +13,14 @@
 .primaryButton-light{
   padding: 1.5rem 2.5rem;
   background-color: transparent;
-  border : solid 1px $SecondaryC1Light;
+  border : solid 1px white;
   border-radius: 5rem;
   width: fit-content;
   height: fit-content;
-  
   font-size: 2rem;
-  color: $SecondaryC1Light;
+  color: white;
+}
+
+.buttonContainer{
+    height: 4dvb;
 }

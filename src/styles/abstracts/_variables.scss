@@ -22,7 +22,7 @@ $TertiaryColor : #D62828;
 $TitleFontBlack : "CabinetGrotesk-Black";
 $TitleFontLight : "PPHatton-Ultralight";
 
-$RegularText : "Roboto";
+$RegularText : "Lato";
 $sizeMainText : 1.6rem;
 $sizeLargeText : 2rem;
 $smallUppercaseText : 1.4rem;
@@ -34,12 +34,15 @@ $sizeTitle3 : 2rem;
 $sizeLargeBoldText : 6.9rem;
 
 
-$textMarginBottomSmall : .1rem;
+$textMarginBottomSmall : .0rem;
 
 $sizePrimaryButton : 1.6rem;
 $sizeSecondaryButton : 1.6rem;
 
 
+
+//MAX WIDTH CONTENEUR
+$maxWidthLaptop : 150rem;
 
 
 // SPACING
@@ -49,10 +52,10 @@ $contentSpacing : 8rem;
 $textTitleSpacing : 1.6rem;
 
 // MARGES LAYOUT
-$baseContentPadding : 3rem;
+$baseContentPadding : 2rem;
 $baseContentPaddingLaptop : 10rem;
 $baseContentPaddingMobile : 1rem;
-$baseContentMargin : 3rem;
+$baseContentMargin : 2rem;
 
 
 //PARAGRAPHES

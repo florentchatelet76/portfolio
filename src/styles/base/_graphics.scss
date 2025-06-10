@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: black;
+  background: $SecondaryC2Light;
   transform: translateY(100%);
   z-index: 9999;
 }
@@ -113,4 +113,17 @@
     border: 3px solid transparent;
     border-radius: 9px;
     background-clip: content-box;
+}
+
+//-------------CONTACT
+
+input{
+  background-color: transparent;
+  border: solid 1px $SecondaryC2Light;
+}
+
+textarea, input{
+  background-color: transparent;
+  border: solid 1px $SecondaryC2Light;
+  margin-top: .4rem;
 }

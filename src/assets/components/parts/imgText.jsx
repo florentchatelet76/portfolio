@@ -5,7 +5,7 @@ import React from 'react';
 function ImageText({image, text}){
 
     return (
-        <div className="imageText contentSpacing contentPadding">
+        <div className="imageText contentSpacing contentPadding p-primColor">
             {image != '' &&(
                     <div className="imageText__imgContainer">
                     <img className='imageText__img' src={image} alt="" />

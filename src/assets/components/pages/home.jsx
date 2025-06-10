@@ -1,5 +1,7 @@
 import medias from "../../../data/medias.js";
 import listingProjects from "../../../data/listingProjects";
+import aboutData from "../../../data/aboutData.js";
+import ContactForm from "../contact.jsx";
 import { Link } from "react-router-dom";
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap } from "gsap";
@@ -11,7 +13,7 @@ function Home({ scrollContainerRef }) {
   const projects = [];
   const projectsNotFirst = [];
 
-  //--------------- about IMG FLIP 
+  //--------------- about IMG FLIP
 
   const aboutImgDev = medias.find((item) => item.id === 2);
   const aboutImgDesign = medias.find((item) => item.id === 3);
@@ -19,36 +21,52 @@ function Home({ scrollContainerRef }) {
   const [aboutSubject, setAboutSubject] = useState(true);
 
   const ChangeAboutSubject = () => {
-    setAboutSubject(current => !current);
-    console.log('img : ' + aboutSubject)
-  }
+    setAboutSubject((current) => !current);
+  };
 
   const aboutTextDev = useRef(null);
   const aboutTextDesign = useRef(null);
 
   useEffect(() => {
-  const dev = aboutTextDev.current;
-  const design = aboutTextDesign.current;
+    const dev = aboutTextDev.current;
+    const design = aboutTextDesign.current;
 
-  if (aboutSubject) {
-    // Afficher texte Dev
-    gsap.to(design, { opacity: 0, y: 20, duration: 0.3, onComplete: () => {
-      design.style.display = "none";
-      dev.style.display = "block";
-      gsap.fromTo(dev, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
-    }});
-  } else {
-    // Afficher texte Design
-    gsap.to(dev, { opacity: 0, y: 20, duration: 0.3, onComplete: () => {
-      dev.style.display = "none";
-      design.style.display = "block";
-      gsap.fromTo(design, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
-    }});
-  }
-}, [aboutSubject]);
+    if (aboutSubject) {
+      // Afficher texte Dev
+      gsap.to(design, {
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
+        onComplete: () => {
+          design.style.display = "none";
+          dev.style.display = "block";
+          gsap.fromTo(
+            dev,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.5 }
+          );
+        },
+      });
+    } else {
+      // Afficher texte Design
+      gsap.to(dev, {
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
+        onComplete: () => {
+          dev.style.display = "none";
+          design.style.display = "block";
+          gsap.fromTo(
+            design,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.5 }
+          );
+        },
+      });
+    }
+  }, [aboutSubject]);
 
   //--------------- GSAP SCROLL PARALLAX
-
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -106,7 +124,6 @@ function Home({ scrollContainerRef }) {
     projectsNotFirst.push(listingProjects[i]);
   }
 
-
   return (
     <div className="home homeContainer">
       <div className="home__inner">
@@ -149,15 +166,16 @@ function Home({ scrollContainerRef }) {
             <div className="homeTopPageContent__sideText">
               <div className="homeTopPageContent__title">
                 <h1 className="homeTitle textUppercase">
-                  <span class="homeTitle__name">Florent</span>
-                  <span class="homeTitle__surname">Chatelet</span>
+                  <span className="homeTitle__name">Florent</span>
+                  <span className="homeTitle__surname">Chatelet</span>
                 </h1>
               </div>
               <div className="homeTopPageText">
                 <p class="p-primColor">
-                  Bonjour, je suis développeur web front et
-                  full stack en devenir, avec un background en design graphique
-                  et motion design. Curieux, je cherche constamment à apprendre de nouvelles compétences techniques.
+                  Bonjour, je suis développeur web front et full stack en
+                  devenir, avec un background en design graphique et motion
+                  design. Curieux, je cherche constamment à apprendre de
+                  nouvelles compétences techniques.
                 </p>
                 {/* <div className="homeTopPageNav">
                   <div className="buttonContainer">
@@ -177,7 +195,8 @@ function Home({ scrollContainerRef }) {
         </div>
         <div className="boxContentContainer">
           <p>
-            Je cherche une alternance pour un niveau BAC+3 en 1 an, n'hésitez pas à me contacter !
+            Je cherche une alternance pour un niveau BAC+3 en 1 an, n'hésitez
+            pas à me contacter !
           </p>
         </div>
         <div className="circlesContainer">
@@ -225,10 +244,13 @@ function Home({ scrollContainerRef }) {
                   </h2>
                 </div>
                 <div className="mainProjectContent__description mg-t-24">
-                  <p className='p-primColor'>{projects[0].descriptionPreview}</p>
+                  <p className="p-primColor">
+                    {projects[0].descriptionPreview}
+                  </p>
                 </div>
                 <div className="mainProjectContent__link mg-t-16">
                   <a
+                    scrollContainerRef={scrollContainerRef}
                     className="seeProjectLink primaryButton"
                     href={`/projects/${projects[0].id}`}
                   >
@@ -244,10 +266,11 @@ function Home({ scrollContainerRef }) {
           {projectsNotFirst.map((project) => (
             <div key={project.id} className="secondaryProject contentSpacing">
               <div
-                className={`secondaryProject__inner ${project.id % 2 == 0
-                  ? "secondaryProject__flex"
-                  : "secondaryProject__flex-reverse"
-                  } `}
+                className={`secondaryProject__inner ${
+                  project.id % 2 == 0
+                    ? "secondaryProject__flex"
+                    : "secondaryProject__flex-reverse"
+                } `}
               >
                 <div className="secondaryProject__imgTextContainer content-inside-padding-medium">
                   <div className="secondaryProject__imgSpecifics">
@@ -278,7 +301,9 @@ function Home({ scrollContainerRef }) {
                       {project.title}
                     </h2>
                     <div className="secondaryProject__text">
-                      <p className='p-primColor'>{project.descriptionPreview}</p>
+                      <p className="p-primColor">
+                        {project.descriptionPreview}
+                      </p>
                     </div>
                     <div className="secondaryProject__link mg-t-16">
                       <a
@@ -293,10 +318,11 @@ function Home({ scrollContainerRef }) {
                 <div className="sideImgs">
                   <div className="sideImgs__inner">
                     <div
-                      className={`sideImgs__sideImg sideImgs__scroll-1 ${project.id % 2 == 0
-                        ? "sideImgs__sideImg1-reverse"
-                        : "sideImgs__sideImg1"
-                        } `}
+                      className={`sideImgs__sideImg sideImgs__scroll-1 ${
+                        project.id % 2 == 0
+                          ? "sideImgs__sideImg1-reverse"
+                          : "sideImgs__sideImg1"
+                      } `}
                     >
                       <img
                         src={project.image2}
@@ -306,10 +332,11 @@ function Home({ scrollContainerRef }) {
                     </div>
 
                     <div
-                      className={`sideImgs__sideImg sideImgs__scroll-2 ${project.id % 2 == 0
-                        ? "sideImgs__sideImg2-reverse"
-                        : "sideImgs__sideImg2"
-                        } `}
+                      className={`sideImgs__sideImg sideImgs__scroll-2 ${
+                        project.id % 2 == 0
+                          ? "sideImgs__sideImg2-reverse"
+                          : "sideImgs__sideImg2"
+                      } `}
                     >
                       <img
                         src={project.image2}
@@ -325,16 +352,18 @@ function Home({ scrollContainerRef }) {
         </div>
         <div className="toListing">
           <div className="toListing__inner ">
-            <p className="toListing__largeText largeBoldText p-bgColor">
+            <p className="toListing__largeText largeBoldText p-white">
               Et le reste ?
             </p>
-            <p className="mg-t-32 p-bgColor">
+            <p className="mg-t-32 p-white">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <div className="buttonContainer mg-t-24">
               <Link to="/listing" className="PrimaryButtonLink">
-                <button className="primaryButton-light">Voir tous mes projets</button>
+                <button className="primaryButton-light">
+                  Voir tous mes projets
+                </button>
               </Link>
             </div>
           </div>
@@ -343,49 +372,107 @@ function Home({ scrollContainerRef }) {
           <div className="h-about__inner">
             <div className="h-about__textContainer">
               <h2 className="largeBoldText p-primColor"> Qui suis-je ?</h2>
-              <div className="h-about__text h-about-Developper mg-t-24" ref={aboutTextDev}>
+              <div
+                className="h-about__text h-about-Developper mg-t-24"
+                ref={aboutTextDev}
+              >
                 <div className=" p-primColor">
-                  <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
+                  <p className="">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
 
-                  <p className=" mg-t-24">Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
+                  <p className=" mg-t-24">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
                 </div>
               </div>
 
-              <div className="h-about__text h-about-Designer mg-t-24" ref={aboutTextDesign}>
+              <div
+                className="h-about__text h-about-Designer mg-t-24"
+                ref={aboutTextDesign}
+              >
                 <div className=" p-primColor">
-                  <p className=""> DESIGN Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
+                  <p className="">
+                    {" "}
+                    DESIGN Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua.
+                  </p>
 
-                  <p className=" mg-t-24">Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
+                  <p className=" mg-t-24">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
                 </div>
               </div>
-
             </div>
             <div className="h-about__imgToggleContainer">
               <div className="h-about__imgContainer">
-                <img src={aboutSubject === true ? aboutImgDev.image : aboutImgDesign.image} alt="" />
+                <img
+                  src={
+                    aboutSubject === true
+                      ? aboutImgDev.image
+                      : aboutImgDesign.image
+                  }
+                  alt=""
+                />
               </div>
               <div className="h-about__toggleContainer">
-                <div onClick={ChangeAboutSubject} className={`h-about__toggle ${aboutSubject === true
-                  ? "h-about__toggleSelected"
-                  : ""
-                  } `}><p>Developpeur</p></div>
-                <div onClick={ChangeAboutSubject} className={`h-about__toggle ${aboutSubject === false
-                  ? "h-about__toggleSelected"
-                  : ""
-                  } `}><p>Designer</p></div>
+                <div
+                  onClick={ChangeAboutSubject}
+                  className={`h-about__toggle ${
+                    aboutSubject === true ? "h-about__toggleSelected" : ""
+                  } `}
+                >
+                  <p>Developpeur</p>
+                </div>
+                <div
+                  onClick={ChangeAboutSubject}
+                  className={`h-about__toggle ${
+                    aboutSubject === false ? "h-about__toggleSelected" : ""
+                  } `}
+                >
+                  <p>Designer</p>
+                </div>
               </div>
             </div>
-
           </div>
         </div>
+        <div className="skills">
+          <h2 className="TitleH2 p-primColor">Compétences</h2>
+          <p className="p-primColor mg-t-16">
+            Dans un apprentissage continu, je cherche à entretenir mes acquis et
+            reste à l'afus des dernières technologies.
+          </p>
+          <div className="skills__inner mg-t-32">
+            {aboutData.map((aboutRow, index) => (
+              <div key={index} className="skills__row p-white">
+                <h3 className="skills__title TitleH3 mg-b-24">
+                  {aboutRow.category}
+                </h3>
+                {aboutRow.skills.map((skill, index) => (
+                  <div key={index} className="skills__rowItem">
+                    <p className="skills__rowItemText textUppercase">{skill}</p>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          {/* <div className="nextSkills mg-t-32">
+            <h2 className="TitleH2 p-primColor">Et ensuite</h2>
+            <p className="p-primColor mg-t-16">
+              Voici ce que je suis en train d'apprendre actuellement
+            </p>
+          </div> */}
+        </div>
+
+          <ContactForm />
+
       </div>
     </div>
   );

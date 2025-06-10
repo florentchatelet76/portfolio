@@ -1,0 +1,31 @@
+.contact{
+
+    width: 60%;
+    min-width: 50rem;
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+        gap : 1.6rem;
+        width: 100%;
+    }
+    
+    &__textZone{
+        width: 70%;
+    }
+    &__name, &__email, &__message{
+
+        line-height: 1.6rem;
+        padding: .5rem 1rem;
+    }
+
+    &__label{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__message{
+        height: 6.4rem;
+    }
+
+}
