@@ -62,7 +62,7 @@
     height : 100%;
     margin: 0 ;
     width: 100%;
-    max-width: $maxWidthLaptop;
+    // max-width: $maxWidthLaptop;
 
     @include respond-below('large') {
         padding: 0 $baseContentPadding;

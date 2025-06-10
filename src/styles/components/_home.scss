@@ -450,18 +450,18 @@
   background-color: $SecondaryC2Light;
   height: 40rem;
   width: calc(100vw);
-  margin-left: calc(-1 * $baseContentPaddingLaptop);
+  margin-left: calc((-1 * $baseContentPaddingLaptop) - 1.2rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   @include respond-below("medium") {
-    margin-left: calc(-1 * $baseContentPadding);
+    margin-left: calc((-1 * $baseContentPadding) - 1.2rem);
   }
 
   @include respond-below("small") {
-    margin-left: calc(-1 * $baseContentPaddingMobile);
+    margin-left: calc((-1 * $baseContentPaddingMobile)  - 1.2rem );
   }
 
   &__inner {
