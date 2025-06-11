@@ -4,19 +4,26 @@ html {
 @font-face {
   font-family: "CabinetGrotesk-Bold"; /*Can be any text*/
   src: local("CabinetGrotesk-Bold"),
-    url("../../fonts/cabinetGrotesk/CabinetGrotesk-Bold.otf") format("truetype");
+    url("fonts/cabinetGrotesk/CabinetGrotesk-Bold.otf") format("truetype");
 }
 @font-face {
   font-family: "CabinetGrotesk-Black"; /*Can be any text*/
   src: local("CabinetGrotesk-Black"),
-    url("../../fonts/cabinetGrotesk/CabinetGrotesk-Black.otf")
+    url("fonts/cabinetGrotesk/CabinetGrotesk-Black.otf")
+      format("truetype");
+}
+
+@font-face {
+  font-family: "lato-Regular"; /*Can be any text*/
+  src: local("lato-Regular"),
+    url("fonts/lato/lato-Regular.ttf")
       format("truetype");
 }
 
 @font-face {
   font-family: "PPHatton-Bold"; /*Can be any text*/
   src: local("PPHatton-Bold"),
-    url("../../fonts/pphatton/PPHatton-Bold.otf") format("truetype");
+    url("fonts/pphatton/PPHatton-Bold.otf") format("truetype");
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
@@ -24,7 +31,7 @@ html {
 @font-face {
   font-family: "PPHatton-Ultralight"; /*Can be any text*/
   src: local("PPHatton-Ultralight"),
-    url("../../fonts/pphatton/PPHatton-Ultralight.otf") format("truetype");
+    url("fonts/pphatton/PPHatton-Ultralight.otf") format("truetype");
 }
 
 p,
