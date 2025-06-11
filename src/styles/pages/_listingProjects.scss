@@ -89,6 +89,8 @@
   }
 
   &__specifics {
+    z-index: 10;
+    position: absolute;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -116,7 +118,7 @@
   margin: 0 0 2rem 0;
 
   &__roleText {
-    font-size: $smallUppercaseText !important;
+    
   }
 
   &__roleText {

@@ -41,21 +41,23 @@ function Listing({ triggerSwipe, scrollContainerRef }) {
             key={project.id}
             className="projectPreviewContainer projectPreview "
           >
-            <div className={` projectPreview__inner ${
-                  project.id % 2 == 0 ? "" : " rowReverse"
-                      }`}>
+            <div
+              className={` projectPreview__inner ${
+                project.id % 2 == 0 ? "" : " rowReverse"
+              }`}
+            >
               <div className="projectPreview__imgContainer">
-                <div className="projectPreview__specifics">
-                  <div className="projectPreview__specificsInner">
-                    {project.technologies &&
-                      project.technologies.map((technologie, index) => (
-                        <p className="smallUpperCase " key={index}>
-                          {technologie}
-                        </p>
-                      ))}
-                  </div>
-                </div>
                 <div className="projectPreview__imgContainerInner">
+                  <div className="projectPreview__specifics">
+                    <div className="projectPreview__specificsInner">
+                      {project.technologies &&
+                        project.technologies.map((technologie, index) => (
+                          <p className="smallUpperCase " key={index}>
+                            {technologie}
+                          </p>
+                        ))}
+                    </div>
+                  </div>
                   <img
                     className="projectPreview__img"
                     src={project.image}
@@ -101,9 +103,13 @@ function Listing({ triggerSwipe, scrollContainerRef }) {
               </div>
             </div>
           </div>
-          <div className= {` listingBetweenContentGraphic ${ 
-                  project.id % 2 == 0 ? "flexEnd listingBetweenContentGraphic__circleRight" : "flexStart listingBetweenContentGraphic__circleLeft"
-                      }`}>
+          <div
+            className={` listingBetweenContentGraphic ${
+              project.id % 2 == 0
+                ? "flexEnd listingBetweenContentGraphic__circleRight"
+                : "flexStart listingBetweenContentGraphic__circleLeft"
+            }`}
+          >
             <div className="listingBetweenContentGraphic__inner">
               <div className="listingBetweenContentGraphic__circle">
                 <div className="listingBetweenContentGraphic__dot"></div>

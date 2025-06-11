@@ -274,20 +274,20 @@ function Home({ scrollContainerRef }) {
               >
                 <div className="secondaryProject__imgTextContainer content-inside-padding-medium">
                   <div className="secondaryProject__imgSpecifics">
-                    <div className="secondaryProject__specifics">
-                      <div className="secondaryProject__specificsInner">
-                        {project.technologies &&
-                          project.technologies.map((technologie, index) => (
-                            <p
-                              className="roles__roleText smallUpperCase p-primColor"
-                              key={index}
-                            >
-                              {technologie}
-                            </p>
-                          ))}
-                      </div>
-                    </div>
                     <div className="secondaryProject__imgContainer">
+                      <div className="secondaryProject__specifics">
+                        <div className="secondaryProject__specificsInner">
+                          {project.technologies &&
+                            project.technologies.map((technologie, index) => (
+                              <p
+                                className="roles__roleText smallUpperCase p-primColor"
+                                key={index}
+                              >
+                                {technologie}
+                              </p>
+                            ))}
+                        </div>
+                      </div>
                       <img
                         src={project.image}
                         className="secondaryProject__img"
@@ -471,8 +471,7 @@ function Home({ scrollContainerRef }) {
           </div> */}
         </div>
 
-          <ContactForm />
-
+        <ContactForm />
       </div>
     </div>
   );

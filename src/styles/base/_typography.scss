@@ -148,6 +148,9 @@ label {
 .smallUpperCase {
   font-size: 1.2rem !important;
   text-transform: uppercase;
+  @include respond-below("medium") {
+    font-size: 1rem !important;
+  }
 }
 
 .textMarginBottomSmall {
