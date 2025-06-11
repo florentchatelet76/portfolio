@@ -289,7 +289,7 @@ function Home({ scrollContainerRef }) {
                     </div>
                     <div className="secondaryProject__imgContainer">
                       <img
-                        src={homeMedia.image}
+                        src={project.image}
                         className="secondaryProject__img"
                         alt=""
                       />

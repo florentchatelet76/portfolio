@@ -65,8 +65,8 @@ const listingProjects = [
   {
     id: "2",
     title: "Musée d'Orsay",
-    image: "/assets/medias/museeOrsayCover.png",
-    image2: "/assets/medias/img_test1.jpg",
+    image: "/assets/medias/orsay/museeOrsayCover-1.png",
+    image2: "/assets/medias/orsay/museeOrsayCover-1.png",
     descriptionPreview:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
     descriptions: [

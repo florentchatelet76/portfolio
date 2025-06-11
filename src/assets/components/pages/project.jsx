@@ -142,7 +142,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
             src={project.image}
             alt=""
           />
-          <div className="projectTitle contentPaddingLR">
+          <div className="projectTitle contentPaddingLR mg-b-24">
           <h1 className="TitleH1 textBold">
             {project.title}
           </h1>
