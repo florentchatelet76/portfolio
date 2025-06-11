@@ -34,24 +34,26 @@ function App() {
     });
 
     // ScrollTrigger proxy pour Smooth Scrollbar
-ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
-  scrollTop(value) {
-    if (!scrollbar.current) return 0; // <-- protection si scrollbar non dispo
-    if (arguments.length) {
-      scrollbar.current.scrollTop = value;
-    }
-    return scrollbar.current.scrollTop;
-  },
-  getBoundingClientRect() {
-    return {
-      top: 0,
-      left: 0,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  },
-  pinType: scrollContainerRef.current.style.transform ? "transform" : "fixed",
-});
+    ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
+      scrollTop(value) {
+        if (!scrollbar.current) return 0; // <-- protection si scrollbar non dispo
+        if (arguments.length) {
+          scrollbar.current.scrollTop = value;
+        }
+        return scrollbar.current.scrollTop;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: scrollContainerRef.current.style.transform
+        ? "transform"
+        : "fixed",
+    });
 
     // Refresh ScrollTrigger après setup
     ScrollTrigger.addEventListener("refresh", () => scrollbar.current.update());
@@ -60,7 +62,9 @@ ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
     // Cleanup
     return () => {
       if (scrollbar.current) {
-        ScrollTrigger.removeEventListener("refresh", () => scrollbar.current.update());
+        ScrollTrigger.removeEventListener("refresh", () =>
+          scrollbar.current.update()
+        );
         scrollbar.current.destroy();
         scrollbar.current = null;
       }
@@ -90,6 +94,15 @@ ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
     });
 
     tl.to(overlay, { yPercent: 100, duration: 0.5, ease: "power2.inOut" })
+      // === scroll to top AVANT navigation ===
+      .add(() => {
+        if (scrollbar.current) {
+          scrollbar.current.scrollTo(0, 0, 800); // scroll fluide vers le haut
+        }
+      })
+      // petite pause pour laisser le temps au scroll
+      .addPause("+=", 0.85) // attend 850ms
+      // navigation après scroll
       .add(() => {
         navigate(path);
       })

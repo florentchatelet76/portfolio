@@ -31,7 +31,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
 
   const headImgContainerRef = useRef(null);
   const headImgRef = useRef(null);
-  const elementRef = useRef(null);
+  const previousProjectRef = useRef(null);
   const contentRef = useRef(null);
 
   // Timeline d'entrée avec délai de 1s
@@ -62,7 +62,6 @@ function Project({ triggerSwipe, scrollContainerRef }) {
   //----------- HEADIMG PARALLAX SCROLL 
   useEffect(() => {
     if (!headImgRef.current || !scrollContainerRef?.current) return;
-    console.log("oueeeee")
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headImgRef.current,
@@ -88,14 +87,14 @@ function Project({ triggerSwipe, scrollContainerRef }) {
   // ScrollTrigger pour le lien suivant
   useEffect(() => {
     const anim = gsap.fromTo(
-      elementRef.current,
+      previousProjectRef.current,
       { opacity: 0, x: -50 },
       {
         opacity: 1,
         x: 0,
         duration: 1,
         scrollTrigger: {
-          trigger: elementRef.current,
+          trigger: previousProjectRef.current,
           start: "top bottom",
           end: "top 20%",
           toggleActions: "play none none reverse",
@@ -208,12 +207,23 @@ function Project({ triggerSwipe, scrollContainerRef }) {
         return <Component key={index} {...block.props} />;
       })}
       <div className="navLinkContainer">
-        {prevId > 0 && <Link to={`/projects/${prevId}`}>Projet Précédent</Link>}
-        <div ref={elementRef}>
-          <Link to={`/projects/${nextId}`}>Projet suivant</Link>
+        {prevId > 0 && <Link 
+        onClick={(e) => {
+                    e.preventDefault();
+                    triggerSwipe(`/projects/${prevId}`);
+                  }}
+        to={`/projects/${prevId}`}>Projet Précédent</Link>}
+        <div ref={previousProjectRef}>
+          <Link onClick={(e) => {
+                    e.preventDefault();
+                    triggerSwipe(`/projects/${nextId}`);
+                  }} to={`/projects/${nextId}`}>Projet suivant</Link>
         </div>
 
-        <Link to="/listing">Retour à la galerie</Link>
+        <Link onClick={(e) => {
+                    e.preventDefault();
+                    triggerSwipe(`/listing`);
+                  }} to="/listing">Retour à la galerie</Link>
       </div>
     </div>
   );

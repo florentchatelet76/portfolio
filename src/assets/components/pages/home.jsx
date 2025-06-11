@@ -8,7 +8,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-function Home({ scrollContainerRef }) {
+function Home({ scrollContainerRef, triggerSwipe }) {
   const homeMedia = medias.find((item) => item.context === "home");
   const projects = [];
   const projectsNotFirst = [];
@@ -113,6 +113,48 @@ function Home({ scrollContainerRef }) {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, [scrollContainerRef]);
+
+  //------------------- ANIM SKILLS
+
+  useEffect(() => {
+  const container = scrollContainerRef.current;
+  if (!container) return;
+
+  // Sélectionne tous les éléments .js-row dans le conteneur scrollé
+  const rows = container.querySelectorAll(".js-row");
+
+
+    const anim = gsap.fromTo(
+      rows,
+      { clipPath: 'inset(100% 0 0 0)' },
+      {
+        clipPath: 'inset(0% 0 0 0)',
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: rows[0],
+          scroller: scrollContainerRef.current, // important pour Scrollbar + ScrollTrigger
+          start: "top 80%",
+          end: "top 20%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      }
+    );
+
+  // Fix refresh avec scroll proxy (comme tu faisais)
+  const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
+
+  // Cleanup
+  return () => {
+    clearTimeout(rId);
+    anim.kill();
+    anim.scrollTrigger?.kill();
+    
+  };
+}, []);
+
 
   //------------------ LISTING PROJECTS
 
@@ -255,6 +297,10 @@ function Home({ scrollContainerRef }) {
                 <div className="mainProjectContent__link mg-t-16">
                   <a
                     scrollContainerRef={scrollContainerRef}
+                    onClick={(e) => {
+                    e.preventDefault();
+                    triggerSwipe(`/projects/${projects[0].id}`);
+                  }}
                     className="seeProjectLink primaryButton"
                     href={`/projects/${projects[0].id}`}
                   >
@@ -313,6 +359,10 @@ function Home({ scrollContainerRef }) {
                       <a
                         className="seeProjectLink primaryButton"
                         href={`/projects/${project.id}`}
+                         onClick={(e) => {
+                    e.preventDefault();
+                    triggerSwipe(`/projects/${projects[0].id}`);
+                  }}
                       >
                         Voir le projet
                       </a>
@@ -364,7 +414,12 @@ function Home({ scrollContainerRef }) {
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <div className="buttonContainer mg-t-24">
-              <Link to="/listing" className="PrimaryButtonLink">
+              <Link to="/listing"
+               onClick={(e) => {
+                    e.preventDefault();
+                    triggerSwipe(`/projects/${projects[0].id}`);
+                  }}
+              className="PrimaryButtonLink">
                 <button className="primaryButton-light">
                   Voir tous mes projets
                 </button>
@@ -455,7 +510,7 @@ function Home({ scrollContainerRef }) {
           </p>
           <div className="skills__inner mg-t-32">
             {aboutData.map((aboutRow, index) => (
-              <div key={index} className="skills__row p-white">
+              <div key={index} className="skills__row js-row p-white">
                 <h3 className="skills__title TitleH3 mg-b-24">
                   {aboutRow.category}
                 </h3>

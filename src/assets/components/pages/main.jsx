@@ -3,11 +3,13 @@ import NavMenu from "../Nav/navMenu"
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-function MainContent({ scrollContainerRef }) {
+function MainContent({ scrollContainerRef, triggerSwipe }) {
   return (
       <div className="site-wrapper">
         <main className="content-wrapper">
-        <Home scrollContainerRef={scrollContainerRef} />
+        <Home scrollContainerRef={scrollContainerRef}
+        triggerSwipe={triggerSwipe}
+        />
         </main>
       </div>
   );
