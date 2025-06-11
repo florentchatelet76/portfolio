@@ -9,12 +9,63 @@ import Project from "./assets/components/pages/project";
 import MainContent from "./assets/components/pages/main";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Scrollbar from "smooth-scrollbar";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   //------------GSAP SCROLL PARALAX
 
   const scrollContainerRef = useRef(null);
+  const scrollbar = useRef(null);
+
+  // Initialisation Smooth Scrollbar + ScrollTrigger
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
+    // Init Smooth Scrollbar
+    scrollbar.current = Scrollbar.init(scrollContainerRef.current, {
+      damping: 0.1,
+      alwaysShowTracks: true,
+    });
+
+    // Quand le scroll change, on met à jour ScrollTrigger
+    scrollbar.current.addListener(() => {
+      ScrollTrigger.update();
+    });
+
+    // ScrollTrigger proxy pour Smooth Scrollbar
+ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
+  scrollTop(value) {
+    if (!scrollbar.current) return 0; // <-- protection si scrollbar non dispo
+    if (arguments.length) {
+      scrollbar.current.scrollTop = value;
+    }
+    return scrollbar.current.scrollTop;
+  },
+  getBoundingClientRect() {
+    return {
+      top: 0,
+      left: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  },
+  pinType: scrollContainerRef.current.style.transform ? "transform" : "fixed",
+});
+
+    // Refresh ScrollTrigger après setup
+    ScrollTrigger.addEventListener("refresh", () => scrollbar.current.update());
+    ScrollTrigger.refresh();
+
+    // Cleanup
+    return () => {
+      if (scrollbar.current) {
+        ScrollTrigger.removeEventListener("refresh", () => scrollbar.current.update());
+        scrollbar.current.destroy();
+        scrollbar.current = null;
+      }
+    };
+  }, []);
 
   //-----------GSAP TRANSITIONS
 
@@ -104,6 +155,7 @@ function App() {
         <div
           className="content-overflow topContentMargin contentPaddingLR"
           ref={scrollContainerRef}
+          style={{ overflowX: "hidden" }}
         >
           <div className="content-overflow__inner content-wrapper">
             <Routes>

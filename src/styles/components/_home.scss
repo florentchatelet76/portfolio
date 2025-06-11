@@ -29,10 +29,13 @@
   }
 }
 
+
 .homeTopPageContent {
-  height: 100%;
+  height: calc(100vh - $headerHeight);
+  width: 100%;
   display: flex;
   justify-content: center;
+
   &__inner {
     margin: 4rem 0 0 0;
     display: flex;
@@ -123,15 +126,24 @@
   display: flex;
 }
 
+// HOME TOP PAGE RELATIVE WRAPPER 
+
+.homeTopRelativeWrapper{
+    height: calc(100vh - $headerHeight);
+    width: 100vw;
+    position: absolute;
+}
+
 //----------- BOX CONTENT
 .boxContentContainer {
   position: absolute;
   padding: 2rem 2rem;
-  bottom: 5rem;
+  bottom: 10rem;
+  left: 10%;
   background-color: $SecondaryC2Light;
 
   @include respond-below("small") {
-    width: 80%;
+    width: 60%;
   }
   p {
     width: 22rem;
@@ -145,7 +157,7 @@
   }
 
   @include respond-below("small") {
-    bottom: 8rem;
+    bottom: 10rem;
     left: 50%;
     transform: translate(-50%, 0);
   }
@@ -156,7 +168,7 @@
 .circlesContainer {
   position: absolute;
   bottom: 5rem;
-  right: -15%;
+  right: -5%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -469,7 +481,7 @@
 //-----------------TO LISTING
 
 .toListing {
-  background-color: $SecondaryC2Light;
+  position: relative;
   height: 40rem;
   width: calc(100vw);
   margin-left: calc((-1 * $baseContentPaddingLaptop) - 1.2rem);
@@ -490,12 +502,13 @@
     margin-left: calc((-1 * $baseContentPaddingMobile)  - 2.4rem );
   }
 
-    @include respond-above("largeDesktop") {
-      margin-left: calc( -$largeDesktop * 1%  );
-    }
+
+
   &__inner {
+    position: absolute;
+      background-color: $SecondaryC2Light;
     height: 100%;
-    width: 60%;
+    width: 100vw;
     min-width: 45rem;
     display: flex;
     flex-direction: column;
@@ -503,6 +516,10 @@
     align-items: center;
 
     text-align: center;
+
+      @include respond-above("largeDesktop") {
+    margin-left: calc( ((-1 *  15) * 1%) - 1.2rem  );
+  }
   }
 }
 

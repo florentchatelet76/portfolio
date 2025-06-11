@@ -70,7 +70,7 @@ function Home({ scrollContainerRef }) {
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    console.log(scrollContainer);
+    console.log("scroll contianer : " + scrollContainer);
     if (!scrollContainerRef?.current) return;
 
     gsap.utils.toArray(".sideImgs__scroll-1").forEach((img) => {
@@ -192,38 +192,42 @@ function Home({ scrollContainerRef }) {
               </div>
             </div>
           </div>
-        </div>
-        <div className="boxContentContainer">
-          <p>
-            Je cherche une alternance pour un niveau BAC+3 en 1 an, n'hésitez
-            pas à me contacter !
-          </p>
-        </div>
-        <div className="circlesContainer">
-          <div className="orbitWrapper">
-            <div className="circlesContainer__leftCircle"></div>
-            <div className="circlesContainer__rightCircle"></div>
+          <div className="homeTopRelativeWrapper">
+<div className="boxContentContainer">
+            <p>
+              Je cherche une alternance pour un niveau BAC+3 en 1 an, n'hésitez
+              pas à me contacter !
+            </p>
           </div>
-        </div>
-        <div className="arrowDown">
-          <div className="arrowDown__inner">
-            <p className="arrowDown__text">Mes projets</p>
-            <div className="arrowDownSVGContainer">
-              <svg
-                id="FLECHE"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 52.62 123.26"
-              >
-                <line class="arrowDownSVG" x1="27.78" x2="27.78" y2="76.47" />
-                <path
-                  class="arrowDownSVG"
-                  d="M0,89.77l27.16,33.49,25.46-31.8c-6.33,6.33-15.52,16.89-24.85,16.8-10.35-.11-20.87-11.58-27.78-18.49Z"
-                />
-              </svg>
+          <div className="circlesContainer">
+            <div className="orbitWrapper">
+              <div className="circlesContainer__leftCircle"></div>
+              <div className="circlesContainer__rightCircle"></div>
             </div>
-            <p className="arrowDown__text">Mes projets</p>
           </div>
+          <div className="arrowDown">
+            <div className="arrowDown__inner">
+              <p className="arrowDown__text">Mes projets</p>
+              <div className="arrowDownSVGContainer">
+                <svg
+                  id="FLECHE"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52.62 123.26"
+                >
+                  <line class="arrowDownSVG" x1="27.78" x2="27.78" y2="76.47" />
+                  <path
+                    class="arrowDownSVG"
+                    d="M0,89.77l27.16,33.49,25.46-31.8c-6.33,6.33-15.52,16.89-24.85,16.8-10.35-.11-20.87-11.58-27.78-18.49Z"
+                  />
+                </svg>
+              </div>
+              <p className="arrowDown__text">Mes projets</p>
+            </div>
+          </div>
+          </div>
+          
         </div>
+
         <div className="homeProjectsContainer">
           {
             // MAIN PROJECT
