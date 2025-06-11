@@ -5,6 +5,7 @@ import Paragraph from "../parts/paragraph";
 import ImgFull from "../parts/imgFull";
 import ImageText from "../parts/imgText";
 import GallerySmall from "../parts/gallerySmall";
+import TwoImgText from "../parts/twoImgText";
 import { useRef, useEffect } from "react";
 import mediaSVG from "../../../data/mediaSVG";
 import gsap from "gsap";
@@ -19,6 +20,7 @@ const COMPONENTS = {
   ImgFull,
   ImageText,
   GallerySmall,
+  TwoImgText
 };
 
 function Project({ triggerSwipe, scrollContainerRef }) {

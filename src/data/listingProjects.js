@@ -76,9 +76,34 @@ const listingProjects = [
     technologies: ["Wordpress", "HTML/CSS", "Javascript", "PHP"],
     content: [
       {
-        type: "CenteredText",
+        type: "TwoImgText",
         props: {
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+          flexRow: false,
+          title: "Contenus relationnels",
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          image1: "/assets/medias/orsay/orsay-searchUI.png",
+          image2: "/assets/medias/orsay/orsay-searchCode.png",
+        },
+      },
+      {
+        type: "GallerySmall",
+        props: {
+          images: [
+            "/assets/medias/orsay/orsay-UI-1.png",
+            "/assets/medias/orsay/orsay-UI-2.png",
+            "/assets/medias/orsay/orsay-UI-3.PNG",
+          ],
+        },
+      },
+
+      {
+        type: "TwoImgText",
+        props: {
+          flexRow: false,
+          title: "Contenus relationnels",
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          image1: "/assets/medias/orsay/orsay-relationContentUI.png",
+          image2: "/assets/medias/orsay/orsay-relationContent.png",
         },
       },
       {
@@ -89,7 +114,10 @@ const listingProjects = [
       },
       {
         type: "ImgFull",
-        props: { image: "/assets/medias/orsay/designSystem.png" },
+        props: {
+          image: "/assets/medias/orsay/designSystem.png",
+          legend: "Design system du site",
+        },
       },
       {
         type: "Paragraph",

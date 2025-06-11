@@ -1,7 +1,7 @@
 .imgFullContainer{
-    max-height: 70rem;
+
     height: 100%;
-    min-height: 90rem;
+    min-height: 60rem;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     overflow: hidden;
@@ -9,8 +9,12 @@
     background-color : red;
 
     
-    @include respond-below('medium') {
-        min-height: 60rem;
+    @include respond-below('large') {
+        min-height: 45rem;
+      }
+
+          @include respond-below('medium') {
+        min-height: 25rem;
       }
 
 
