@@ -490,6 +490,9 @@
     margin-left: calc((-1 * $baseContentPaddingMobile)  - 2.4rem );
   }
 
+    @include respond-above("largeDesktop") {
+      margin-left: calc( -$largeDesktop * 1%  );
+    }
   &__inner {
     height: 100%;
     width: 60%;
