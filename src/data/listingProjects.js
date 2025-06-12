@@ -6,7 +6,7 @@ const listingProjects = [
     image: "/assets/medias/somewhereBetweenCover.png",
     image2: "/assets/medias/somewhereBetweenCover.png",
     descriptionPreview:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+      "Jeu 3D immersif et narratif sur navigateur, dans le cadre de la sensibilisation au sujet de la solitude chez les étudiants.",
     descriptions: [
       "Somewhere Between est un projet 3D sur navigateur, sous forme de jeu-vidéo narratif où l'on découvre plusieurs univers immersifs et animés en 3D.",
     ],
