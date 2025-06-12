@@ -297,6 +297,22 @@
       width: auto;
     }
   }
+
+  &__specifics{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__specificsInner{
+    display: flex;
+    gap : 2rem;
+    flex-wrap: wrap;
+    background-color: $SecondaryC2Light;
+    padding: 0.2rem 1rem;
+  }
 }
 
 .mainProjectContent {

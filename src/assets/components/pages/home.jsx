@@ -277,6 +277,21 @@ function Home({ scrollContainerRef, triggerSwipe }) {
           <div className="mainProjectContainer  content-inside-padding contentSpacing homeProjectContainer">
             <div className="mainProject__inner mainProject">
               <div className="mainProject__imgContainer">
+                <div className="mainProject__specifics">
+                  <div className="mainProject__specificsInner">
+                            {projects[0].technologies &&
+                            projects[0].technologies.map((technologie, index) => (
+                              <p
+                                className="p-white smallUpperCase p-primColor"
+                                key={index}
+                              >
+                                {technologie}
+                              </p>
+                            ))}
+                  </div>
+                          
+                </div>
+                
                 <img
                   src={projects[0].image}
                   className="mainProject__img"
