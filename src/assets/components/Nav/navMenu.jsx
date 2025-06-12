@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import medias from "../../../data/medias";
 
-function NavMenu({scrollContainerRef}) {
+function NavMenu({triggerSwipe, scrollContainerRef}) {
   const navLinksRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -117,7 +117,14 @@ function NavMenu({scrollContainerRef}) {
 
           </button>
         </div>
-
+          <Link 
+            scrollContainerRef={scrollContainerRef}
+            onClick={(e) => {
+              e.preventDefault();            // empêcher le comportement par défaut du lien
+              setIsOpen(false);             // ferme le menu
+              triggerSwipe(`/`);     // déclenche l’animation + navigation
+            }}
+          >
         <div className={`logoContainer ${isOpen ? "logoOpen" : "logoClose"}`}>
           <svg
             id="LOGO"
@@ -138,6 +145,7 @@ function NavMenu({scrollContainerRef}) {
             />
           </svg>
         </div>
+        </Link>
       </div>
 
       <div

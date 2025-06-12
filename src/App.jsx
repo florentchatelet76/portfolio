@@ -165,7 +165,9 @@ function App() {
           </div>
         </div>
 
-        <NavMenu scrollContainerRef={scrollContainerRef} />
+        <NavMenu scrollContainerRef={scrollContainerRef} 
+        triggerSwipe={triggerSwipe}
+        />
         <div
           className="content-overflow topContentMargin contentPaddingLR"
           ref={scrollContainerRef}

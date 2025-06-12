@@ -36,7 +36,7 @@
   justify-content: center;
 
   &__inner {
-    margin: 4rem 0 0 0;
+    margin: 8rem 0 0 0;
     display: flex;
     gap: 1.6rem;
   }
@@ -137,15 +137,16 @@
 .boxContentContainer {
   position: absolute;
   padding: 2rem 4rem;
-  bottom: 10rem;
+  bottom: 15rem;
   left: 10%;
   background-color: $SecondaryC2Light;
 
   @include respond-below("small") {
-    width: 60%;
+    width: 80%;
+    padding: 2rem 2rem;
   }
   p {
-    width: 22rem;
+    width: 28rem;
     font-size: 1.8rem !important;
     line-height: 2rem !important;
     color: white;
@@ -156,7 +157,7 @@
   }
 
   @include respond-below("small") {
-    bottom: 10rem;
+    bottom: 15rem;
     left: 50%;
     transform: translate(-50%, 0);
   }

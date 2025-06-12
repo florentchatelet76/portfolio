@@ -237,8 +237,8 @@ function Home({ scrollContainerRef, triggerSwipe }) {
           <div className="homeTopRelativeWrapper">
 <div className="boxContentContainer">
             <p>
-              Je cherche une alternance pour un niveau BAC+3 en 1 an, n'hésitez
-              pas à me contacter !
+              Je cherche une alternance en développement web FRONT / BACK pour un niveau BAC+3 en 1 an, n'hésitez
+              pas à me contacter!
             </p>
           </div>
           <div className="circlesContainer">
