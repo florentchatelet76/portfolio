@@ -12,7 +12,7 @@ function MainContent({ scrollContainerRef, triggerSwipe }) {
         triggerSwipe={triggerSwipe}
         />
         </main>
-        <Footer />
+        
       </div>
   );
 }

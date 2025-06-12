@@ -75,7 +75,8 @@ const listingProjects = [
     id: "1",
     title: "Musée d'Orsay",
     image: "/assets/medias/orsay/museeOrsayCover-1.png",
-    image2: "/assets/medias/orsay/museeOrsayCover-1.png",
+    image2: "/assets/medias/orsay/orsay-mockup-2.jpg",
+    image3: "/assets/medias/orsay/orsay-mockup-1.jpg",
     descriptionPreview:
       "Projet de refonte visuelle et technique du site du musée d'Orsay, dans le cadre d'un projet universitaire.",
     descriptions: [

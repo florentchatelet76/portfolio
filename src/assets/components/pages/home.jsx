@@ -393,7 +393,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                       } `}
                     >
                       <img
-                        src={project.image2}
+                        src={project.image3}
                         className="sideImgs__img"
                         alt=""
                       />
