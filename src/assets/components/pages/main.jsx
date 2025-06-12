@@ -1,5 +1,6 @@
 import Home from "./home";
 import NavMenu from "../Nav/navMenu"
+import Footer from "../footer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +12,7 @@ function MainContent({ scrollContainerRef, triggerSwipe }) {
         triggerSwipe={triggerSwipe}
         />
         </main>
+        <Footer />
       </div>
   );
 }

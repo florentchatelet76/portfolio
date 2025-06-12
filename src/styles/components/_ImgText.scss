@@ -46,7 +46,7 @@
   }
 
   &__textContainer {
-
+    margin-top: 4rem;
     width: 100%;
     height: fit-content;
     display: flex;
@@ -56,6 +56,14 @@
       max-width: 80%;
       padding: 0;
       height: fit-content;
+      margin-top: 0rem;
+    }
+  }
+
+  &__textContainer p {
+    width: 80%;
+        @include respond-below("medium") {
+          width: 100%;
     }
   }
 

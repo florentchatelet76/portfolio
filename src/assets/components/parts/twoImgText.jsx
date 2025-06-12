@@ -26,7 +26,7 @@ function TwoImgText({ image1, image2, text, title, flexRow }) {
               {title != "" && (
               <h2 className="TitleH2">{title}</h2>
               )}
-              <p className="imageText__text">{text}</p>
+              <p className="imageText__text mg-t-16">{text}</p>
             </div>
           
         </div>

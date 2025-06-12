@@ -96,7 +96,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
         img,
         { y: "10rem" },
         {
-          y: "0rem",
+          y: "-3rem",
           ease: "linear",
           scrollTrigger: {
             trigger: img,
@@ -350,7 +350,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                     <h2 className="TitleH2 textBold titlePrimaryColor">
                       {project.title}
                     </h2>
-                    <div className="secondaryProject__text">
+                    <div className="secondaryProject__text mg-t-16">
                       <p className="p-primColor">
                         {project.descriptionPreview}
                       </p>
@@ -361,7 +361,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                         href={`/projects/${project.id}`}
                          onClick={(e) => {
                     e.preventDefault();
-                    triggerSwipe(`/projects/${projects[0].id}`);
+                    triggerSwipe(`/projects/${project.id}`);
                   }}
                       >
                         Voir le projet

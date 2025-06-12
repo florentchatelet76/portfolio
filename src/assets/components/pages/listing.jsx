@@ -106,13 +106,13 @@ function Listing({ triggerSwipe, scrollContainerRef }) {
           <div
             className={` listingBetweenContentGraphic ${
               project.id % 2 == 0
-                ? "flexEnd listingBetweenContentGraphic__circleRight"
-                : "flexStart listingBetweenContentGraphic__circleLeft"
+                ? "flexEnd circleRight"
+                : "flexStart circleLeft"
             }`}
           >
             <div className="listingBetweenContentGraphic__inner">
-              <div className="listingBetweenContentGraphic__circle">
-                <div className="listingBetweenContentGraphic__dot"></div>
+              <div className="circle">
+                <div className="dot"></div>
               </div>
             </div>
           </div>

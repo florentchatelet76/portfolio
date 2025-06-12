@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import "./styles/main.scss";
 
+import Footer from "./assets/components/footer";
 import NavMenu from "./assets/components/Nav/navMenu";
 import Listing from "./assets/components/pages/listing";
 import Project from "./assets/components/pages/project";
@@ -190,9 +191,13 @@ function App() {
                 element={<Project triggerSwipe={triggerSwipe} />}
               />
             </Routes>
+            
           </div>
+           
         </div>
+       
       </main>
+      
     </div>
   );
 }

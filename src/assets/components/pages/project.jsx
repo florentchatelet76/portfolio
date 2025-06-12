@@ -20,11 +20,10 @@ const COMPONENTS = {
   ImgFull,
   ImageText,
   GallerySmall,
-  TwoImgText
+  TwoImgText,
 };
 
 function Project({ triggerSwipe, scrollContainerRef }) {
-
   const { id } = useParams(); // on récupère `:id`
   const project = listingProjects.find((p) => p.id === id);
   if (!project) return <p>Projet introuvable</p>;
@@ -59,7 +58,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
     );
   }, [id]);
 
-  //----------- HEADIMG PARALLAX SCROLL 
+  //----------- HEADIMG PARALLAX SCROLL
   useEffect(() => {
     if (!headImgRef.current || !scrollContainerRef?.current) return;
     const ctx = gsap.context(() => {
@@ -71,8 +70,8 @@ function Project({ triggerSwipe, scrollContainerRef }) {
           ease: "linear",
           scrollTrigger: {
             trigger: headImgRef.current,
-            start: "top top",     // dès que le haut de l'image atteint le haut du viewport
-            end: "bottom top",    // jusqu’à ce que le bas de l’image atteigne le haut du viewport
+            start: "top top", // dès que le haut de l'image atteint le haut du viewport
+            end: "bottom top", // jusqu’à ce que le bas de l’image atteigne le haut du viewport
             scrub: true,
             scroller: scrollContainerRef.current,
           },
@@ -83,32 +82,31 @@ function Project({ triggerSwipe, scrollContainerRef }) {
     return () => ctx.revert();
   }, [scrollContainerRef]);
 
-
   // ScrollTrigger pour le lien suivant
-  useEffect(() => {
-    const anim = gsap.fromTo(
-      previousProjectRef.current,
-      { opacity: 0, x: -50 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: previousProjectRef.current,
-          start: "top bottom",
-          end: "top 20%",
-          toggleActions: "play none none reverse",
-          markers: false,
-        },
-      }
-    );
-    const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
-    return () => {
-      clearTimeout(rId);
-      anim.kill();
-      anim.scrollTrigger?.kill();
-    };
-  }, [id]);
+  // useEffect(() => {
+  //   const anim = gsap.fromTo(
+  //     previousProjectRef.current,
+  //     { opacity: 0, x: -50 },
+  //     {
+  //       opacity: 1,
+  //       x: 0,
+  //       duration: 1,
+  //       scrollTrigger: {
+  //         trigger: previousProjectRef.current,
+  //         start: "top bottom",
+  //         end: "top 20%",
+  //         toggleActions: "play none none reverse",
+  //         markers: false,
+  //       },
+  //     }
+  //   );
+  //   const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
+  //   return () => {
+  //     clearTimeout(rId);
+  //     anim.kill();
+  //     anim.scrollTrigger?.kill();
+  //   };
+  // }, [id]);
 
   // Log scroll (inchangé)
   useEffect(() => {
@@ -124,7 +122,13 @@ function Project({ triggerSwipe, scrollContainerRef }) {
 
   const currentIdNumber = parseInt(id, 10);
   const nextId = String(currentIdNumber + 1);
+  const nextProject = listingProjects.find((item) => item.id == nextId);
   const prevId = String(currentIdNumber - 1);
+  const prevProject = listingProjects.find((item) => item.id == prevId);
+
+  console.log("prevProject", prevProject);
+  console.log("nextProject", nextProject);
+
   const iconLink = mediaSVG.find((item) => item.name === "icon-link");
 
   return (
@@ -142,20 +146,20 @@ function Project({ triggerSwipe, scrollContainerRef }) {
             alt=""
           />
           <div className="projectTitle contentPaddingLR mg-b-24">
-          <h1 className="TitleH1 textBold">
-            {project.title}
-          </h1>
+            <h1 className="TitleH1 textBold">{project.title}</h1>
           </div>
         </div>
       </div>
       <div className="projectHeadContent">
         <div className="projectHeadContent__link">
-          <a target="_blank" href={project.link}>Lien
-          <img
-            className="projectHeadContent__linkIcon mr-8"
-            src={iconLink.media}
-            alt=""
-          /></a>
+          <a target="_blank" href={project.link}>
+            Lien
+            <img
+              className="projectHeadContent__linkIcon mr-8"
+              src={iconLink.media}
+              alt=""
+            />
+          </a>
         </div>
         <div className="projectHeadContent__textContainer">
           <div className="projectHeadContent__description">
@@ -206,24 +210,67 @@ function Project({ triggerSwipe, scrollContainerRef }) {
         }
         return <Component key={index} {...block.props} />;
       })}
-      <div className="navLinkContainer">
-        {prevId > 0 && <Link 
-        onClick={(e) => {
-                    e.preventDefault();
-                    triggerSwipe(`/projects/${prevId}`);
-                  }}
-        to={`/projects/${prevId}`}>Projet Précédent</Link>}
-        <div ref={previousProjectRef}>
-          <Link onClick={(e) => {
-                    e.preventDefault();
-                    triggerSwipe(`/projects/${nextId}`);
-                  }} to={`/projects/${nextId}`}>Projet suivant</Link>
-        </div>
+      <div className="navProjects">
+        {prevProject && (
+          <div className="navProjects__linkContainer rowReverse">
+            <div className="navProjects__circleContainer flexEnd">
+              <div className="navProjects__circleContainerInner">
+                <div className="circle">
+                  <div className="dot"></div>
+                </div>
+              </div>
+            </div>
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                triggerSwipe(`/projects/${prevId}`);
+              }}
+              to={`/projects/${prevId}`}
+            >
+              <div className="navProjects__linkContainerInner">
+                <div ref={previousProjectRef}>
+                  <p className="p-white">Projet précedent</p>
+                  <h3 className="TitleH3 p-white">{prevProject.title}</h3>
+                </div>
+              </div>
+            </Link>
+          </div>
+        )}
 
-        <Link onClick={(e) => {
-                    e.preventDefault();
-                    triggerSwipe(`/listing`);
-                  }} to="/listing">Retour à la galerie</Link>
+        {nextProject && (
+          <div className="navProjects__linkContainer">
+            <div className="navProjects__circleContainer">
+              <div className="navProjects__circleContainerInner">
+                <div className="circle">
+                  <div className="dot"></div>
+                </div>
+              </div>
+            </div>
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                triggerSwipe(`/projects/${nextId}`);
+              }}
+              to={`/projects/${nextId}`}
+            >
+              <div className="navProjects__linkContainerInner">
+                <div>
+                  <p className="p-white">Projet suivant</p>
+                  <h3 className="TitleH3 p-white">{nextProject.title}</h3>
+                </div>
+              </div>
+            </Link>
+          </div>
+        )}
+        <Link
+          onClick={(e) => {
+            e.preventDefault();
+            triggerSwipe(`/listing`);
+          }}
+          to="/listing"
+        >
+          Retour à la galerie
+        </Link>
       </div>
     </div>
   );
