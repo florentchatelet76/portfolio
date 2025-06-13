@@ -167,7 +167,9 @@ function NavMenu({triggerSwipe, scrollContainerRef, overlayRef}) {
                 className="linkBold textBold"
                 scrollContainerRef={scrollContainerRef}
                 to={link.to}
+                
                 onClick={() => setIsOpen(false)}
+                
               >
                 {link.label}
               </Link>
