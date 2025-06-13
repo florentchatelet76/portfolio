@@ -40,6 +40,7 @@
     &__innerOpen{
         min-width: 16rem;
             transition: ease .5s;
+            background-color: $SecondaryC1Light;
     }
 
     &__innerClose{
@@ -49,7 +50,7 @@
 
     &__inner {
     position: relative;
-    background-color: $SecondaryC1Light;
+    
     padding: 1.5rem 3.5rem;
     border-radius: 3rem;
     border: solid 2px $SecondaryC2Light;

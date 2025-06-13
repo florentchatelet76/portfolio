@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
 import listingProjects from "../../../data/listingProjects";
 import CenteredText from "../parts/centeredText";
 import Paragraph from "../parts/paragraph";
@@ -131,6 +132,12 @@ function Project({ triggerSwipe, scrollContainerRef }) {
 
   const iconLink = mediaSVG.find((item) => item.name === "icon-link");
 
+
+  //--------- HOVER NAV PREV ET NEXT 
+
+   const [isHoveredPrev, setIsHoveredPrev] = useState(false);
+  const [isHoveredNext, setIsHoveredNext] = useState(false);
+
   return (
     <div className="projectContainer project" ref={contentRef}>
       <div className="project__headImgContainer">
@@ -212,11 +219,16 @@ function Project({ triggerSwipe, scrollContainerRef }) {
       })}
       <div className="navProjects">
         {prevProject && (
-          <div className="navProjects__linkContainer rowReverse">
+          <div 
+          onMouseEnter={() => setIsHoveredPrev(true)}
+          onMouseLeave={() => setIsHoveredPrev(false)}
+          className="navProjects__linkContainer rowReverse">
             <div className="navProjects__circleContainer flexEnd">
               <div className="navProjects__circleContainerInner">
+                <div className={`navProjects__prevCircle ${isHoveredPrev ? "navProjects__prevCircle--over" : ""}`}>
                 <div className="circle">
                   <div className="dot"></div>
+                </div>
                 </div>
               </div>
             </div>
@@ -238,11 +250,16 @@ function Project({ triggerSwipe, scrollContainerRef }) {
         )}
 
         {nextProject && (
-          <div className="navProjects__linkContainer">
+          <div 
+          onMouseEnter={() => setIsHoveredNext(true)}
+          onMouseLeave={() => setIsHoveredNext(false)}
+          className="navProjects__linkContainer">
             <div className="navProjects__circleContainer">
               <div className="navProjects__circleContainerInner">
+                <div className={`navProjects__nextCircle ${isHoveredNext ? "navProjects__nextCircle--over" : ""}`}>
                 <div className="circle">
                   <div className="dot"></div>
+                </div>
                 </div>
               </div>
             </div>
@@ -262,7 +279,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
             </Link>
           </div>
         )}
-        <Link
+        {/* <Link
           onClick={(e) => {
             e.preventDefault();
             triggerSwipe(`/listing`);
@@ -270,7 +287,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
           to="/listing"
         >
           Retour à la galerie
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

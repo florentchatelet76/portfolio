@@ -164,8 +164,41 @@
 
   &__circleContainer{
     width: 50%;
-    display: flex;
+    position: relative;
     flex-direction: row;
+    
+  }
+
+  &__prevCircle{
+    right: 0;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+  }
+  
+    &__nextCircle{
+    left: 0;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    
+  }
+
+  &__nextCircle, &__prevCircle{
+    transition: .3s ease-in;
+  }
+  
+  &__prevCircle--over, &__nextCircle--over{
+    transition: .5s ease-in-out;
+  }
+  &__prevCircle--over{
+      right: 100%;
+      transform: translateX(100%);
+  }
+
+  &__nextCircle--over{
+      left: 100%;
+      transform: translateX(-100%);
   }
 
   &__circleContainerInner{

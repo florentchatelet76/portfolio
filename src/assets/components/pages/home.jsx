@@ -27,10 +27,12 @@ function Home({ scrollContainerRef, triggerSwipe }) {
 
   const aboutTextDev = useRef(null);
   const aboutTextDesign = useRef(null);
+  const aboutButtonDesign = useRef(null);
 
   useEffect(() => {
     const dev = aboutTextDev.current;
     const design = aboutTextDesign.current;
+    const Buttondesign = aboutButtonDesign.current;
 
     if (aboutSubject) {
       // Afficher texte Dev
@@ -40,6 +42,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
         duration: 0.3,
         onComplete: () => {
           design.style.display = "none";
+          Buttondesign.style.display = "none";
           dev.style.display = "block";
           gsap.fromTo(
             dev,
@@ -57,10 +60,27 @@ function Home({ scrollContainerRef, triggerSwipe }) {
         onComplete: () => {
           dev.style.display = "none";
           design.style.display = "block";
+          design.style.display = "block";
           gsap.fromTo(
             design,
             { opacity: 0, y: -20 },
             { opacity: 1, y: 0, duration: 0.5 }
+          );
+        },
+      });
+
+      gsap.to(Buttondesign, {
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
+        onComplete: () => {
+          dev.style.display = "none";
+          design.style.display = "block";
+          Buttondesign.style.display = "block";
+          gsap.fromTo(
+            Buttondesign,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.2 }
           );
         },
       });
@@ -118,18 +138,17 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   //------------------- ANIM SKILLS
 
   useEffect(() => {
-  const container = scrollContainerRef.current;
-  if (!container) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-  // Sélectionne tous les éléments .js-row dans le conteneur scrollé
-  const rows = container.querySelectorAll(".js-row");
-
+    // Sélectionne tous les éléments .js-row dans le conteneur scrollé
+    const rows = container.querySelectorAll(".js-row");
 
     const anim = gsap.fromTo(
       rows,
-      { clipPath: 'inset(100% 0 0 0)' },
+      { clipPath: "inset(100% 0 0 0)" },
       {
-        clipPath: 'inset(0% 0 0 0)',
+        clipPath: "inset(0% 0 0 0)",
         duration: 1,
         ease: "power2.out",
         stagger: 0.1,
@@ -144,18 +163,16 @@ function Home({ scrollContainerRef, triggerSwipe }) {
       }
     );
 
-  // Fix refresh avec scroll proxy (comme tu faisais)
-  const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
+    // Fix refresh avec scroll proxy (comme tu faisais)
+    const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
 
-  // Cleanup
-  return () => {
-    clearTimeout(rId);
-    anim.kill();
-    anim.scrollTrigger?.kill();
-    
-  };
-}, []);
-
+    // Cleanup
+    return () => {
+      clearTimeout(rId);
+      anim.kill();
+      anim.scrollTrigger?.kill();
+    };
+  }, []);
 
   //------------------ LISTING PROJECTS
 
@@ -236,39 +253,43 @@ function Home({ scrollContainerRef, triggerSwipe }) {
             </div>
           </div>
           <div className="homeTopRelativeWrapper">
-<div className="boxContentContainer">
-            <p>
-              Je cherche une alternance en développement web FRONT / BACK pour un niveau BAC+3 en 1 an, n'hésitez
-              pas à me contacter!
-            </p>
-          </div>
-          <div className="circlesContainer">
-            <div className="orbitWrapper">
-              <div className="circlesContainer__leftCircle"></div>
-              <div className="circlesContainer__rightCircle"></div>
+            <div className="boxContentContainer">
+              <p>
+                Je cherche une alternance en développement web FRONT / BACK pour
+                un niveau BAC+3 en 1 an, n'hésitez pas à me contacter!
+              </p>
             </div>
-          </div>
-          <div className="arrowDown">
-            <div className="arrowDown__inner">
-              <p className="arrowDown__text">Mes projets</p>
-              <div className="arrowDownSVGContainer">
-                <svg
-                  id="FLECHE"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 52.62 123.26"
-                >
-                  <line class="arrowDownSVG" x1="27.78" x2="27.78" y2="76.47" />
-                  <path
-                    class="arrowDownSVG"
-                    d="M0,89.77l27.16,33.49,25.46-31.8c-6.33,6.33-15.52,16.89-24.85,16.8-10.35-.11-20.87-11.58-27.78-18.49Z"
-                  />
-                </svg>
+            <div className="circlesContainer">
+              <div className="orbitWrapper">
+                <div className="circlesContainer__leftCircle"></div>
+                <div className="circlesContainer__rightCircle"></div>
               </div>
-              <p className="arrowDown__text">Mes projets</p>
+            </div>
+            <div className="arrowDown">
+              <div className="arrowDown__inner">
+                <p className="arrowDown__text">Mes projets</p>
+                <div className="arrowDownSVGContainer">
+                  <svg
+                    id="FLECHE"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 52.62 123.26"
+                  >
+                    <line
+                      class="arrowDownSVG"
+                      x1="27.78"
+                      x2="27.78"
+                      y2="76.47"
+                    />
+                    <path
+                      class="arrowDownSVG"
+                      d="M0,89.77l27.16,33.49,25.46-31.8c-6.33,6.33-15.52,16.89-24.85,16.8-10.35-.11-20.87-11.58-27.78-18.49Z"
+                    />
+                  </svg>
+                </div>
+                <p className="arrowDown__text">Mes projets</p>
+              </div>
             </div>
           </div>
-          </div>
-          
         </div>
 
         <div className="homeProjectsContainer">
@@ -280,19 +301,18 @@ function Home({ scrollContainerRef, triggerSwipe }) {
               <div className="mainProject__imgContainer">
                 <div className="mainProject__specifics">
                   <div className="mainProject__specificsInner">
-                            {projects[0].technologies &&
-                            projects[0].technologies.map((technologie, index) => (
-                              <p
-                                className="p-white smallUpperCase p-primColor"
-                                key={index}
-                              >
-                                {technologie}
-                              </p>
-                            ))}
+                    {projects[0].technologies &&
+                      projects[0].technologies.map((technologie, index) => (
+                        <p
+                          className="p-white smallUpperCase p-primColor"
+                          key={index}
+                        >
+                          {technologie}
+                        </p>
+                      ))}
                   </div>
-                          
                 </div>
-                
+
                 <img
                   src={projects[0].image}
                   className="mainProject__img"
@@ -314,9 +334,9 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                   <a
                     scrollContainerRef={scrollContainerRef}
                     onClick={(e) => {
-                    e.preventDefault();
-                    triggerSwipe(`/projects/${projects[0].id}`);
-                  }}
+                      e.preventDefault();
+                      triggerSwipe(`/projects/${projects[0].id}`);
+                    }}
                     className="seeProjectLink primaryButton"
                     href={`/projects/${projects[0].id}`}
                   >
@@ -375,10 +395,10 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                       <a
                         className="seeProjectLink primaryButton"
                         href={`/projects/${project.id}`}
-                         onClick={(e) => {
-                    e.preventDefault();
-                    triggerSwipe(`/projects/${project.id}`);
-                  }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          triggerSwipe(`/projects/${project.id}`);
+                        }}
                       >
                         Voir le projet
                       </a>
@@ -430,12 +450,14 @@ function Home({ scrollContainerRef, triggerSwipe }) {
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <div className="buttonContainer mg-t-24">
-              <Link to="/listing"
-               onClick={(e) => {
-                    e.preventDefault();
-                    triggerSwipe(`/projects/${projects[0].id}`);
-                  }}
-              className="PrimaryButtonLink">
+              <Link
+                to="/listing"
+                onClick={(e) => {
+                  e.preventDefault();
+                  triggerSwipe(`/projects/${projects[0].id}`);
+                }}
+                className="PrimaryButtonLink"
+              >
                 <button className="primaryButton-light">
                   Voir tous mes projets
                 </button>
@@ -447,47 +469,66 @@ function Home({ scrollContainerRef, triggerSwipe }) {
           <div className="h-about__inner">
             <div className="h-about__textContainer">
               <h2 className="largeBoldText p-primColor"> Qui suis-je ?</h2>
-              <div className="h-about__files">
-                <a href="/pdf/Florent_Chatelet_CV.pdf" rel="noopener noreferrer" target="_blank" className="primaryButton"></a>
-              </div>
-              <div
-                className="h-about__text h-about-Developper mg-t-24"
-                ref={aboutTextDev}
-              >
-                <div className=" p-primColor">
-                  <p className="">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
 
-                  <p className=" mg-t-24">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
+              <div className="h-about__textContainerInner">
+                <div
+                  className="h-about__text h-about-Developper mg-t-24"
+                  ref={aboutTextDev}
+                >
+                  <div className=" p-primColor">
+                    <p className="">
+                      Après plusieurs années à créer des expériences visuelles,
+                      j’ai décidé de me recentrer sur ma passion pour le
+                      développement web, pour allier créativité, logique et
+                      interactivité.
+                    </p>
+
+                    <p className=" mg-t-24">
+                      Aujourd’hui, je me forme en développement front-end
+                      (React, GSAP) et en back-end (PHP, POO, MySQL) dans le
+                      cadre d’un futur bachelor en alternance.
+                    </p>
+                  </div>
                 </div>
-              </div>
+                
+                <div
+                  className="h-about__text h-about-Designer mg-t-24"
+                  ref={aboutTextDesign}
+                >
+                  <div className=" p-primColor">
+                    <p className="">
+                      je suis également motion designer et graphiste basé entre
+                      Lyon et Rouen. Formé aux Gobelins, je combine une approche
+                      narrative et graphique pour créer des contenus dynamiques
+                      qui ont du sens, que ce soit en 2D,3D ou montage vidéo.
+                    </p>
 
-              <div
-                className="h-about__text h-about-Designer mg-t-24"
-                ref={aboutTextDesign}
-              >
-                <div className=" p-primColor">
-                  <p className="">
-                    {" "}
-                    DESIGN Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
-                  </p>
-
-                  <p className=" mg-t-24">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
+                    <p className=" mg-t-24">
+                      Concevoir des animations réactives, construire des
+                      systèmes procéduraux, résoudre des casse-têtes visuels,
+                      c’est cette dimension technique qui nourrit ma passion.
+                    </p>
+                  </div>
                 </div>
+                 <a
+                href="https://vimeo.com/1014820828"
+                target="blank"
+                className="mg-t-24 primaryButton"
+                ref={aboutButtonDesign}
+              >
+                Visionner mon showreel
+              </a>
               </div>
+              <a
+                href="/pdf/Florent_Chatelet_CV.pdf"
+                download="Florent_Chatelet_CV.pdf"
+                target="_blank"
+                className="mg-t-24 seeProjectLink primaryButton"
+              >
+                Mon CV
+              </a>
+
+             
             </div>
             <div className="h-about__imgToggleContainer">
               <div className="h-about__imgContainer">

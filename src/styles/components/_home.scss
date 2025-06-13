@@ -148,7 +148,7 @@
   p {
     width: 28rem;
     font-size: 1.8rem !important;
-    line-height: 2rem !important;
+    line-height: 2.3rem !important;
     color: white;
 
     @include respond-below("small") {
@@ -610,6 +610,12 @@
     max-height: 80%;
     display: flex;
     flex-direction: column;
+  }
+
+  &__textContainerInner{
+    display: flex;
+    flex-direction: column;
+    flex-grow : 1;
   }
 
   &__toggleSelected {
