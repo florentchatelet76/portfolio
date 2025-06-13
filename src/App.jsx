@@ -30,9 +30,18 @@ function App() {
     });
 
     // Quand le scroll change, on met à jour ScrollTrigger
-    scrollbar.current.addListener(() => {
-      ScrollTrigger.update();
-    });
+scrollbar.current.addListener(() => {
+  const scrollContent = scrollContainerRef.current?.querySelector('.scroll-content');
+
+  if (scrollContent && scrollContent.style.transform) {
+    const matchY = scrollContent.style.transform.match(/translate3d\([^,]+,\s*([^,]+),/);
+    const translateY = matchY ? matchY[1] : '0px';
+    scrollContent.style.transform = `translate3d(0px, ${translateY}, 0px)`;
+  }
+
+  ScrollTrigger.update();
+});
+
 
     // ScrollTrigger proxy pour Smooth Scrollbar
     ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
@@ -71,6 +80,8 @@ function App() {
       }
     };
   }, []);
+
+  
 
   //-----------GSAP TRANSITIONS
 

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 
 function Home({ scrollContainerRef, triggerSwipe }) {
@@ -446,6 +447,9 @@ function Home({ scrollContainerRef, triggerSwipe }) {
           <div className="h-about__inner">
             <div className="h-about__textContainer">
               <h2 className="largeBoldText p-primColor"> Qui suis-je ?</h2>
+              <div className="h-about__files">
+                <a href="/pdf/Florent_Chatelet_CV.pdf" rel="noopener noreferrer" target="_blank" className="primaryButton"></a>
+              </div>
               <div
                 className="h-about__text h-about-Developper mg-t-24"
                 ref={aboutTextDev}
