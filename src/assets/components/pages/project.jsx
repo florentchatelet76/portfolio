@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link,  } from "react-router-dom";
 import { useState } from "react";
 import listingProjects from "../../../data/listingProjects";
 import CenteredText from "../parts/centeredText";
@@ -26,7 +26,7 @@ const COMPONENTS = {
   List,
 };
 
-function Project({ triggerSwipe, scrollContainerRef }) {
+function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
   const { id } = useParams(); // on récupère `:id`
   const project = listingProjects.find((p) => p.id === id);
   if (!project) return <p>Projet introuvable</p>;
@@ -35,6 +35,28 @@ function Project({ triggerSwipe, scrollContainerRef }) {
   const headImgRef = useRef(null);
   const previousProjectRef = useRef(null);
   const contentRef = useRef(null);
+
+  //FIN TRANSITIOPN 
+
+  useEffect(() => {
+  if (!overlayRef?.current) return;
+
+  gsap.set(overlayRef.current, { yPercent: 100 });
+
+  const tl = gsap.timeline();
+  tl.to(overlayRef.current, {
+    yPercent: -100,
+    duration: 0.5,
+    ease: "power2.inOut",
+    delay: 0.1,
+  }).to(overlayRef.current, {
+    yPercent: -200,
+    duration: 0.5,
+    ease: "power2.inOut",
+    delay: 0.1,
+  });
+}, []);
+
 
   // Timeline d'entrée avec délai de 1s
   useEffect(() => {
@@ -49,7 +71,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
     tl.fromTo(
       headImgRef.current,
       { bottom: "-100%" },
-      { bottom: "-50%", duration: 1, ease: "power2.inOut" },
+      { bottom: "0%", duration: 1, ease: "power2.inOut" },
       "<+0.2"
     );
 

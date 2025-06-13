@@ -30,18 +30,20 @@ function App() {
     });
 
     // Quand le scroll change, on met à jour ScrollTrigger
-scrollbar.current.addListener(() => {
-  const scrollContent = scrollContainerRef.current?.querySelector('.scroll-content');
+    scrollbar.current.addListener(() => {
+      const scrollContent =
+        scrollContainerRef.current?.querySelector(".scroll-content");
 
-  if (scrollContent && scrollContent.style.transform) {
-    const matchY = scrollContent.style.transform.match(/translate3d\([^,]+,\s*([^,]+),/);
-    const translateY = matchY ? matchY[1] : '0px';
-    scrollContent.style.transform = `translate3d(0px, ${translateY}, 0px)`;
-  }
+      if (scrollContent && scrollContent.style.transform) {
+        const matchY = scrollContent.style.transform.match(
+          /translate3d\([^,]+,\s*([^,]+),/
+        );
+        const translateY = matchY ? matchY[1] : "0px";
+        scrollContent.style.transform = `translate3d(0px, ${translateY}, 0px)`;
+      }
 
-  ScrollTrigger.update();
-});
-
+      ScrollTrigger.update();
+    });
 
     // ScrollTrigger proxy pour Smooth Scrollbar
     ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
@@ -81,8 +83,6 @@ scrollbar.current.addListener(() => {
     };
   }, []);
 
-  
-
   //-----------GSAP TRANSITIONS
 
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -90,37 +90,51 @@ scrollbar.current.addListener(() => {
   const navigate = useNavigate();
 
   const triggerSwipe = (path) => {
-    const overlay = overlayRef.current;
-    if (!overlay) {
-      navigate(path);
-      return;
+  const overlay = overlayRef.current;
+  if (!overlay) {
+    navigate(path);
+    return;
+  }
+
+  console.log("Transition vers", path);
+  setIsTransitioning(true);
+
+  // Réinitialise l'overlay en dehors de l’écran
+ // Position initiale de l'overlay (hors écran en bas)
+gsap.set(overlay, { yPercent: 200 });
+
+const tl = gsap.timeline();
+
+// 1. Entrée de l’overlay (de bas à milieu visible)
+tl.to(overlay, {
+  yPercent: 0,  // ici 0 pour que l'overlay soit bien visible à la fin
+  duration: 0.6,
+  ease: "power2.inOut",
+});
+
+// 2. Scroll vers le haut, on retourne une Promise pour que la timeline attende la fin
+tl.add(() => {
+  return new Promise((resolve) => {
+    if (scrollbar.current) {
+      console.log("Scroll to top");
+      scrollbar.current.scrollTo(0, 0, 800); // scroll fluide sur 800ms
+      setTimeout(() => {
+        resolve(); // fin du scroll après 800ms
+      }, 800);
+    } else {
+      resolve();
     }
+  });
+});
 
-    gsap.set(overlay, { yPercent: 200 });
-    setIsTransitioning(true);
+// 3. Navigation une fois scroll + overlay terminés
+tl.add(() => {
+  console.log("Navigate");
+  navigate(path);
+});
+};
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setIsTransitioning(false);
-      },
-    });
 
-    tl.to(overlay, { yPercent: 100, duration: 0.5, ease: "power2.inOut" })
-      // === scroll to top AVANT navigation ===
-      .add(() => {
-        if (scrollbar.current) {
-          scrollbar.current.scrollTo(0, 0, 800); // scroll fluide vers le haut
-        }
-      })
-      // petite pause pour laisser le temps au scroll
-      .addPause("+=", 0.85) // attend 850ms
-      // navigation après scroll
-      .add(() => {
-        navigate(path);
-      })
-      .to(overlay, { yPercent: -100, duration: 0.5, ease: "power2.inOut" })
-      .to(overlay, { yPercent: -200, duration: 0.5, ease: "power2.inOut" });
-  };
 
   //------ TRAITS BG
   const containerRef = useRef(null);
@@ -176,8 +190,10 @@ scrollbar.current.addListener(() => {
           </div>
         </div>
 
-        <NavMenu scrollContainerRef={scrollContainerRef} 
-        triggerSwipe={triggerSwipe}
+        <NavMenu
+          scrollContainerRef={scrollContainerRef}
+          overlayRef={overlayRef}
+          triggerSwipe={triggerSwipe}
         />
         <div
           className="content-overflow topContentMargin contentPaddingLR"
@@ -190,6 +206,7 @@ scrollbar.current.addListener(() => {
                 path="/"
                 element={
                   <MainContent
+                    overlayRef={overlayRef}
                     triggerSwipe={triggerSwipe}
                     scrollContainerRef={scrollContainerRef}
                   />
@@ -201,16 +218,20 @@ scrollbar.current.addListener(() => {
               />
               <Route
                 path="/projects/:id"
-                element={<Project triggerSwipe={triggerSwipe} />}
+                overlayRef={overlayRef}
+                element={
+                  <Project
+                    triggerSwipe={triggerSwipe}
+                    scrollContainerRef={scrollContainerRef}
+                    overlayRef={overlayRef}
+                  />
+                }
               />
             </Routes>
-            
           </div>
-           <Footer />
+          <Footer />
         </div>
-       
       </main>
-      
     </div>
   );
 }

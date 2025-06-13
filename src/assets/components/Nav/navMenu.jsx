@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import medias from "../../../data/medias";
 
-function NavMenu({triggerSwipe, scrollContainerRef}) {
+function NavMenu({triggerSwipe, scrollContainerRef, overlayRef}) {
   const navLinksRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -118,6 +118,7 @@ function NavMenu({triggerSwipe, scrollContainerRef}) {
           </button>
         </div>
           <Link 
+          overlayRef={overlayRef}
             scrollContainerRef={scrollContainerRef}
             onClick={(e) => {
               e.preventDefault();            // empêcher le comportement par défaut du lien

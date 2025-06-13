@@ -8,7 +8,7 @@ const aboutData = [
     id: 2,
     category: "Back-end",
     skills: [
-      "Wordpress Custom Theme ( PHP )",
+      "Wordpress Custom Theme (PHP)",
       "Programmation Orientée Objet (PHP)",
       "MYSQL",
       "SYMFONY",

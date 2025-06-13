@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import listingProjects from "../../../data/listingProjects";
 import gsap from "gsap";
 
-function Listing({ triggerSwipe, scrollContainerRef }) {
+function Listing({ triggerSwipe, scrollContainerRef, overlayRef }) {
   const listingRef = useRef(null);
   const navigate = useNavigate();
 
@@ -92,6 +92,7 @@ function Listing({ triggerSwipe, scrollContainerRef }) {
                 <a
                   className="seeProjectLink primaryButton"
                   scrollContainerRef={scrollContainerRef}
+                  overlayRef={overlayRef}
                   href={`/projects/${project.id}`}
                   onClick={(e) => {
                     e.preventDefault();
