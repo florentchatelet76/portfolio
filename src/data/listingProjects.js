@@ -141,9 +141,25 @@ const listingProjects = [
     title: "Register & Login",
     image: "/assets/medias/img_test4.png",
     image2: "/assets/medias/img_test1.jpg",
-    descriptionPreview: "Système de création de compte et de connexion dans une base de données MYSQL",
+    descriptionPreview: "J’ai développé un système d’authentification sécurisé en PHP structuré selon une architecture MVC légère. Le projet comprend une gestion complète de l’inscription et de la connexion des utilisateurs, avec vérification des champs, validation des erreurs et sécurisation des sessions.",
+    descriptions : ["J’ai développé un système d’authentification sécurisé en PHP structuré selon une architecture MVC légère. Le projet comprend une gestion complète de l’inscription et de la connexion des utilisateurs, avec vérification des champs, validation des erreurs et sécurisation des sessions."],
     technologies: ["HTML/CSS", "PHP", "MYSQL"],
     content: [
+      {
+        type : "ImageText",
+        props : {
+          title : "Sécurisation des données",
+          text : "Tous les mots de passe sont hashés avec password_hash() avant d’être stockés, et vérifiés à la connexion avec password_verify(). Les entrées utilisateurs sont protégées via des requêtes préparées PDO pour éviter les injections SQL, et les données sensibles sont échappées avec htmlspecialchars() lors de l'affichage. J’ai également mis en place session_regenerate_id() pour empêcher les attaques par fixation de session."
+        }
+      },
+      {
+        type : "ImageText",
+        props : {
+          flexRow : true,
+          title : "Sécurisation des données",
+          text : "Tous les mots de passe sont hashés avec password_hash() avant d’être stockés, et vérifiés à la connexion avec password_verify(). Les entrées utilisateurs sont protégées via des requêtes préparées PDO pour éviter les injections SQL, et les données sensibles sont échappées avec htmlspecialchars() lors de l'affichage. J’ai également mis en place session_regenerate_id() pour empêcher les attaques par fixation de session."
+        }
+      },
       {
         type: "CenteredText",
         props: { text: "Texte centré 1" },
