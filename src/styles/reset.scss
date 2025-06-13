@@ -63,3 +63,13 @@ a{
 	cursor: pointer;
 	outline: inherit;
 }
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+ul.unset, ul.unset > li {
+  margin: inherit;
+  padding: inherit;
+}

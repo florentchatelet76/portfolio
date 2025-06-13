@@ -2,6 +2,7 @@ const listingProjects = [
   {
     id: "0",
     title: "Somewhere Between",
+    year :"2024",
     link: "https://sb-preprod.netlify.app/",
     image: "/assets/medias/somewhereBetweenCover.png",
     image2: "/assets/medias/somewhereBetweenCover.png",
@@ -74,6 +75,7 @@ const listingProjects = [
   {
     id: "1",
     title: "Musée d'Orsay",
+    year :"2021",
     image: "/assets/medias/orsay/museeOrsayCover-1.png",
     image2: "/assets/medias/orsay/orsay-mockup-2.jpg",
     image3: "/assets/medias/orsay/orsay-mockup-1.jpg",
@@ -138,65 +140,73 @@ const listingProjects = [
 
   {
     id: "2",
+    link: "https://github.com/florentchatelet76/register_login",
     title: "Register & Login",
+    year :"2024",
     image: "/assets/medias/img_test4.png",
-    image2: "/assets/medias/img_test1.jpg",
-    descriptionPreview: "J’ai développé un système d’authentification sécurisé en PHP structuré selon une architecture MVC légère. Le projet comprend une gestion complète de l’inscription et de la connexion des utilisateurs, avec vérification des champs, validation des erreurs et sécurisation des sessions.",
-    descriptions : ["J’ai développé un système d’authentification sécurisé en PHP structuré selon une architecture MVC légère. Le projet comprend une gestion complète de l’inscription et de la connexion des utilisateurs, avec vérification des champs, validation des erreurs et sécurisation des sessions."],
+    image2: "/assets/medias/img_test4.png",
+    descriptionPreview: "Développement d'un système d’authentification sécurisé en PHP structuré selon une architecture MVC légère.",
+    descriptions : ["Développement d'un système d’authentification sécurisé en PHP structuré selon une architecture MVC légère. Le projet comprend une gestion complète de l’inscription et de la connexion des utilisateurs, avec vérification des champs, validation des erreurs et sécurisation des sessions."],
     technologies: ["HTML/CSS", "PHP", "MYSQL"],
+    roles: ["Développeur Back"],
     content: [
       {
         type : "ImageText",
         props : {
+          image : "/assets/medias/loginRegister/login_hspwd.png",
           title : "Sécurisation des données",
           text : "Tous les mots de passe sont hashés avec password_hash() avant d’être stockés, et vérifiés à la connexion avec password_verify(). Les entrées utilisateurs sont protégées via des requêtes préparées PDO pour éviter les injections SQL, et les données sensibles sont échappées avec htmlspecialchars() lors de l'affichage. J’ai également mis en place session_regenerate_id() pour empêcher les attaques par fixation de session."
         }
       },
-      {
-        type : "ImageText",
-        props : {
-          flexRow : true,
-          title : "Sécurisation des données",
-          text : "Tous les mots de passe sont hashés avec password_hash() avant d’être stockés, et vérifiés à la connexion avec password_verify(). Les entrées utilisateurs sont protégées via des requêtes préparées PDO pour éviter les injections SQL, et les données sensibles sont échappées avec htmlspecialchars() lors de l'affichage. J’ai également mis en place session_regenerate_id() pour empêcher les attaques par fixation de session."
-        }
+            {
+        type: "List",
+        
+        props: { 
+          title: "Architecture Modulaire & Réutilisable",
+          text : "Chaque partie du code est séparée de façon claire :",
+           text2: "Cela permet une maintenance facilitée et une réutilisation efficace des fonctions dans plusieurs contextes.",
+          list: [
+            "Modèles pour les interactions avec la base de données,", 
+            "Contrôleurs pour la logique métier et les validations,",
+            "Contrôleurs pour la logique métier et les validations,"] },
       },
       {
-        type: "CenteredText",
-        props: { text: "Texte centré 1" },
-      },
-      {
-        type: "CenteredText",
-        props: { text: "Texte centré 2" },
-      },
-      {
-        type: "Paragraph",
-        props: { text: "Paragraphe lol" },
-      },
+        type: "TwoImgText",
+        props: { 
+          image1 : "/assets/medias/loginRegister/login_signupErrors.png",
+          image2: "/assets/medias/loginRegister/login_signupErrorsData.png",
+          title : "UX : Gestion des erreurs ",
+          text: "Les erreurs sont stockées temporairement en session pour être réaffichées après redirection. Les champs de formulaire sont pré-remplis avec les données précédemment saisies si une erreur est détectée, améliorant ainsi l’expérience utilisateur et la fluidité du parcours." },
+         
+        },
+
+
     ],
   },
 
-  {
-    id: "3",
-    title: "Register & Login",
-    image: "/assets/medias/img_test4.png",
-    image2: "/assets/medias/img_test1.jpg",
-    descriptionPreview: "splendide texte",
-    technologies: ["Wordpress", "HTML/CSS", "Javascript", "PHP"],
-    content: [
-      {
-        type: "CenteredText",
-        props: { text: "Texte centré 1" },
-      },
-      {
-        type: "CenteredText",
-        props: { text: "Texte centré 2" },
-      },
-      {
-        type: "Paragraph",
-        props: { text: "Paragraphe lol" },
-      },
-    ],
-  },
+  // {
+  //   id: "3",
+  //   title: "Register & Login",
+  //   image: "/assets/medias/img_test4.png",
+  //   image2: "/assets/medias/img_test4.png",
+  //   image3: "/assets/medias/img_test4.png",
+  //   descriptionPreview: "splendide texte",
+  //   technologies: ["Wordpress", "HTML/CSS", "Javascript", "PHP"],
+  //   content: [
+  //     {
+  //       type: "CenteredText",
+  //       props: { text: "Texte centré 1" },
+  //     },
+  //     {
+  //       type: "CenteredText",
+  //       props: { text: "Texte centré 2" },
+  //     },
+  //     {
+  //       type: "Paragraph",
+  //       props: { text: "Paragraphe lol" },
+  //     },
+  //   ],
+  // },
 ];
 
 export default listingProjects;

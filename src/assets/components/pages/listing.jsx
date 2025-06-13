@@ -68,7 +68,7 @@ function Listing({ triggerSwipe, scrollContainerRef }) {
               <div className="projectPreview__infosContainer infos p-primColor">
                 <div className="infos__text">
                   <div className="infos__date">
-                    <p className="">2024</p>
+                    <p className="">{project.year}</p>
                   </div>
                   <div className="infos__TitleContainer mg-t-8">
                     <h2 className="TitleH2 textBold titlePrimaryColor">

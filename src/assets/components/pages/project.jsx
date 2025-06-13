@@ -7,6 +7,7 @@ import ImgFull from "../parts/imgFull";
 import ImageText from "../parts/imgText";
 import GallerySmall from "../parts/gallerySmall";
 import TwoImgText from "../parts/twoImgText";
+import List from "../parts/List";
 import { useRef, useEffect } from "react";
 import mediaSVG from "../../../data/mediaSVG";
 import gsap from "gsap";
@@ -22,6 +23,7 @@ const COMPONENTS = {
   ImageText,
   GallerySmall,
   TwoImgText,
+  List,
 };
 
 function Project({ triggerSwipe, scrollContainerRef }) {
@@ -159,7 +161,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
       </div>
       <div className="projectHeadContent">
         <div className="projectHeadContent__link">
-          <a target="_blank" href={project.link}>
+          <a target="_blank" href={project.link} className=" p-primColor">
             Lien
             <img
               className="projectHeadContent__linkIcon mr-8"
@@ -168,8 +170,8 @@ function Project({ triggerSwipe, scrollContainerRef }) {
             />
           </a>
         </div>
-        <div className="projectHeadContent__textContainer">
-          <div className="projectHeadContent__description">
+        <div className="projectHeadContent__textContainer p-primColor">
+          <div className="projectHeadContent__description ">
             {project.descriptions &&
               project.descriptions.map((description, index) => (
                 <p key={index}>{description}</p>
@@ -217,7 +219,7 @@ function Project({ triggerSwipe, scrollContainerRef }) {
         }
         return <Component key={index} {...block.props} />;
       })}
-      <div className="navProjects">
+      <div className="navProjects contentSpacing">
         {prevProject && (
           <div 
           onMouseEnter={() => setIsHoveredPrev(true)}

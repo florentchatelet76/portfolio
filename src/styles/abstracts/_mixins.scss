@@ -5,25 +5,41 @@ $mobile-landscape: 568px;
 $tablet: 768px;
 $desktop: 992px;
 $largeDesktop : 1400px;
+$mobileHeight : 840px;
 /*
 * Map for breakpoints
 */
 $breakpoints: (
-  "small": (
-    $mobile-landscape,
-  ),
-  "medium": (
-   $tablet,
-  ),
-  "large": (
-   $desktop,
-  ),
-    "largeDesktop": (
-   $largeDesktop,
-  ),
+  "small": $mobile-landscape,
+  "medium": $tablet,
+  "large": $desktop,
+  "largeDesktop": $largeDesktop,
+  "mobileHeight": $mobileHeight,
 ); 
 
 
+@mixin respond-below-height($breakpoint-name) {
+    $value: map-get($breakpoints, $breakpoint-name);
+    @if $value {
+      @media screen and (max-height: $value) {
+        @content;
+      }
+    } @else {
+      @warn "Le breakpoint `#{$breakpoint-name}` n'existe pas.";
+    }
+  }
+
+
+  @mixin respond-above-height($breakpoint-name) {
+    $value: map-get($breakpoints, $breakpoint-name);
+    @if $value {
+      @media screen and (min-height: $value) {
+        @content;
+      }
+    } @else {
+      @warn "Le breakpoint `#{$breakpoint-name}` n'existe pas.";
+    }
+  }
 @mixin respond-below($breakpoint-name) {
     $value: map-get($breakpoints, $breakpoint-name);
     @if $value {

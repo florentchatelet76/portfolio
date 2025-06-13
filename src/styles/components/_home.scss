@@ -36,9 +36,16 @@
   justify-content: center;
 
   &__inner {
-    margin: 8rem 0 0 0;
+
     display: flex;
     gap: 1.6rem;
+    @include respond-above-height("mobileHeight") {
+          margin: 8rem 0 0 0;
+    }
+    
+    @include respond-below-height("mobileHeight") {
+      margin: 2rem 0 0 0;
+    }
   }
 
   &__sideText {
@@ -283,6 +290,11 @@
     width: 100%;
     overflow: hidden;
     position: relative;
+
+      @include respond-below("medium") {
+max-height: 40rem;
+min-height: 30rem;
+    }
   }
   &__img {
     object-fit: cover;
@@ -294,7 +306,7 @@
     width: 100%;
     @include respond-below("medium") {
       height: 100%;
-      width: auto;
+      width: 100%;
     }
   }
 
@@ -504,7 +516,6 @@
   position: relative;
   height: 40rem;
   width: calc(100vw);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -530,6 +541,7 @@
     width: 100vw;
     min-width: 45rem;
     display: flex;
+    gap: 4rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;

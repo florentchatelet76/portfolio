@@ -17,7 +17,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   //--------------- about IMG FLIP
 
   const aboutImgDev = medias.find((item) => item.id === 4);
-  const aboutImgDesign = medias.find((item) => item.id === 3);
+  const aboutImgDesign = medias.find((item) => item.id === 1);
 
   const [aboutSubject, setAboutSubject] = useState(true);
 
@@ -445,11 +445,10 @@ function Home({ scrollContainerRef, triggerSwipe }) {
             <p className="toListing__largeText largeBoldText p-white">
               Et le reste ?
             </p>
-            <p className="mg-t-32 p-white">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <div className="buttonContainer mg-t-24">
+            {/* <p className="mg-t-32 p-white">
+              
+            </p> */}
+            <div className="buttonContainer ">
               <Link
                 to="/listing"
                 onClick={(e) => {
