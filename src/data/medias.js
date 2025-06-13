@@ -18,7 +18,14 @@ const medias = [
       title: "Img_test_1",
       image: "/assets/medias/img_test2.jpg",
       description: "img_test1" 
-    }    
+    },
+
+      {
+      id: 4,
+      title: "photo_florent_1",
+      image: "/assets/medias/about/photo_florent_1.jpg",
+      description: "photo_florent_1" 
+    } 
 ]
 
 

@@ -138,11 +138,11 @@ const listingProjects = [
 
   {
     id: "2",
-    title: "Projet 3",
+    title: "Register & Login",
     image: "/assets/medias/img_test4.png",
     image2: "/assets/medias/img_test1.jpg",
-    descriptionPreview: "splendide texte",
-    technologies: ["Wordpress", "HTML/CSS", "Javascript", "PHP"],
+    descriptionPreview: "Système de création de compte et de connexion dans une base de données MYSQL",
+    technologies: ["HTML/CSS", "PHP", "MYSQL"],
     content: [
       {
         type: "CenteredText",
@@ -161,7 +161,7 @@ const listingProjects = [
 
   {
     id: "3",
-    title: "Projet 4",
+    title: "Register & Login",
     image: "/assets/medias/img_test4.png",
     image2: "/assets/medias/img_test1.jpg",
     descriptionPreview: "splendide texte",

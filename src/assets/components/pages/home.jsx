@@ -16,7 +16,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
 
   //--------------- about IMG FLIP
 
-  const aboutImgDev = medias.find((item) => item.id === 2);
+  const aboutImgDev = medias.find((item) => item.id === 4);
   const aboutImgDesign = medias.find((item) => item.id === 3);
 
   const [aboutSubject, setAboutSubject] = useState(true);
@@ -487,6 +487,10 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                       Aujourd’hui, je me forme en développement front-end
                       (React, GSAP) et en back-end (PHP, POO, MySQL) dans le
                       cadre d’un futur bachelor en alternance.
+                    </p>
+
+                    <p className=" mg-t-24">
+                      Fort de mon expérience 360 en agence et en travaux en collaboration avec des développeurs, j'aspire à mettre mes connaissances acquises à votre disposition.
                     </p>
                   </div>
                 </div>
