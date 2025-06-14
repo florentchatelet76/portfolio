@@ -162,8 +162,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   //------------------- ANIM SKILLS
 
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!scrollContainerRef.current) return;
     if (!itemsRef.current) return;
 
     // Sélectionne tous les éléments .js-row dans le conteneur scrollé
