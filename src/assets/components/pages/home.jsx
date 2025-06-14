@@ -19,6 +19,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
 
   //--------------- SYSTEM REFS
   const itemsRef = useRef([]);
+  const imgsRef = useRef([]);
   
 
   //--------------- about IMG FLIP
@@ -97,48 +98,51 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   //--------------- GSAP SCROLL PARALLAX
 
   useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
+
     console.log("scroll contianer REF CURRENT : " + scrollContainerRef.current);
     if (!scrollContainerRef?.current) return;
-    if (!scrollContainer.querySelector(".scroll-content")) return;
+    if (!imgsRef.current?.length > 0) return;
 
-     console.log("scroll timeline" + scrollContainer),
-    gsap.utils.toArray(".sideImgs__scroll-1").forEach((img) => {
-      gsap.fromTo(
-        img,
+    console.log("scroll timeline" + scrollContainerRef.current);
+    for(let index = 0 ; index < imgsRef.current.length ; index+=1){
+      if(index%2===0){
+        gsap.fromTo(
+        imgsRef.current[index],
         { y: "5rem" },
        
         {
           y: "-15rem",
           ease: "linear",
           scrollTrigger: {
-            trigger: img,
+            trigger: imgsRef.current[index],
             start: "top 100%",
             end: "bottom 0%",
             scrub: true,
-            scroller: scrollContainer,
+            scroller: scrollContainerRef.current,
           },
         }
       );
-    });
-
-    gsap.utils.toArray(".sideImgs__scroll-2").forEach((img) => {
+      }
+      else{
       gsap.fromTo(
-        img,
+        imgsRef.current[index],
         { y: "10rem" },
         {
           y: "-3rem",
           ease: "linear",
           scrollTrigger: {
-            trigger: img,
+            trigger: imgsRef.current[index],
             start: "top 100%",
             end: "bottom 0%",
             scrub: true,
-            scroller: scrollContainer,
+            scroller: scrollContainerRef.current,
           },
         }
       );
-    });
+      }
+    }
+      
+
 
   const handleReady = () => {
     setTimeout(() => {
@@ -372,7 +376,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
           {
             // SECONDARY PROJECTS
           }
-          {projectsNotFirst.map((project) => (
+          {projectsNotFirst.map((project, index) => (
             <div key={project.id} className="secondaryProject contentSpacing">
               <div
                 className={`secondaryProject__inner ${
@@ -431,6 +435,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                 <div className="sideImgs">
                   <div className="sideImgs__inner">
                     <div
+                    ref={(el) => (imgsRef.current[index*2] = el)}
                       className={`sideImgs__sideImg sideImgs__scroll-1 ${
                         project.id % 2 == 0
                           ? "sideImgs__sideImg1-reverse"
@@ -445,6 +450,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                     </div>
 
                     <div
+                    ref={(el) => (imgsRef.current[index*2+1] = el)}
                       className={`sideImgs__sideImg sideImgs__scroll-2 ${
                         project.id % 2 == 0
                           ? "sideImgs__sideImg2-reverse"

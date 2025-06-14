@@ -40,8 +40,8 @@ function Listing({ triggerSwipe, scrollContainerRef, overlayRef }) {
 
   return (
     <div ref={listingRef} className="listing listingContainer contentSpacing">
-      {listingProjects.map((project) => (
-        <div className="projectPreviewref">
+      {listingProjects.map((project, index) => (
+        <div key={index} className="projectPreviewref">
           <div
             key={project.id}
             className="projectPreviewContainer projectPreview "
