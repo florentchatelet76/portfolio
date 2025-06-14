@@ -1,3 +1,8 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Scrollbar from "smooth-scrollbar";
+gsap.registerPlugin(ScrollTrigger);
+
 import { useState, useRef, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
@@ -8,14 +13,11 @@ import NavMenu from "./assets/components/Nav/navMenu";
 import Listing from "./assets/components/pages/listing";
 import Project from "./assets/components/pages/project";
 import MainContent from "./assets/components/pages/main";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Scrollbar from "smooth-scrollbar";
-gsap.registerPlugin(ScrollTrigger);
+
 
 function App() {
   //------------GSAP SCROLL PARALAX
-
+  console.log("gsap : "+gsap);
   const scrollContainerRef = useRef(null);
   const scrollbar = useRef(null);
 
