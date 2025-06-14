@@ -21,6 +21,7 @@ function App() {
   const scrollContainerRef = useRef(null);
   const scrollbar = useRef(null);
 
+  
   // Initialisation Smooth Scrollbar + ScrollTrigger
   useEffect(() => {
     if (!scrollContainerRef.current) return;
@@ -85,6 +86,7 @@ function App() {
     };
   }, []);
 
+  
   //-----------GSAP TRANSITIONS
 
   const [isTransitioning, setIsTransitioning] = useState(false);
