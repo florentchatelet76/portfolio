@@ -131,6 +131,12 @@ function Home({ scrollContainerRef, triggerSwipe }) {
       );
     });
 
+     // 💡 Ajout critique pour Vercel (permet d'activer les triggers)
+  setTimeout(() => {
+    ScrollTrigger.refresh(true);
+    console.log("reflersh scrollbar");
+  }, 300);
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
