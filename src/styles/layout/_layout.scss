@@ -138,8 +138,12 @@ html, body{
   padding: 4rem 1rem;
 }
 
-.content-inside-padding-medium {
-  padding: 3rem 5rem;
+.content-inside-padding {
+    padding: 2rem 2rem 4rem 2rem;
+  @include respond-below("medium") {
+    padding: 1rem 1rem;
+  }   
+
 }
 
 .mg-t-16 {

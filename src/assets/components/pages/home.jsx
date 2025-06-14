@@ -2,6 +2,7 @@ import medias from "../../../data/medias.js";
 import listingProjects from "../../../data/listingProjects";
 import aboutData from "../../../data/aboutData.js";
 import ContactForm from "../contact.jsx";
+
 import { Link } from "react-router-dom";
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap } from "gsap";
@@ -358,7 +359,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                     : "secondaryProject__flex-reverse"
                 } `}
               >
-                <div className="secondaryProject__imgTextContainer content-inside-padding-medium">
+                <div className="secondaryProject__imgTextContainer content-inside-padding">
                   <div className="secondaryProject__imgSpecifics">
                     <div className="secondaryProject__imgContainer">
                       <div className="secondaryProject__specifics">

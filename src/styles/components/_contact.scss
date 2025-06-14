@@ -1,6 +1,6 @@
 .contact{
 
-    width: 60%;
+    width: 50%;
     min-width: 50rem;
 
     &__form{
@@ -28,4 +28,37 @@
         height: 6.4rem;
     }
 
+}
+
+.contactContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 4rem;
+
+}
+
+.socials{
+
+
+    &__inner{
+        display: flex;
+        gap: 1rem;
+        padding: 1.5rem;
+        border: solid $SecondaryC2Light 1px;
+    }
+    &__link{
+        padding: 1rem;
+        background-color: $SecondaryC2Light;
+    }
+
+    &__rect{
+        width: 100%;
+        height: 2rem;
+        padding: 1rem;
+        border: solid $SecondaryC2Light 1px;
+        background-color: $SecondaryC2Light;
+        margin-top: -1px;
+    }
 }

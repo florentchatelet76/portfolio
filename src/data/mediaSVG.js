@@ -4,6 +4,8 @@ const mediaSVG = [
         name: "icon-link",
         media: "../../public/assets/medias/assets/icon-link.svg",
       },
+
+      
 ]
 
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import contactData from "../../data/contactData";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -33,7 +34,21 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="contact contentSpacing p-primColor">
+    <div className="contactContainer contentSpacing">
+
+    <div className="contactInfos">
+      <div className="contactInfos__inner socials">
+        <div className="socials__inner">
+          {contactData.map((icon, index) => (
+            <a href={icon.link} target="_blank"  className=""><div className="socials__link"><img src={icon.media} alt="" /></div></a>
+          ))}
+          
+        </div>
+        <div className="socials__rect"></div>
+      </div>
+    </div>
+    
+    <div className="contact  p-primColor">
       <h2 className="TitleH2">Me contacter</h2>
       <form className="contact__form" onSubmit={handleSubmit}>
         <div className="contact__textZone">
@@ -80,6 +95,7 @@ const ContactForm = () => {
         </button>
       </form>
       {responseMessage && <p>{responseMessage}</p>}
+    </div>
     </div>
   );
 };
