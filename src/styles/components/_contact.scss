@@ -37,16 +37,29 @@
     justify-content: flex-end;
     gap: 4rem;
 
+      @include respond-below("medium") {
+    flex-direction: column-reverse;
+  }   
+
 }
 
 .socials{
 
+    @include respond-below("medium") {
+    width: 80%;
+    min-width: 35rem;
+    }   
 
     &__inner{
         display: flex;
         gap: 1rem;
         padding: 1.5rem;
         border: solid $SecondaryC2Light 1px;
+        
+        @include respond-below("medium") {
+    justify-content: space-around;
+    }  
+
     }
     &__link{
         padding: 1rem;
