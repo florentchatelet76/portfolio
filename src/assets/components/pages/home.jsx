@@ -92,13 +92,15 @@ function Home({ scrollContainerRef, triggerSwipe }) {
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    console.log("scroll contianer : " + scrollContainer);
+    console.log("scroll contianer REF CURRENT : " + scrollContainerRef.current);
     if (!scrollContainerRef?.current) return;
 
+     console.log("scroll timeline" + scrollContainer),
     gsap.utils.toArray(".sideImgs__scroll-1").forEach((img) => {
       gsap.fromTo(
         img,
         { y: "5rem" },
+       
         {
           y: "-15rem",
           ease: "linear",
