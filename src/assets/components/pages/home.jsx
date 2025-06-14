@@ -94,6 +94,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
     const scrollContainer = scrollContainerRef.current;
     console.log("scroll contianer REF CURRENT : " + scrollContainerRef.current);
     if (!scrollContainerRef?.current) return;
+    if (!scrollContainer.querySelector(".scroll-content")) return;
 
      console.log("scroll timeline" + scrollContainer),
     gsap.utils.toArray(".sideImgs__scroll-1").forEach((img) => {

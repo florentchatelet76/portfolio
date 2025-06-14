@@ -81,22 +81,26 @@ function App() {
     ScrollTrigger.refresh();
 
       // 💡 Ajout d’un refresh différé
-setTimeout(() => {
-  scrollbar.current?.update();
-  ScrollTrigger.refresh(true);
-  console.log("ScrollTrigger refresh after Scrollbar init");
-}, 300);
-
+  const handleReady = () => {
+    console.log("Images et Scrollbar prêts, refresh forcé");
+    setTimeout(() => {
+      scrollbar.current?.update();
+      ScrollTrigger.refresh(true);
+      console.log("handeready");
+    }, 100);
+  };
+  if (document.readyState === "complete") {
+    handleReady();
+  } else {
+    window.addEventListener("load", handleReady);
+  }
     // Cleanup
     return () => {
-      if (scrollbar.current) {
-        ScrollTrigger.removeEventListener("refresh", () =>
-          scrollbar.current.update()
-        );
-        scrollbar.current.destroy();
-        scrollbar.current = null;
-      }
-    };
+    window.removeEventListener("load", handleReady);
+    ScrollTrigger.removeEventListener("refresh", () => scrollbar.current?.update());
+    scrollbar.current?.destroy();
+    scrollbar.current = null;
+  };
   }, []);
 
   
