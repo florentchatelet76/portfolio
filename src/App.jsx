@@ -2,7 +2,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scrollbar from "smooth-scrollbar";
 
-
 import { useState, useRef, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
@@ -14,38 +13,32 @@ import Listing from "./assets/components/pages/listing";
 import Project from "./assets/components/pages/project";
 import MainContent from "./assets/components/pages/main";
 
-
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 }
 function App() {
-
-  
   useEffect(() => {
-  const triggers = ScrollTrigger.getAll();
-  console.log("Nombre de ScrollTrigger actifs :", triggers.length);
-}, []);
+    const triggers = ScrollTrigger.getAll();
+    console.log("Nombre de ScrollTrigger actifs :", triggers.length);
+  }, []);
 
   //------------GSAP SCROLL PARALAX
-  console.log("gsap : "+gsap);
+  console.log("gsap : " + gsap);
   const scrollContainerRef = useRef(null);
   const scrollbar = useRef(null);
 
   // Initialisation Smooth Scrollbar + ScrollTrigger POUR EVITER LE SCROLL SUR X
   useEffect(() => {
-    if (!scrollContainerRef.current) return;
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
 
-    // Init Smooth Scrollbar
-    scrollbar.current = Scrollbar.init(scrollContainerRef.current, {
+    scrollbar.current = Scrollbar.init(scrollContainer, {
       damping: 0.1,
       alwaysShowTracks: true,
     });
 
-    // MAJ du ScrollTrigger
     scrollbar.current.addListener(() => {
-      const scrollContent =
-        scrollContainerRef.current?.querySelector(".scroll-content");
-
+      const scrollContent = scrollContainer.querySelector(".scroll-content");
       if (scrollContent && scrollContent.style.transform) {
         const matchY = scrollContent.style.transform.match(
           /translate3d\([^,]+,\s*([^,]+),/
@@ -53,14 +46,12 @@ function App() {
         const translateY = matchY ? matchY[1] : "0px";
         scrollContent.style.transform = `translate3d(0px, ${translateY}, 0px)`;
       }
-
       ScrollTrigger.update();
     });
 
-    // ScrollTrigger proxy pour Smooth Scrollbar
-    ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
+    // SCROLLER PROXY pour ScrollTrigger
+    ScrollTrigger.scrollerProxy(scrollContainer, {
       scrollTop(value) {
-        if (!scrollbar.current) return 0; // <-- protection si scrollbar non dispo
         if (arguments.length) {
           scrollbar.current.scrollTop = value;
         }
@@ -74,39 +65,37 @@ function App() {
           height: window.innerHeight,
         };
       },
-      pinType: scrollContainerRef.current.style.transform
-        ? "transform"
-        : "fixed",
+      pinType: scrollContainer.style.transform ? "transform" : "fixed",
     });
+
+    // 💡 Ce bloc garantit que tout est prêt
+    const forceRefresh = () => {
+      setTimeout(() => {
+        scrollbar.current?.update();
+        ScrollTrigger.refresh(true); // true = forcer un recalcul complet
+        console.log("ScrollTrigger refreshed after full load");
+      }, 400); // délai après chargement complet
+    };
 
     // Refresh ScrollTrigger après setup
     ScrollTrigger.addEventListener("refresh", () => scrollbar.current.update());
     ScrollTrigger.refresh();
 
-      // 💡 Ajout d’un refresh différé
-  const handleReady = () => {
-    console.log("Images et Scrollbar prêts, refresh forcé");
-    setTimeout(() => {
-      scrollbar.current?.update();
-      ScrollTrigger.refresh(true);
-      console.log("handeready");
-    }, 100);
-  };
-  if (document.readyState === "complete") {
-    handleReady();
-  } else {
-    window.addEventListener("load", handleReady);
-  }
-    // Cleanup
+    if (document.readyState === "complete") {
+      forceRefresh();
+    } else {
+      window.addEventListener("load", forceRefresh);
+    }
     return () => {
-    window.removeEventListener("load", handleReady);
-    ScrollTrigger.removeEventListener("refresh", () => scrollbar.current?.update());
-    scrollbar.current?.destroy();
-    scrollbar.current = null;
-  };
+      window.removeEventListener("load", forceRefresh);
+      ScrollTrigger.removeEventListener("refresh", () =>
+        scrollbar.current?.update()
+      );
+      scrollbar.current?.destroy();
+      scrollbar.current = null;
+    };
   }, []);
 
-  
   //-----------GSAP TRANSITIONS
 
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -114,51 +103,49 @@ function App() {
   const navigate = useNavigate();
 
   const triggerSwipe = (path) => {
-  const overlay = overlayRef.current;
-  if (!overlay) {
-    navigate(path);
-    return;
-  }
-
-  console.log("Transition vers", path);
-  setIsTransitioning(true);
-
-  // Réinitialise l'overlay en dehors de l’écran
- // Position initiale de l'overlay (hors écran en bas)
-gsap.set(overlay, { yPercent: 200 });
-
-const tl = gsap.timeline();
-
-// 1. Entrée de l’overlay (de bas à milieu visible)
-tl.to(overlay, {
-  yPercent: 0,  // ici 0 pour que l'overlay soit bien visible à la fin
-  duration: 0.6,
-  ease: "power2.inOut",
-});
-
-// 2. Scroll vers le haut, on retourne une Promise pour que la timeline attende la fin
-tl.add(() => {
-  return new Promise((resolve) => {
-    if (scrollbar.current) {
-      console.log("Scroll to top");
-      scrollbar.current.scrollTo(0, 0, 800); // scroll fluide sur 800ms
-      setTimeout(() => {
-        resolve(); // fin du scroll après 800ms
-      }, 800);
-    } else {
-      resolve();
+    const overlay = overlayRef.current;
+    if (!overlay) {
+      navigate(path);
+      return;
     }
-  });
-});
 
-// 3. Navigation une fois scroll + overlay terminés
-tl.add(() => {
-  console.log("Navigate");
-  navigate(path);
-});
-};
+    console.log("Transition vers", path);
+    setIsTransitioning(true);
 
+    // Réinitialise l'overlay en dehors de l’écran
+    // Position initiale de l'overlay (hors écran en bas)
+    gsap.set(overlay, { yPercent: 200 });
 
+    const tl = gsap.timeline();
+
+    // 1. Entrée de l’overlay (de bas à milieu visible)
+    tl.to(overlay, {
+      yPercent: 0, // ici 0 pour que l'overlay soit bien visible à la fin
+      duration: 0.6,
+      ease: "power2.inOut",
+    });
+
+    // 2. Scroll vers le haut, on retourne une Promise pour que la timeline attende la fin
+    tl.add(() => {
+      return new Promise((resolve) => {
+        if (scrollbar.current) {
+          console.log("Scroll to top");
+          scrollbar.current.scrollTo(0, 0, 800); // scroll fluide sur 800ms
+          setTimeout(() => {
+            resolve(); // fin du scroll après 800ms
+          }, 800);
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    // 3. Navigation une fois scroll + overlay terminés
+    tl.add(() => {
+      console.log("Navigate");
+      navigate(path);
+    });
+  };
 
   //------ TRAITS BG
   const containerRef = useRef(null);

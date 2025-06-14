@@ -8,208 +8,112 @@ import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger.js";
 
 
+
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 function Home({ scrollContainerRef, triggerSwipe }) {
-  const homeMedia = medias.find((item) => item.context === "home");
-  const projects = [];
-  const projectsNotFirst = [];
-
-  //--------------- SYSTEM REFS
-  const itemsRef = useRef([]);
-  const imgsRef = useRef([]);
-  
-
-  //--------------- about IMG FLIP
-
-  const aboutImgDev = medias.find((item) => item.id === 4);
-  const aboutImgDesign = medias.find((item) => item.id === 1);
-
   const [aboutSubject, setAboutSubject] = useState(true);
-
-  const ChangeAboutSubject = () => {
-    setAboutSubject((current) => !current);
-  };
-
   const aboutTextDev = useRef(null);
   const aboutTextDesign = useRef(null);
   const aboutButtonDesign = useRef(null);
 
+  const imgsRef = useRef([]);
+  const itemsRef = useRef([]);
+
+  const aboutImgDev = medias.find((item) => item.id === 4);
+  const aboutImgDesign = medias.find((item) => item.id === 1);
+  const projects = listingProjects;
+  const projectsNotFirst = projects.slice(1, 3);
+
+  const ChangeAboutSubject = () => setAboutSubject((prev) => !prev);
+
+  // FLIP texte dev/design
   useEffect(() => {
     const dev = aboutTextDev.current;
     const design = aboutTextDesign.current;
-    const Buttondesign = aboutButtonDesign.current;
+    const button = aboutButtonDesign.current;
 
     if (aboutSubject) {
-      // Afficher texte Dev
       gsap.to(design, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
+        opacity: 0, y: 20, duration: 0.3,
         onComplete: () => {
           design.style.display = "none";
-          Buttondesign.style.display = "none";
+          button.style.display = "none";
           dev.style.display = "block";
-          gsap.fromTo(
-            dev,
-            { opacity: 0, y: -20 },
-            { opacity: 1, y: 0, duration: 0.5 }
-          );
+          gsap.fromTo(dev, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
         },
       });
     } else {
-      // Afficher texte Design
       gsap.to(dev, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
+        opacity: 0, y: 20, duration: 0.3,
         onComplete: () => {
           dev.style.display = "none";
           design.style.display = "block";
-          design.style.display = "block";
-          gsap.fromTo(
-            design,
-            { opacity: 0, y: -20 },
-            { opacity: 1, y: 0, duration: 0.5 }
-          );
+          gsap.fromTo(design, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
         },
       });
 
-      gsap.to(Buttondesign, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
+      gsap.to(button, {
+        opacity: 0, y: 20, duration: 0.3,
         onComplete: () => {
-          dev.style.display = "none";
-          design.style.display = "block";
-          Buttondesign.style.display = "block";
-          gsap.fromTo(
-            Buttondesign,
-            { opacity: 0, y: -20 },
-            { opacity: 1, y: 0, duration: 0.2 }
-          );
+          button.style.display = "block";
+          gsap.fromTo(button, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 });
         },
       });
     }
   }, [aboutSubject]);
 
-  //--------------- GSAP SCROLL PARALLAX
-
-  useEffect(() => {
-
-    console.log("scroll contianer REF CURRENT : " + scrollContainerRef.current);
-    if (!scrollContainerRef?.current) return;
-    if (!imgsRef.current?.length > 0) return;
-
-    console.log("scroll timeline" + scrollContainerRef.current);
-    for(let index = 0 ; index < imgsRef.current.length ; index+=1){
-      if(index%2===0){
-        gsap.fromTo(
-        imgsRef.current[index],
-        { y: "5rem" },
-       
-        {
-          y: "-15rem",
-          ease: "linear",
-          scrollTrigger: {
-            trigger: imgsRef.current[index],
-            start: "top 100%",
-            end: "bottom 0%",
-            scrub: true,
-            scroller: scrollContainerRef.current,
-          },
-        }
-      );
-      }
-      else{
-      gsap.fromTo(
-        imgsRef.current[index],
-        { y: "10rem" },
-        {
-          y: "-3rem",
-          ease: "linear",
-          scrollTrigger: {
-            trigger: imgsRef.current[index],
-            start: "top 100%",
-            end: "bottom 0%",
-            scrub: true,
-            scroller: scrollContainerRef.current,
-          },
-        }
-      );
-      }
-    }
-      
-
-
-  const handleReady = () => {
-    setTimeout(() => {
-      ScrollTrigger.refresh(true); // forcer recalcul
-      console.log("ScrollTrigger refreshed (images loaded)");
-    }, 100);
-  };
-
-  // Exécute une fois toutes les images chargées
-  if (document.readyState === "complete") {
-    handleReady();
-  } else {
-    window.addEventListener("load", handleReady);
-  }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [scrollContainerRef]);
-
-  //------------------- ANIM SKILLS
-
+  // SCROLLTRIGGER + PARALLAX sur images
   useEffect(() => {
     if (!scrollContainerRef.current) return;
-    if (!itemsRef.current) return;
 
-    // Sélectionne tous les éléments .js-row dans le conteneur scrollé
-    
-    const anim = gsap.fromTo(
-      itemsRef.current,
-      { clipPath: "inset(100% 0 0 0)" },
-      {
-        clipPath: "inset(0% 0 0 0)",
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: itemsRef.current[0],
-          scroller: scrollContainerRef.current, // important pour Scrollbar + ScrollTrigger
-          start: "top 80%",
-          end: "top 20%",
-          toggleActions: "play none none reverse",
-          markers: false,
-        },
-      }
-    );
+    const delay = setTimeout(() => {
+      if (!imgsRef.current.length || !itemsRef.current.length) return;
 
-    // Fix refresh avec scroll proxy (comme tu faisais)
-    const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
+      imgsRef.current.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { y: i % 2 === 0 ? "5rem" : "10rem" },
+          {
+            y: i % 2 === 0 ? "-15rem" : "-3rem",
+            ease: "linear",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 100%",
+              end: "bottom 0%",
+              scrub: true,
+              scroller: scrollContainerRef.current,
+            },
+          }
+        );
+      });
 
-    // Cleanup
-    return () => {
-      clearTimeout(rId);
-      anim.kill();
-      anim.scrollTrigger?.kill();
-    };
-  }, []);
+      gsap.fromTo(
+        itemsRef.current,
+        { clipPath: "inset(100% 0 0 0)" },
+        {
+          clipPath: "inset(0% 0 0 0)",
+          duration: 1,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: itemsRef.current[0],
+            scroller: scrollContainerRef.current,
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
 
-  //------------------ LISTING PROJECTS
+      ScrollTrigger.refresh(true);
+    }, 400); // délai pour laisser React rendre et scrollbar init
 
-  for (let i = 0; i < listingProjects.length; i++) {
-    projects.push(listingProjects[i]);
-  }
+    return () => clearTimeout(delay);
+  }, [scrollContainerRef]);
 
-  for (let i = 1; i < 3; i++) {
-    projectsNotFirst.push(listingProjects[i]);
-  }
 
   return (
     <div className="home homeContainer">
