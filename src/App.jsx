@@ -37,74 +37,74 @@ function App() {
     if (!scrollContainerRef.current) return;
 
     // Init Smooth Scrollbar
-    scrollbar.current = Scrollbar.init(scrollContainerRef.current, {
-      damping: 0.1,
-      alwaysShowTracks: true,
-    });
+    // scrollbar.current = Scrollbar.init(scrollContainerRef.current, {
+    //   damping: 0.1,
+    //   alwaysShowTracks: true,
+    // });
 
-    // MAJ du ScrollTrigger
-    scrollbar.current.addListener(() => {
-      const scrollContent =
-        scrollContainerRef.current?.querySelector(".scroll-content");
+  //   // MAJ du ScrollTrigger
+  //   scrollbar.current.addListener(() => {
+  //     const scrollContent =
+  //       scrollContainerRef.current?.querySelector(".scroll-content");
 
-      if (scrollContent && scrollContent.style.transform) {
-        const matchY = scrollContent.style.transform.match(
-          /translate3d\([^,]+,\s*([^,]+),/
-        );
-        const translateY = matchY ? matchY[1] : "0px";
-        scrollContent.style.transform = `translate3d(0px, ${translateY}, 0px)`;
-      }
+  //     if (scrollContent && scrollContent.style.transform) {
+  //       const matchY = scrollContent.style.transform.match(
+  //         /translate3d\([^,]+,\s*([^,]+),/
+  //       );
+  //       const translateY = matchY ? matchY[1] : "0px";
+  //       scrollContent.style.transform = `translate3d(0px, ${translateY}, 0px)`;
+  //     }
 
-      ScrollTrigger.update();
-    });
+  //     ScrollTrigger.update();
+  //   });
 
-    // ScrollTrigger proxy pour Smooth Scrollbar
-    ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
-      scrollTop(value) {
-        if (!scrollbar.current) return 0; // <-- protection si scrollbar non dispo
-        if (arguments.length) {
-          scrollbar.current.scrollTop = value;
-        }
-        return scrollbar.current.scrollTop;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: scrollContainerRef.current.style.transform
-        ? "transform"
-        : "fixed",
-    });
+  //   // ScrollTrigger proxy pour Smooth Scrollbar
+  //   ScrollTrigger.scrollerProxy(scrollContainerRef.current, {
+  //     scrollTop(value) {
+  //       if (!scrollbar.current) return 0; // <-- protection si scrollbar non dispo
+  //       if (arguments.length) {
+  //         scrollbar.current.scrollTop = value;
+  //       }
+  //       return scrollbar.current.scrollTop;
+  //     },
+  //     getBoundingClientRect() {
+  //       return {
+  //         top: 0,
+  //         left: 0,
+  //         width: window.innerWidth,
+  //         height: window.innerHeight,
+  //       };
+  //     },
+  //     pinType: scrollContainerRef.current.style.transform
+  //       ? "transform"
+  //       : "fixed",
+  //   });
 
-    // Refresh ScrollTrigger après setup
-    ScrollTrigger.addEventListener("refresh", () => scrollbar.current.update());
-    ScrollTrigger.refresh();
+  //   // Refresh ScrollTrigger après setup
+  //   ScrollTrigger.addEventListener("refresh", () => scrollbar.current.update());
+  //   ScrollTrigger.refresh();
 
-      // 💡 Ajout d’un refresh différé
-  const handleReady = () => {
-    console.log("Images et Scrollbar prêts, refresh forcé");
-    setTimeout(() => {
-      scrollbar.current?.update();
-      ScrollTrigger.refresh(true);
-      console.log("handeready");
-    }, 100);
-  };
-  if (document.readyState === "complete") {
-    handleReady();
-  } else {
-    window.addEventListener("load", handleReady);
-  }
-    // Cleanup
-    return () => {
-    window.removeEventListener("load", handleReady);
-    ScrollTrigger.removeEventListener("refresh", () => scrollbar.current?.update());
-    scrollbar.current?.destroy();
-    scrollbar.current = null;
-  };
+  //     // 💡 Ajout d’un refresh différé
+  // const handleReady = () => {
+  //   console.log("Images et Scrollbar prêts, refresh forcé");
+  //   setTimeout(() => {
+  //     scrollbar.current?.update();
+  //     ScrollTrigger.refresh(true);
+  //     console.log("handeready");
+  //   }, 100);
+  // };
+  // if (document.readyState === "complete") {
+  //   handleReady();
+  // } else {
+  //   window.addEventListener("load", handleReady);
+  // }
+  //   // Cleanup
+  //   return () => {
+  //   window.removeEventListener("load", handleReady);
+  //   ScrollTrigger.removeEventListener("refresh", () => scrollbar.current?.update());
+  //   scrollbar.current?.destroy();
+  //   scrollbar.current = null;
+  // };
   }, []);
 
   
