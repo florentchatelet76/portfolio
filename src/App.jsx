@@ -16,6 +16,12 @@ import MainContent from "./assets/components/pages/main";
 
 
 function App() {
+
+  useEffect(() => {
+  const triggers = ScrollTrigger.getAll();
+  console.log("Nombre de ScrollTrigger actifs :", triggers.length);
+}, []);
+
   //------------GSAP SCROLL PARALAX
   console.log("gsap : "+gsap);
   const scrollContainerRef = useRef(null);
