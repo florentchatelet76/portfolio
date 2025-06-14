@@ -66,53 +66,70 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   }, [aboutSubject]);
 
   // SCROLLTRIGGER + PARALLAX sur images
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
+useEffect(() => {
+  if (!scrollContainerRef.current) return;
 
-    const delay = setTimeout(() => {
-      if (!imgsRef.current.length || !itemsRef.current.length) return;
+  const runGSAP = async () => {
+    // On attend que la page et les assets soient bien chargés
+    await new Promise((resolve) => {
+      if (document.readyState === "complete") {
+        resolve();
+      } else {
+        window.addEventListener("load", resolve, { once: true });
+      }
+    });
 
-      imgsRef.current.forEach((el, i) => {
-        gsap.fromTo(
-          el,
-          { y: i % 2 === 0 ? "5rem" : "10rem" },
-          {
-            y: i % 2 === 0 ? "-15rem" : "-3rem",
-            ease: "linear",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 100%",
-              end: "bottom 0%",
-              scrub: true,
-              scroller: scrollContainerRef.current,
-            },
-          }
-        );
-      });
+    // On laisse un petit délai de sécurité après le load
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
+    if (!imgsRef.current.length || !itemsRef.current.length) return;
+
+    imgsRef.current.forEach((el, i) => {
       gsap.fromTo(
-        itemsRef.current,
-        { clipPath: "inset(100% 0 0 0)" },
+        el,
+        { y: i % 2 === 0 ? "5rem" : "10rem" },
         {
-          clipPath: "inset(0% 0 0 0)",
-          duration: 1,
-          ease: "power2.out",
-          stagger: 0.1,
+          y: i % 2 === 0 ? "-15rem" : "-3rem",
+          ease: "linear",
           scrollTrigger: {
-            trigger: itemsRef.current[0],
+            trigger: el,
+            start: "top 100%",
+            end: "bottom 0%",
+            scrub: true,
             scroller: scrollContainerRef.current,
-            start: "top 80%",
-            end: "top 20%",
-            toggleActions: "play none none reverse",
           },
         }
       );
+    });
 
-      ScrollTrigger.refresh(true);
-    }, 400); // délai pour laisser React rendre et scrollbar init
+    gsap.fromTo(
+      itemsRef.current,
+      { clipPath: "inset(100% 0 0 0)" },
+      {
+        clipPath: "inset(0% 0 0 0)",
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: itemsRef.current[0],
+          scroller: scrollContainerRef.current,
+          start: "top 80%",
+          end: "top 20%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
 
-    return () => clearTimeout(delay);
-  }, [scrollContainerRef]);
+    ScrollTrigger.refresh(true);
+  };
+
+  runGSAP();
+
+  return () => {
+    // Cleanup éventuel si tu veux kill les triggers
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  };
+}, [scrollContainerRef]);
 
 
   return (
