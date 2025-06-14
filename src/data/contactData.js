@@ -2,26 +2,26 @@ const contactData = [
     {
         id: "0",
         name: "icon-github",
-        media: "../../public/assets/medias/icons/icon-github.svg",
+        media: "assets/medias/assets/icon-github.svg",
         link : "https://github.com/florentchatelet76",
       },
     {
         id: "1",
         name: "icon-linkedin",
-        media: "../../public/assets/medias/icons/icon-linkedin.svg",
+        media: "assets/medias/assets/icon-linkedin.svg",
         link : "www.linkedin.com/in/florent-chatelet",
       },
           {
         id: "2",
         name: "icon-instagram",
-        media: "../../public/assets/medias/icons/icon-instagram.svg",
+        media: "assets/medias/assets/icon-instagram.svg",
         link : "https://www.instagram.com/florentctlt/",
       },
 
                 {
         id: "3",
         name: "icon-behance",
-        media: "../../public/assets/medias/icons/icon-behance.svg",
+        media: "assets/medias/assets/icon-behance.svg",
         link: "https://www.behance.net/florentchatelet1",
       },
       
