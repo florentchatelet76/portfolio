@@ -75,11 +75,11 @@ function App() {
     ScrollTrigger.refresh();
 
       // 💡 Ajout d’un refresh différé
-  setTimeout(() => {
-    scrollbar.current?.update();
-    ScrollTrigger.refresh(true);
-    console.log("refresh app");
-  }, 500);
+setTimeout(() => {
+  scrollbar.current?.update();
+  ScrollTrigger.refresh(true);
+  console.log("ScrollTrigger refresh after Scrollbar init");
+}, 300);
 
     // Cleanup
     return () => {

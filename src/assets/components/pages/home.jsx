@@ -133,11 +133,19 @@ function Home({ scrollContainerRef, triggerSwipe }) {
       );
     });
 
-     // 💡 Ajout critique pour Vercel (permet d'activer les triggers)
-  setTimeout(() => {
-    ScrollTrigger.refresh(true);
-    console.log("reflersh scrollbar");
-  }, 300);
+  const handleReady = () => {
+    setTimeout(() => {
+      ScrollTrigger.refresh(true); // forcer recalcul
+      console.log("ScrollTrigger refreshed (images loaded)");
+    }, 100);
+  };
+
+  // Exécute une fois toutes les images chargées
+  if (document.readyState === "complete") {
+    handleReady();
+  } else {
+    window.addEventListener("load", handleReady);
+  }
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
