@@ -65,16 +65,26 @@
   &__link {
     font-size: $sizeLargeText;
     text-decoration: none;
+        display: flex;
+    flex-direction: row;
+    gap: 1.6rem;
+  }
+
+  &__link:hover{
+          .cls-link1 {
+        fill: #f7f2e1;
+      }
   }
 
   &__link a {
     color: #000000;
     text-decoration: none;
+
   }
 
   &__linkIcon {
-    width: auto;
-    height: 100%;
+    width: 2rem;
+    height: 2rem;
   }
 
   &__textContainer {

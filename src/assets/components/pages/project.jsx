@@ -1,4 +1,4 @@
-import { useParams, Link,  } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import listingProjects from "../../../data/listingProjects";
 import CenteredText from "../parts/centeredText";
@@ -36,27 +36,26 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
   const previousProjectRef = useRef(null);
   const contentRef = useRef(null);
 
-  //FIN TRANSITIOPN 
+  //FIN TRANSITIOPN
 
   useEffect(() => {
-  if (!overlayRef?.current) return;
+    if (!overlayRef?.current) return;
 
-  gsap.set(overlayRef.current, { yPercent: 100 });
+    gsap.set(overlayRef.current, { yPercent: 100 });
 
-  const tl = gsap.timeline();
-  tl.to(overlayRef.current, {
-    yPercent: -100,
-    duration: 0.5,
-    ease: "power2.inOut",
-    delay: 0.1,
-  }).to(overlayRef.current, {
-    yPercent: -200,
-    duration: 0.5,
-    ease: "power2.inOut",
-    delay: 0.1,
-  });
-}, []);
-
+    const tl = gsap.timeline();
+    tl.to(overlayRef.current, {
+      yPercent: -100,
+      duration: 0.5,
+      ease: "power2.inOut",
+      delay: 0.1,
+    }).to(overlayRef.current, {
+      yPercent: -200,
+      duration: 0.5,
+      ease: "power2.inOut",
+      delay: 0.1,
+    });
+  }, []);
 
   // Timeline d'entrée avec délai de 1s
   useEffect(() => {
@@ -156,10 +155,9 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
 
   const iconLink = mediaSVG.find((item) => item.name === "icon-link");
 
+  //--------- HOVER NAV PREV ET NEXT
 
-  //--------- HOVER NAV PREV ET NEXT 
-
-   const [isHoveredPrev, setIsHoveredPrev] = useState(false);
+  const [isHoveredPrev, setIsHoveredPrev] = useState(false);
   const [isHoveredNext, setIsHoveredNext] = useState(false);
 
   return (
@@ -182,16 +180,27 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
         </div>
       </div>
       <div className="projectHeadContent">
-        <div className="projectHeadContent__link">
-          <a target="_blank" href={project.link} className=" p-primColor">
-            Lien
-            <img
-              className="projectHeadContent__linkIcon mr-8"
-              src={iconLink.media}
-              alt=""
-            />
-          </a>
-        </div>
+        <a target="_blank" href={project.link} className=" p-primColor">
+          <div className="projectHeadContent__link primaryButton">
+            <p className="p-primColor">Lien</p>
+            <svg
+              className="projectHeadContent__linkIcon"
+              id="Calque_1"
+              data-name="Calque 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 22.86 24.85"
+            >
+              <path
+                class="cls-link2"
+                d="M18.56.79c1.79-.91,3.9.46,3.79,2.47l-.65,11.91-.37,6.7c-.15,2.67-3.73,3.42-4.94,1.04l-3.5-6.91c-.42-.83-1.26-1.38-2.19-1.43l-7.73-.42c-2.67-.15-3.42-3.73-1.04-4.94l5.98-3.03L18.56.79Z"
+              />
+              <path
+                class="cls-link1"
+                d="M18.69,24.85c-1.15,0-2.18-.63-2.73-1.71l-3.5-6.91c-.34-.67-1.02-1.11-1.77-1.15l-7.73-.42c-1.45-.08-2.58-1.05-2.88-2.47-.3-1.42.34-2.76,1.64-3.42L18.34.34c1-.51,2.17-.45,3.11.17.94.61,1.47,1.65,1.41,2.78l-1.02,18.61c-.08,1.45-1.05,2.58-2.47,2.88-.23.05-.46.07-.68.07ZM19.75,1c-.33,0-.65.08-.96.23L2.16,9.66c-1.07.54-1.27,1.59-1.11,2.32.15.73.76,1.61,1.95,1.67l7.73.42c1.11.06,2.1.71,2.61,1.7l3.5,6.91c.54,1.07,1.59,1.26,2.32,1.11.73-.15,1.61-.76,1.67-1.95l1.02-18.61c.04-.76-.32-1.47-.96-1.88-.35-.23-.75-.35-1.15-.35Z"
+              />
+            </svg>
+          </div>
+        </a>
         <div className="projectHeadContent__textContainer p-primColor">
           <div className="projectHeadContent__description ">
             {project.descriptions &&
@@ -243,16 +252,21 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
       })}
       <div className="navProjects contentSpacing">
         {prevProject && (
-          <div 
-          onMouseEnter={() => setIsHoveredPrev(true)}
-          onMouseLeave={() => setIsHoveredPrev(false)}
-          className="navProjects__linkContainer rowReverse">
+          <div
+            onMouseEnter={() => setIsHoveredPrev(true)}
+            onMouseLeave={() => setIsHoveredPrev(false)}
+            className="navProjects__linkContainer rowReverse"
+          >
             <div className="navProjects__circleContainer flexEnd">
               <div className="navProjects__circleContainerInner">
-                <div className={`navProjects__prevCircle ${isHoveredPrev ? "navProjects__prevCircle--over" : ""}`}>
-                <div className="circle">
-                  <div className="dot"></div>
-                </div>
+                <div
+                  className={`navProjects__prevCircle ${
+                    isHoveredPrev ? "navProjects__prevCircle--over" : ""
+                  }`}
+                >
+                  <div className="circle">
+                    <div className="dot"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -274,16 +288,21 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
         )}
 
         {nextProject && (
-          <div 
-          onMouseEnter={() => setIsHoveredNext(true)}
-          onMouseLeave={() => setIsHoveredNext(false)}
-          className="navProjects__linkContainer">
+          <div
+            onMouseEnter={() => setIsHoveredNext(true)}
+            onMouseLeave={() => setIsHoveredNext(false)}
+            className="navProjects__linkContainer"
+          >
             <div className="navProjects__circleContainer">
               <div className="navProjects__circleContainerInner">
-                <div className={`navProjects__nextCircle ${isHoveredNext ? "navProjects__nextCircle--over" : ""}`}>
-                <div className="circle">
-                  <div className="dot"></div>
-                </div>
+                <div
+                  className={`navProjects__nextCircle ${
+                    isHoveredNext ? "navProjects__nextCircle--over" : ""
+                  }`}
+                >
+                  <div className="circle">
+                    <div className="dot"></div>
+                  </div>
                 </div>
               </div>
             </div>

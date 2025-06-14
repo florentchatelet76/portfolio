@@ -1,18 +1,18 @@
-.primaryButton{
+.primaryButton {
   padding: 1.5rem 2.5rem;
   background-color: transparent;
-  border : solid 1px $SecondaryC2Light;
+  border: solid 1px $SecondaryC2Light;
   border-radius: 5rem;
   width: fit-content;
   height: fit-content;
   font-size: 2rem;
   color: $SecondaryC2Light;
-  transition: .2s ease-in;
+  transition: 0.2s ease-in;
   overflow: hidden;
   position: relative;
 }
 
-.primaryButton::after{
+.primaryButton::after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -21,24 +21,25 @@
   height: 100%;
   top: 100%;
   left: 0;
-  transition: .2s ease-in;
+  transition: 0.2s ease-in;
 }
 
-.primaryButton:hover{
-  color : white;
+.primaryButton:hover {
+  color: white;
+
+  * {
+    color: white;
+  }
 }
 
-.primaryButton:hover::after{
+.primaryButton:hover::after {
   top: 0%;
- 
 }
 
-
-
-.primaryButton-light{
+.primaryButton-light {
   padding: 1.5rem 2.5rem;
   background-color: transparent;
-  border : solid 1px white;
+  border: solid 1px white;
   border-radius: 5rem;
   width: fit-content;
   height: fit-content;
@@ -46,6 +47,19 @@
   color: white;
 }
 
-.buttonContainer{
-    height: 4dvb;
+a{
+  pointer-events: visible;
+  cursor: pointer;
+}
+.buttonContainer {
+  height: 4dvb;
+}
+
+.cls-link1 {
+  fill: #364a4e;
+  transition: 0.2s;
+}
+
+.cls-link2 {
+  fill: #f7f2e1;
 }
