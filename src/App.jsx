@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scrollbar from "smooth-scrollbar";
-gsap.registerPlugin(ScrollTrigger);
+
 
 import { useState, useRef, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -15,8 +15,13 @@ import Project from "./assets/components/pages/project";
 import MainContent from "./assets/components/pages/main";
 
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
 function App() {
 
+  
   useEffect(() => {
   const triggers = ScrollTrigger.getAll();
   console.log("Nombre de ScrollTrigger actifs :", triggers.length);
@@ -27,8 +32,7 @@ function App() {
   const scrollContainerRef = useRef(null);
   const scrollbar = useRef(null);
 
-  
-  // Initialisation Smooth Scrollbar + ScrollTrigger
+  // Initialisation Smooth Scrollbar + ScrollTrigger POUR EVITER LE SCROLL SUR X
   useEffect(() => {
     if (!scrollContainerRef.current) return;
 
@@ -38,7 +42,7 @@ function App() {
       alwaysShowTracks: true,
     });
 
-    // Quand le scroll change, on met à jour ScrollTrigger
+    // MAJ du ScrollTrigger
     scrollbar.current.addListener(() => {
       const scrollContent =
         scrollContainerRef.current?.querySelector(".scroll-content");

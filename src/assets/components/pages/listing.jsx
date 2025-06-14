@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import listingProjects from "../../../data/listingProjects";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 function Listing({ triggerSwipe, scrollContainerRef, overlayRef }) {
   const listingRef = useRef(null);

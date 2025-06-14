@@ -40,7 +40,7 @@ const ContactForm = () => {
       <div className="contactInfos__inner socials">
         <div className="socials__inner">
           {contactData.map((icon, index) => (
-            <a href={icon.link} target="_blank"  className=""><div className="socials__link"><img src={icon.media} alt="" /></div></a>
+            <a href={icon.link} key={index} target="_blank"  className=""><div className="socials__link"><img src={icon.media} alt="" /></div></a>
           ))}
           
         </div>

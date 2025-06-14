@@ -2,18 +2,24 @@ import medias from "../../../data/medias.js";
 import listingProjects from "../../../data/listingProjects";
 import aboutData from "../../../data/aboutData.js";
 import ContactForm from "../contact.jsx";
-
 import { Link } from "react-router-dom";
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger.js";
 
-gsap.registerPlugin(ScrollTrigger);
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 function Home({ scrollContainerRef, triggerSwipe }) {
   const homeMedia = medias.find((item) => item.context === "home");
   const projects = [];
   const projectsNotFirst = [];
+
+  //--------------- SYSTEM REFS
+  const itemsRef = useRef([]);
+  
 
   //--------------- about IMG FLIP
 
@@ -158,12 +164,12 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
+    if (!itemsRef.current) return;
 
     // Sélectionne tous les éléments .js-row dans le conteneur scrollé
-    const rows = container.querySelectorAll(".js-row");
-
+    
     const anim = gsap.fromTo(
-      rows,
+      itemsRef.current,
       { clipPath: "inset(100% 0 0 0)" },
       {
         clipPath: "inset(0% 0 0 0)",
@@ -171,7 +177,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
         ease: "power2.out",
         stagger: 0.1,
         scrollTrigger: {
-          trigger: rows[0],
+          trigger: itemsRef.current[0],
           scroller: scrollContainerRef.current, // important pour Scrollbar + ScrollTrigger
           start: "top 80%",
           end: "top 20%",
@@ -249,7 +255,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                 </h1>
               </div>
               <div className="homeTopPageText">
-                <p class="p-primColor">
+                <p className="p-primColor">
                   Bonjour, je suis développeur web front et full stack en
                   devenir, avec un background en design graphique et motion
                   design. Curieux, je cherche constamment à apprendre de
@@ -293,13 +299,13 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                     viewBox="0 0 52.62 123.26"
                   >
                     <line
-                      class="arrowDownSVG"
+                      className="arrowDownSVG"
                       x1="27.78"
                       x2="27.78"
                       y2="76.47"
                     />
                     <path
-                      class="arrowDownSVG"
+                      className="arrowDownSVG"
                       d="M0,89.77l27.16,33.49,25.46-31.8c-6.33,6.33-15.52,16.89-24.85,16.8-10.35-.11-20.87-11.58-27.78-18.49Z"
                     />
                   </svg>
@@ -591,7 +597,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
           </p>
           <div className="skills__inner mg-t-32">
             {aboutData.map((aboutRow, index) => (
-              <div key={index} className="skills__row js-row p-white">
+              <div key={index} className="skills__row js-row p-white" ref={(el) => (itemsRef.current[index] = el)}>
                 <h3 className="skills__title TitleH3 mg-b-24">
                   {aboutRow.category}
                 </h3>

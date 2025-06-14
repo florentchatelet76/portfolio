@@ -106,33 +106,6 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
     return () => ctx.revert();
   }, [scrollContainerRef]);
 
-  // ScrollTrigger pour le lien suivant
-  // useEffect(() => {
-  //   const anim = gsap.fromTo(
-  //     previousProjectRef.current,
-  //     { opacity: 0, x: -50 },
-  //     {
-  //       opacity: 1,
-  //       x: 0,
-  //       duration: 1,
-  //       scrollTrigger: {
-  //         trigger: previousProjectRef.current,
-  //         start: "top bottom",
-  //         end: "top 20%",
-  //         toggleActions: "play none none reverse",
-  //         markers: false,
-  //       },
-  //     }
-  //   );
-  //   const rId = setTimeout(() => ScrollTrigger.refresh(), 100);
-  //   return () => {
-  //     clearTimeout(rId);
-  //     anim.kill();
-  //     anim.scrollTrigger?.kill();
-  //   };
-  // }, [id]);
-
-  // Log scroll (inchangé)
   useEffect(() => {
     let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
     const onScroll = () => {
@@ -191,11 +164,11 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
               viewBox="0 0 22.86 24.85"
             >
               <path
-                class="cls-link2"
+                className="cls-link2"
                 d="M18.56.79c1.79-.91,3.9.46,3.79,2.47l-.65,11.91-.37,6.7c-.15,2.67-3.73,3.42-4.94,1.04l-3.5-6.91c-.42-.83-1.26-1.38-2.19-1.43l-7.73-.42c-2.67-.15-3.42-3.73-1.04-4.94l5.98-3.03L18.56.79Z"
               />
               <path
-                class="cls-link1"
+                className="cls-link1"
                 d="M18.69,24.85c-1.15,0-2.18-.63-2.73-1.71l-3.5-6.91c-.34-.67-1.02-1.11-1.77-1.15l-7.73-.42c-1.45-.08-2.58-1.05-2.88-2.47-.3-1.42.34-2.76,1.64-3.42L18.34.34c1-.51,2.17-.45,3.11.17.94.61,1.47,1.65,1.41,2.78l-1.02,18.61c-.08,1.45-1.05,2.58-2.47,2.88-.23.05-.46.07-.68.07ZM19.75,1c-.33,0-.65.08-.96.23L2.16,9.66c-1.07.54-1.27,1.59-1.11,2.32.15.73.76,1.61,1.95,1.67l7.73.42c1.11.06,2.1.71,2.61,1.7l3.5,6.91c.54,1.07,1.59,1.26,2.32,1.11.73-.15,1.61-.76,1.67-1.95l1.02-18.61c.04-.76-.32-1.47-.96-1.88-.35-.23-.75-.35-1.15-.35Z"
               />
             </svg>
