@@ -97,6 +97,10 @@
 
   &__description {
     width: 60%;
+
+    @include respond-below("medium"){
+      width: 100%;
+    }
   }
 
   &__description p {
