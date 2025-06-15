@@ -315,6 +315,10 @@
       width: 100%;
       padding: 1rem;
     }
+
+    @include respond-below("small"){
+      padding: 0rem;
+    }
   }
   &__imgContainer {
     max-height: 90rem;
@@ -581,6 +585,12 @@ min-height: 30rem;
 
     text-align: center;
 
+  }
+
+  &__largeText{
+    @include respond-below("small"){
+      max-width: 35rem;
+    }
   }
 }
 

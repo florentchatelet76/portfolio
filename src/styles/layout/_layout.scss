@@ -141,7 +141,7 @@ html, body{
 .content-inside-padding {
     padding: 2rem 2rem 4rem 2rem;
   @include respond-below("medium") {
-    padding: 1rem 1rem;
+    padding: 1rem;
   }   
 
 }
