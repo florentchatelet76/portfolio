@@ -16,7 +16,6 @@
     &__name, &__email, &__message{
 
         line-height: 1.6rem;
-        padding: .5rem 1rem;
     }
 
     &__label{
@@ -26,6 +25,9 @@
 
     &__message{
         height: 6.4rem;
+        padding: .5rem 1rem;
+        min-height: 10rem;
+        min-width: 35rem;
     }
 
 }

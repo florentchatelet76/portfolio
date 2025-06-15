@@ -164,7 +164,7 @@
   }
 
   @include respond-below("small") {
-    bottom: 15rem;
+    bottom: 10rem;
     left: 50%;
     transform: translate(-50%, 0);
   }
@@ -240,6 +240,8 @@
   height: auto;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+
   &__inner {
     display: flex;
     flex-direction: row;
@@ -251,9 +253,35 @@
     height: 5rem;
   }
 
+  &__textContainer{
+      clip-path: inset(10% 0 50% 0);
+  }
+
   &__text {
     font-size: 1.4rem !important;
     color: $SecondaryC2Light;
+
+  }
+
+  &__textL{
+    transition: .3s ease-out;
+  }
+
+  &__textR{
+    transition: .3s ease-in;
+  }
+  
+  &__textDown{
+    transform: translateY(5rem);
+
+  }
+
+  .is-hovered{
+    transform: translateY(-50px);
+  }
+
+  .is-hoveredDown{
+     transform: translateY(-25px);
   }
 }
 .arrowDownSVG {

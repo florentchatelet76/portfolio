@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 function Listing({ triggerSwipe, scrollContainerRef, overlayRef }) {
@@ -86,14 +86,6 @@ function Listing({ triggerSwipe, scrollContainerRef, overlayRef }) {
                   </div>
                 </div>
 
-                {/* <div className="rolesContainer roles">
-                {project.roles &&
-                  project.roles.map((role, index) => (
-                    <p className="roles__roleText" key={index}>
-                      {role}
-                    </p>
-                  ))}
-              </div> */}
                 <a
                   className="seeProjectLink primaryButton"
                   scrollContainerRef={scrollContainerRef}
@@ -109,19 +101,21 @@ function Listing({ triggerSwipe, scrollContainerRef, overlayRef }) {
               </div>
             </div>
           </div>
-          <div
-            className={` listingBetweenContentGraphic ${
-              project.id % 2 == 0
-                ? "flexEnd circleRight"
-                : "flexStart circleLeft"
-            }`}
-          >
-            <div className="listingBetweenContentGraphic__inner">
-              <div className="circle">
-                <div className="dot"></div>
+          {index < listingProjects.length - 1 && (
+            <div
+              className={` listingBetweenContentGraphic ${
+                project.id % 2 == 0
+                  ? "flexEnd circleRight"
+                  : "flexStart circleLeft"
+              }`}
+            >
+              <div className="listingBetweenContentGraphic__inner">
+                <div className="circle">
+                  <div className="dot"></div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       ))}
     </div>

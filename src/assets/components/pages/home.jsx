@@ -29,6 +29,8 @@ function Home({ scrollContainerRef, triggerSwipe }) {
 
   const ChangeAboutSubject = () => setAboutSubject((prev) => !prev);
 
+  const [arrowDownHover, setarrowDownHover] = useState(false);
+
   // FLIP texte dev/design
   useEffect(() => {
     const dev = aboutTextDev.current;
@@ -213,9 +215,15 @@ useEffect(() => {
                 <div className="circlesContainer__rightCircle"></div>
               </div>
             </div>
-            <div className="arrowDown">
-              <div className="arrowDown__inner">
-                <p className="arrowDown__text">Mes projets</p>
+            <div className="arrowDown"
+            onMouseEnter={() => setarrowDownHover(true)}
+            onMouseLeave={() => setarrowDownHover(false)}
+            >
+              <div className="arrowDown__inner ">
+                  <div className="arrowDown__textContainer">
+                  <p className={`arrowDown__text arrowDown__textL ${arrowDownHover ? "is-hovered" : ""}`}>Mes projets</p>
+                  <p className={`arrowDown__text arrowDown__textL arrowDown__textDown ${arrowDownHover ? "is-hoveredDown" : ""}`}>Mes projets</p>
+                </div>
                 <div className="arrowDownSVGContainer">
                   <svg
                     id="FLECHE"
@@ -234,7 +242,11 @@ useEffect(() => {
                     />
                   </svg>
                 </div>
-                <p className="arrowDown__text">Mes projets</p>
+                <div className="arrowDown__textContainer">
+                  <p className={`arrowDown__text arrowDown__textR ${arrowDownHover ? "is-hovered" : ""}`}>Mes projets</p>
+                  <p className={`arrowDown__text arrowDown__textR arrowDown__textDown ${arrowDownHover ? "is-hoveredDown" : ""}`}>Mes projets</p>
+                </div>
+                
               </div>
             </div>
           </div>

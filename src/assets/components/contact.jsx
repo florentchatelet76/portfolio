@@ -17,11 +17,11 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("/contact.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
+      fetch("http://localhost/contact/contact.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
       .then((res) => res.text())
       .then((data) => {
         setResponseMessage(data);

@@ -1,4 +1,12 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/src/PHPMailer.php';
+require __DIR__ . '/src/SMTP.php';
+require __DIR__ . '/src/Exception.php';
+
+
 $data = json_decode(file_get_contents("php://input"), true);
 
 if ($data) {
