@@ -4,8 +4,8 @@ const listingProjects = [
     title: "Somewhere Between",
     year :"2024",
     link: "https://sb-preprod.netlify.app/",
-    image: "/assets/medias/somewhereBetweenCover.png",
-    image2: "/assets/medias/somewhereBetweenCover.png",
+    image: "/assets/medias/somewhereBetween/somewhereBetweenCover.png",
+    image2: "/assets/medias/somewhereBetween/somewhereBetweenCover.png",
     descriptionPreview:
       "Jeu 3D immersif et narratif sur navigateur, dans le cadre de la sensibilisation au sujet de la solitude chez les étudiants.",
     descriptions: [

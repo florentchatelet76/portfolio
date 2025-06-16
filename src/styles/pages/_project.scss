@@ -163,11 +163,18 @@
     height: 10rem;
     border : solid 1px $SecondaryC2Light;
     display: flex;
+
+    @include respond-below("medium"){
+      height: 15rem;
+    }
   }
 
   a{
     width: 50%;
     height: 100%;
+    @include respond-below("small"){
+      width: 90%;
+    }
   }
   &__linkContainerInner{
     width: 100%;
