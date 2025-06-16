@@ -92,9 +92,10 @@ label {
   font-size: 6rem;
   font-weight: bold;
   text-transform: uppercase;
-
+  line-height: 6.2rem!important;
   @include respond-below("medium") {
     font-size: 3.2rem;
+      line-height: 3.4rem!important;
   }
 }
 
@@ -118,6 +119,7 @@ label {
 
 .title2 {
   font-size: $sizeTitle2;
+
 }
 
 .titlePrimaryColor {
