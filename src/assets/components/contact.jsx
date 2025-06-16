@@ -17,20 +17,22 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      fetch("http://localhost/contact/contact.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      fetch("/api/contact.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
       })
       .then((res) => res.text())
       .then((data) => {
         setResponseMessage(data);
         setFormData({ name: "", email: "", message: "" });
+        console.log("data mail : "+data)
       })
       .catch((err) => {
         console.error("Erreur : ", err);
         setResponseMessage("Erreur lors de l'envoi.");
       });
+
   };
 
   return (

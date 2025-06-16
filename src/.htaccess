@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Exclut .php dans /api/ de la réécriture
+  RewriteCond %{REQUEST_URI} ^/api/.*\.php$ [NC]
+  RewriteRule .* - [L]
+
+  # SPA React : tout le reste vers index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>

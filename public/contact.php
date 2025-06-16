@@ -1,32 +1,63 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// Débug
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require __DIR__ . '/src/PHPMailer.php';
-require __DIR__ . '/src/SMTP.php';
-require __DIR__ . '/src/Exception.php';
+// Autoload PHPMailer
+require __DIR__ . '/PHPMailer/src/Exception.php';
+require __DIR__ . '/PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/PHPMailer/src/SMTP.php';
 
+// Récupère et décode le JSON
+$data = json_decode(file_get_contents('php://input'), true);
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-if ($data) {
-    $name = htmlspecialchars($data['name']);
-    $email = htmlspecialchars($data['email']);
-    $message = htmlspecialchars($data['message']);
-
-    // Exemple simple d’envoi par mail (tu peux adapter !)
-    $to = "florent.chatelet@gmail.com";
-    $subject = "Message de $name depuis ton site";
-    $body = "Nom: $name\nEmail: $email\nMessage:\n$message";
-    $headers = "From: $email";
-
-
-
-    if (mail($to, $subject, $body, $headers)) {
-        echo "Merci pour ton message, $name !";
-    } else {
-        echo "Erreur lors de l'envoi du message.";
-    }
-} else {
-    echo "Données invalides.";
+if (! $data) {
+    echo 'Données invalides.';
+    exit;
 }
+
+// Sécurisation et validation
+$name    = htmlspecialchars($data['name']   ?? '');
+$email   = filter_var(   $data['email']  ?? '', FILTER_VALIDATE_EMAIL);
+$message = htmlspecialchars($data['message'] ?? '');
+
+if (! $email) {
+    echo 'Email invalide.';
+    exit;
+}
+
+$mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+try {
+    // Config SMTP Infomaniak
+    $mail->isSMTP();
+    $mail->Host       = 'mail.infomaniak.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'florent@florentchatelet.fr';
+    $mail->Password   = 'Fagitmdr76;;';
+    $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
+
+    // Expéditeur / destinataire
+    $mail->setFrom('florent@florentchatelet.fr', 'Florent Chatelet');
+    $mail->addAddress('florent.chatelet@gmail.com');
+    $mail->addReplyTo($email, $name);
+
+    // Sujet & corps
+    $mail->Subject = "Nouveau message de $name";
+    $mail->Body    = "Nom   : $name\nEmail : $email\n\n$message";
+
+    $mail->send();
+
+    // Affichage de confirmation
+    echo "Merci pour ton message, $name !";
+    exit;
+
+} catch (\PHPMailer\PHPMailer\Exception $e) {
+    // Affiche l’erreur SMTP
+    echo "Erreur SMTP : {$mail->ErrorInfo}";
+    exit;
+}
+
+// (Pas de echo ni de fermeture PHP en fin de fichier)
