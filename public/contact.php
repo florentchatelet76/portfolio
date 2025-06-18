@@ -35,7 +35,7 @@ try {
     $mail->Host       = 'mail.infomaniak.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'florent@florentchatelet.fr';
-    $mail->Password   = 'Fagitmdr76;;';
+    $mail->Password   = '///';
     $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
