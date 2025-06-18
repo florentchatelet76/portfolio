@@ -611,6 +611,9 @@ min-height: 30rem;
     }
   }
 
+  &__imgToggleContainer{
+    position: relative;
+  }
   &__imgToggleContainer,
   &__textContainer {
     width: 50%;

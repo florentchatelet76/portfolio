@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="about_x5F_icon_x5F_dev" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 125 125">
+  <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke-width: 3px;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke: #94a388;
+      }
+
+      .st1 {
+        stroke-width: 2px;
+      }
+
+      .st2 {
+        fill: #94a388;
+      }
+    </style>
+  </defs>
+  <rect id="square" class="st1" x="1" y="1" width="123" height="123"/>
+  <path id="bracketL" class="st0" d="M23.8,76.6l-8.8-32.8,32.8-8.8"/>
+  <path id="bracketR" class="st0" d="M104,50l8.8,32.8-32.8,8.8"/>
+  <circle id="dot" class="st2" cx="45.4" cy="64" r="3"/>
+  <circle id="dot1" data-name="dot" class="st2" cx="62.4" cy="64" r="3"/>
+  <circle id="dot2" data-name="dot" class="st2" cx="79.4" cy="64" r="3"/>
+</svg>

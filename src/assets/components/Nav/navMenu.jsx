@@ -20,11 +20,6 @@ function NavMenu({triggerSwipe, scrollContainerRef, overlayRef}) {
       to: "/listing",
       image: medias.find((item) => item.context === "home").image,
     },
-    {
-      label: "ABOUT",
-      to: "/",
-      image: medias.find((item) => item.context === "home").image,
-    },
   ];
 
   const imgRefs = useRef([]);

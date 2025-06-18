@@ -1,0 +1,56 @@
+.icon-dev-bracket,
+.icon-dev-square {
+  stroke-width: 5px;
+}
+
+.icon-dev-bracket,
+.icon-dev-square {
+  fill: none;
+  stroke: #94a388;
+}
+
+.icon-dev-bracket {
+  stroke: white;
+  transform: translate(0, 0);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.icon-dev-square {
+  position: relative;
+  fill: #94a388;
+}
+
+.dot-about {
+  fill: white;
+  transform: translate(0, 0);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.icon-dev {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);
+  z-index: 10;
+  width: 6rem;
+  height: 6rem;
+}
+
+.line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 5px;
+
+
+}
+
+.line-1{
+  transform: translate(10rem, 5rem);
+}
+
+.line-2{
+  transform: translate(1rem, 1rem) rotate(180deg);
+  transform-origin: center center;
+}

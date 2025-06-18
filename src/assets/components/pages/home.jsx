@@ -4,11 +4,13 @@ import aboutData from "../../../data/aboutData.js";
 import ContactForm from "../contact.jsx";
 import { Link } from "react-router-dom";
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger.js";
+import Scrollbar from "smooth-scrollbar";
 
-
-
+gsap.registerPlugin(DrawSVGPlugin);
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -18,18 +20,127 @@ function Home({ scrollContainerRef, triggerSwipe }) {
   const aboutTextDev = useRef(null);
   const aboutTextDesign = useRef(null);
   const aboutButtonDesign = useRef(null);
+  const mainProjectRef = useRef(null);
 
   const imgsRef = useRef([]);
   const itemsRef = useRef([]);
+  const iconDev = useRef();
+  const iconDevDots = useRef([]);
+  const iconDevBrackets = useRef([]);
+  const iconDesignLines = useRef([]);
+  const iconAboutInner = useRef();
 
   const aboutImgDev = medias.find((item) => item.id === 4);
-  const aboutImgDesign = medias.find((item) => item.id === 1);
+  const aboutImgDesign = medias.find((item) => item.id === 4);
   const projects = listingProjects;
   const projectsNotFirst = projects.slice(1, 3);
 
+  const [arrowDownHover, setarrowDownHover] = useState(false);
+
   const ChangeAboutSubject = () => setAboutSubject((prev) => !prev);
 
-  const [arrowDownHover, setarrowDownHover] = useState(false);
+  useEffect(() => {
+    if (aboutSubject) {
+      iconDesignLines.current = [];
+    } else {
+      iconDevDots.current = [];
+      iconDevBrackets.current = [];
+    }
+  }, [aboutSubject]);
+
+  useEffect(() => {
+    if (!iconAboutInner.current) return;
+
+    gsap.fromTo(
+      iconAboutInner.current,
+      { rotation: 0 },
+      {
+        rotation: 360,
+        duration: 1,
+        ease: "power2.out",
+      }
+    );
+  }, [aboutSubject]);
+
+  //ROTATION ICON ABOUT
+  useEffect(() => {
+    if (!iconDev.current) return;
+
+    gsap.to(iconDev.current, {
+      rotation: 360,
+      duration: 60,
+      repeat: -1,
+
+      ease: "linear",
+    });
+  }, []);
+
+  // BRACKETS
+  useEffect(() => {
+    if (!iconDevBrackets.current.length) return;
+
+    gsap.fromTo(
+      iconDevBrackets.current,
+      {
+        transform: (i) =>
+          i === 0 ? "translateX(.5rem)" : "translateX(-.5rem)",
+      },
+      {
+        transform: (i) =>
+          i === 0 ? "translateX(-.5rem)" : "translateX(.5rem)",
+        duration: 1,
+        repeat: -1,
+        yoyo: true,
+
+        ease: "ease-in",
+      }
+    );
+  }, [aboutSubject]);
+  // ANIM DOTS
+
+  useEffect(() => {
+    if (!iconDevDots.current.length) return;
+
+    gsap.fromTo(
+      iconDevDots.current,
+      {
+        opacity: 0,
+        scale: 1.5,
+      },
+      {
+        opacity: 1,
+        scale: 0.5,
+        duration: 0.5,
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 0.8,
+        ease: "linear",
+        stagger: {
+          each: 0.2,
+        },
+      }
+    );
+  }, [aboutSubject]);
+
+  // LINES ICON
+
+  useEffect(() => {
+    if (!iconDesignLines.current.length) return;
+
+    if (!aboutSubject && iconDesignLines.current.length) {
+      iconDesignLines.current.forEach((el, index) => {
+        const tl = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 0.8,
+          delay: index * 0.2,
+        });
+
+        tl.set(el, { drawSVG: "0% 0%" })
+          .to(el, { drawSVG: "0% 100%", duration: 1, ease: "power1.inOut" })
+          .to(el, { drawSVG: "100% 100%", duration: 1, ease: "power1.inOut" });
+      });
+    }
+  }, [aboutSubject]);
 
   // FLIP texte dev/design
   useEffect(() => {
@@ -39,112 +150,121 @@ function Home({ scrollContainerRef, triggerSwipe }) {
 
     if (aboutSubject) {
       gsap.to(design, {
-        opacity: 0, y: 20, duration: 0.3,
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
         onComplete: () => {
           design.style.display = "none";
           button.style.display = "none";
           dev.style.display = "block";
-          gsap.fromTo(dev, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
+          gsap.fromTo(
+            dev,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.5 }
+          );
         },
       });
     } else {
       gsap.to(dev, {
-        opacity: 0, y: 20, duration: 0.3,
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
         onComplete: () => {
           dev.style.display = "none";
           design.style.display = "block";
-          gsap.fromTo(design, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 });
+          gsap.fromTo(
+            design,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.5 }
+          );
         },
       });
 
       gsap.to(button, {
-        opacity: 0, y: 20, duration: 0.3,
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
         onComplete: () => {
           button.style.display = "block";
-          gsap.fromTo(button, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 });
+          gsap.fromTo(
+            button,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.3 }
+          );
         },
       });
     }
   }, [aboutSubject]);
 
   // SCROLLTRIGGER + PARALLAX sur images
-useEffect(() => {
-  if (!scrollContainerRef.current) return;
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
 
-  const runGSAP = async () => {
-    // On attend que la page et les assets soient bien chargés
-    await new Promise((resolve) => {
-      if (document.readyState === "complete") {
-        resolve();
-      } else {
-        window.addEventListener("load", resolve, { once: true });
-      }
-    });
+    const runGSAP = async () => {
+      // ATTENTE DU LOAD DES ASSETS QUI ONT DES REFS
+      await new Promise((resolve) => {
+        if (document.readyState === "complete") {
+          resolve();
+        } else {
+          window.addEventListener("load", resolve, { once: true });
+        }
+      });
 
-    // On laisse un petit délai de sécurité après le load
-    await new Promise((resolve) => setTimeout(resolve, 300));
+      // DELAI APRES LOAD
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
-    if (!imgsRef.current.length || !itemsRef.current.length) return;
+      if (!imgsRef.current.length || !itemsRef.current.length) return;
 
-    imgsRef.current.forEach((el, i) => {
+      imgsRef.current.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { y: i % 2 === 0 ? "5rem" : "10rem" },
+          {
+            y: i % 2 === 0 ? "-15rem" : "-3rem",
+            ease: "linear",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 100%",
+              end: "bottom 0%",
+              scrub: true,
+              scroller: scrollContainerRef.current,
+            },
+          }
+        );
+      });
+
       gsap.fromTo(
-        el,
-        { y: i % 2 === 0 ? "5rem" : "10rem" },
+        itemsRef.current,
+        { clipPath: "inset(100% 0 0 0)" },
         {
-          y: i % 2 === 0 ? "-15rem" : "-3rem",
-          ease: "linear",
+          clipPath: "inset(0% 0 0 0)",
+          duration: 1,
+          ease: "power2.out",
+          stagger: 0.1,
           scrollTrigger: {
-            trigger: el,
-            start: "top 100%",
-            end: "bottom 0%",
-            scrub: true,
+            trigger: itemsRef.current[0],
             scroller: scrollContainerRef.current,
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "play none none reverse",
           },
         }
       );
-    });
 
-    gsap.fromTo(
-      itemsRef.current,
-      { clipPath: "inset(100% 0 0 0)" },
-      {
-        clipPath: "inset(0% 0 0 0)",
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: itemsRef.current[0],
-          scroller: scrollContainerRef.current,
-          start: "top 80%",
-          end: "top 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+      ScrollTrigger.refresh(true);
+    };
 
-    ScrollTrigger.refresh(true);
-  };
+    runGSAP();
 
-  runGSAP();
-
-  return () => {
-    // Cleanup éventuel si tu veux kill les triggers
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  };
-}, [scrollContainerRef]);
-
+    return () => {
+      // KILL TRIGGERS
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [scrollContainerRef]);
 
   return (
     <div className="home homeContainer">
       <div className="home__inner">
-        {/* <div className="myName">
-          {prenom.split("").map((lettre, index) => (
-            <span key={index} className="lettre">
-              {lettre}
-            </span>
-          ))}
-        </div> */}
-
         <div className="homeTopPageContent">
           <div className="homeTopPageContent__inner">
             <div className="homeTopPageContent__logo topPageLogo">
@@ -187,18 +307,6 @@ useEffect(() => {
                   design. Curieux, je cherche constamment à apprendre de
                   nouvelles compétences techniques.
                 </p>
-                {/* <div className="homeTopPageNav">
-                  <div className="buttonContainer">
-                    <Link to="/listing" className="PrimaryButtonLink">
-                      <button className="primaryButton">Qui suis-je</button>
-                    </Link>
-                  </div>
-                  <div className="buttonContainer">
-                    <Link to="/listing" className="PrimaryButtonLink">
-                      <button className="primaryButton">Contactez-moi</button>
-                    </Link>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
@@ -215,14 +323,62 @@ useEffect(() => {
                 <div className="circlesContainer__rightCircle"></div>
               </div>
             </div>
-            <div className="arrowDown"
-            onMouseEnter={() => setarrowDownHover(true)}
-            onMouseLeave={() => setarrowDownHover(false)}
+            <div
+              className="arrowDown"
+              onMouseEnter={() => setarrowDownHover(true)}
+              onMouseLeave={() => setarrowDownHover(false)}
+              onClick={() => {
+                if (scrollContainerRef.current && mainProjectRef.current) {
+                  const target =
+                    mainProjectRef.current.getBoundingClientRect().top;
+                  const offset = scrollContainerRef.current.scrollTop || 0;
+
+                  // si SMOOTH SCROLLBAR
+                  if (scrollContainerRef.current.scrollTop !== undefined) {
+                    const scrollContent =
+                      scrollContainerRef.current.querySelector(
+                        ".scroll-content"
+                      );
+                    if (
+                      scrollContent &&
+                      scrollContent.scrollTop !== undefined
+                    ) {
+                      const scrollbarInstance = Scrollbar.get(
+                        scrollContainerRef.current
+                      );
+                      if (scrollbarInstance) {
+                        scrollbarInstance.scrollTo(
+                          0,
+                          scrollbarInstance.offset.y + target,
+                          800
+                        );
+                      }
+                    }
+                  } else {
+                    // SCROLL NATIF
+                    mainProjectRef.current.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }
+                }
+              }}
             >
               <div className="arrowDown__inner ">
-                  <div className="arrowDown__textContainer">
-                  <p className={`arrowDown__text arrowDown__textL ${arrowDownHover ? "is-hovered" : ""}`}>Mes projets</p>
-                  <p className={`arrowDown__text arrowDown__textL arrowDown__textDown ${arrowDownHover ? "is-hoveredDown" : ""}`}>Mes projets</p>
+                <div className="arrowDown__textContainer">
+                  <p
+                    className={`arrowDown__text arrowDown__textL ${
+                      arrowDownHover ? "is-hovered" : ""
+                    }`}
+                  >
+                    Mes projets
+                  </p>
+                  <p
+                    className={`arrowDown__text arrowDown__textL arrowDown__textDown ${
+                      arrowDownHover ? "is-hoveredDown" : ""
+                    }`}
+                  >
+                    Mes projets
+                  </p>
                 </div>
                 <div className="arrowDownSVGContainer">
                   <svg
@@ -243,23 +399,37 @@ useEffect(() => {
                   </svg>
                 </div>
                 <div className="arrowDown__textContainer">
-                  <p className={`arrowDown__text arrowDown__textR ${arrowDownHover ? "is-hovered" : ""}`}>Mes projets</p>
-                  <p className={`arrowDown__text arrowDown__textR arrowDown__textDown ${arrowDownHover ? "is-hoveredDown" : ""}`}>Mes projets</p>
+                  <p
+                    className={`arrowDown__text arrowDown__textR ${
+                      arrowDownHover ? "is-hovered" : ""
+                    }`}
+                  >
+                    Mes projets
+                  </p>
+                  <p
+                    className={`arrowDown__text arrowDown__textR arrowDown__textDown ${
+                      arrowDownHover ? "is-hoveredDown" : ""
+                    }`}
+                  >
+                    Mes projets
+                  </p>
                 </div>
-                
               </div>
             </div>
           </div>
         </div>
 
         <div className="homeProjectsContainer">
-          {
-            // MAIN PROJECT
-          }
-          <div className="mainProjectContainer  content-inside-padding contentSpacing homeProjectContainer">
+          <div
+            className="mainProjectContainer  content-inside-padding contentSpacing homeProjectContainer"
+            ref={(el) => (mainProjectRef.current = el)}
+          >
             <div className="mainProject__inner mainProject">
               <div className="mainProject__imgContainer">
                 <div className="mainProject__specifics">
+                  {
+                    // MAIN PROJECT
+                  }
                   <div className="mainProject__specificsInner">
                     {projects[0].technologies &&
                       projects[0].technologies.map((technologie, index) => (
@@ -368,7 +538,7 @@ useEffect(() => {
                 <div className="sideImgs">
                   <div className="sideImgs__inner">
                     <div
-                    ref={(el) => (imgsRef.current[index*2] = el)}
+                      ref={(el) => (imgsRef.current[index * 2] = el)}
                       className={`sideImgs__sideImg sideImgs__scroll-1 ${
                         project.id % 2 == 0
                           ? "sideImgs__sideImg1-reverse"
@@ -383,7 +553,7 @@ useEffect(() => {
                     </div>
 
                     <div
-                    ref={(el) => (imgsRef.current[index*2+1] = el)}
+                      ref={(el) => (imgsRef.current[index * 2 + 1] = el)}
                       className={`sideImgs__sideImg sideImgs__scroll-2 ${
                         project.id % 2 == 0
                           ? "sideImgs__sideImg2-reverse"
@@ -415,7 +585,7 @@ useEffect(() => {
                 to="/listing"
                 onClick={(e) => {
                   e.preventDefault();
-                  triggerSwipe(`/projects/${projects[0].id}`);
+                  triggerSwipe(`/listing`);
                 }}
                 className="PrimaryButtonLink"
               >
@@ -451,11 +621,13 @@ useEffect(() => {
                     </p>
 
                     <p className=" mg-t-24">
-                      Fort de mon expérience 360 en agence et en travaux en collaboration avec des développeurs, j'aspire à mettre mes connaissances acquises à votre disposition.
+                      Fort de mon expérience 360 en agence et en travaux en
+                      collaboration avec des développeurs, j'aspire à mettre mes
+                      connaissances acquises à votre disposition.
                     </p>
                   </div>
                 </div>
-                
+
                 <div
                   className="h-about__text h-about-Designer mg-t-24"
                   ref={aboutTextDesign}
@@ -475,27 +647,108 @@ useEffect(() => {
                     </p>
                   </div>
                 </div>
-                 <a
-                href="https://vimeo.com/1014820828"
-                target="blank"
-                className="mg-t-24 primaryButton"
-                ref={aboutButtonDesign}
-              >
-                Visionner mon showreel
-              </a>
+                <a
+                  href="https://vimeo.com/1014820828"
+                  target="blank"
+                  className="mg-t-24 primaryButton"
+                  ref={aboutButtonDesign}
+                >
+                  Visionner mon showreel
+                </a>
               </div>
               <a
-                href="/pdf/Florent_Chatelet_CV.pdf"
-                download="Florent_Chatelet_CV.pdf"
-                target="_blank"
+                href="assets/pdf/Florent_Chatelet_CV.pdf"
+                download="Florent_Chatelet_CV_LIGHT.pdf"
                 className="mg-t-24 seeProjectLink primaryButton"
               >
                 Mon CV
               </a>
-
-             
             </div>
             <div className="h-about__imgToggleContainer">
+              <div
+                ref={(el) => (iconAboutInner.current = el)}
+                className="icon-dev"
+              >
+                <svg
+                  ref={(el) => (iconDev.current = el)}
+                  id="about_icon_dev"
+                  className="icon-dev-inner"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 125 125"
+                >
+                  <g>
+                    <rect
+                      id="square"
+                      className="icon-dev-square"
+                      x="1"
+                      y="1"
+                      width="123"
+                      height="123"
+                    />
+
+                    {aboutSubject === false && (
+                      <>
+                        <path
+                          ref={(el) => (iconDesignLines.current[1] = el)}
+                          id="line-2"
+                          className="line line-2"
+                          d="M137.31,1.38C95.47-3.31,49.19,36.48,71.54,76.39,106.2,138.31,25.2,166.76.87,124.09"
+                        />
+                        <path
+                          ref={(el) => (iconDesignLines.current[0] = el)}
+                          id="line"
+                          className="line line-1"
+                          d="M68.69.99C-20.2,11.22-3.31,90.33,18.02,108.55"
+                        />
+                      </>
+                    )}
+
+                    {aboutSubject === true && (
+                      <>
+                        <path
+                          ref={(el) => (iconDevBrackets.current[0] = el)}
+                          id="bracketL"
+                          className="icon-dev-bracketL icon-dev-bracket"
+                          d="M23.78,76.57l-8.78-32.78,32.78-8.78"
+                        />
+                        <path
+                          ref={(el) => (iconDevBrackets.current[1] = el)}
+                          id="bracketR"
+                          className="icon-dev-bracketR icon-dev-bracket"
+                          d="M104,50l8.79,32.78-32.78,8.78"
+                        />
+                        <circle
+                          ref={(el) => (iconDevDots.current[0] = el)}
+                          id="dot"
+                          className="dot-about"
+                          cx="45.39"
+                          cy="64"
+                          r="4"
+                        />
+                        <circle
+                          ref={(el) => (iconDevDots.current[1] = el)}
+                          id="dot-2"
+                          data-name="dot"
+                          className="dot-about"
+                          cx="62.39"
+                          cy="64"
+                          r="4"
+                        />
+                        <circle
+                          ref={(el) => (iconDevDots.current[2] = el)}
+                          id="dot-3"
+                          data-name="dot"
+                          className="dot-about"
+                          cx="79.39"
+                          cy="64"
+                          r="4"
+                        />
+                      </>
+                    )}
+                  </g>
+                </svg>
+              </div>
+
               <div className="h-about__imgContainer">
                 <img
                   src={
@@ -535,7 +788,11 @@ useEffect(() => {
           </p>
           <div className="skills__inner mg-t-32">
             {aboutData.map((aboutRow, index) => (
-              <div key={index} className="skills__row js-row p-white" ref={(el) => (itemsRef.current[index] = el)}>
+              <div
+                key={index}
+                className="skills__row js-row p-white"
+                ref={(el) => (itemsRef.current[index] = el)}
+              >
                 <h3 className="skills__title TitleH3 mg-b-24">
                   {aboutRow.category}
                 </h3>

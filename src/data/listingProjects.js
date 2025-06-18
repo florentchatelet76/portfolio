@@ -184,29 +184,53 @@ const listingProjects = [
     ],
   },
 
-  // {
-  //   id: "3",
-  //   title: "Register & Login",
-  //   image: "/assets/medias/img_test4.png",
-  //   image2: "/assets/medias/img_test4.png",
-  //   image3: "/assets/medias/img_test4.png",
-  //   descriptionPreview: "splendide texte",
-  //   technologies: ["Wordpress", "HTML/CSS", "Javascript", "PHP"],
-  //   content: [
-  //     {
-  //       type: "CenteredText",
-  //       props: { text: "Texte centré 1" },
-  //     },
-  //     {
-  //       type: "CenteredText",
-  //       props: { text: "Texte centré 2" },
-  //     },
-  //     {
-  //       type: "Paragraph",
-  //       props: { text: "Paragraphe lol" },
-  //     },
-  //   ],
-  // },
+    {
+    id: "3",
+    link: "https://github.com/florentchatelet76/portfolio",
+    title: "Portfolio 2025",
+    year :"2025",
+    image: "/assets/medias/portfolio/portfolio_cover.jpg",
+    image2: "/assets/medias/portfolio/portfolio_cover.jpg",
+    descriptionPreview: "Développement de mon portfolio avec React.",
+    descriptions : ["Développement de mon portfolio avec React. Projet d'entraînement au framework front avec l'utilisation de composants et blocs réutilisables."],
+    technologies: ["HTML/CSS", "REACT", "Javascript", "GSAP"],
+    roles: ["Designer", "Développeur Front"],
+    content: [
+            {
+        type: "TwoImgText",
+        props: { 
+          image2 : "/assets/medias/portfolio/portfolio_code_projectMappingLoop.png",
+          image1: "/assets/medias/portfolio/portfolio_code_projectMappingTable.png",
+          title : "Création de blocs flexibles",
+          text: "Pour ce projet, j’ai conçu une architecture flexible où le contenu est défini sous forme de blocs de données dans un fichier JavaScript. Chaque bloc possède un type associé à un composant React spécifique, ce qui permet de générer dynamiquement la mise en page en fonction des données fournies. Cette approche modulaire facilite la réutilisation des composants, simplifie la maintenance et permet d’adapter facilement le contenu sans modifier le code des composants." },
+         
+        },
+      {
+        type : "ImageText",
+        props : {
+          image : "/assets/medias/portfolio/portfolio_code_injectionDynamique.png",
+          title : "Injection dynamique depuis un fichier de données",
+          text : "Les projets sont centralisés dans un fichier JS et injectés dans la home via une simple importation. Le projet principal est affiché séparément, tandis que les suivants sont mappés en utilisant un layout inversé conditionné par (project.id % 2). Les visuels et métadonnées sont entièrement pilotés par les données, ce qui rend la structure évolutive, sans duplication de code."
+        }
+      },
+            {
+        type: "List",
+        
+        props: { 
+          title: "Transitions de page animées avec GSAP timeline et promesse async",
+          text : "Une transition custom entre les pages est orchestrée via une timeline GSAP. Elle enchaîne :",
+           text2: "Cela crée un effet de swipe immersif tout en assurant que les animations et le contenu restent synchronisés.",
+          list: [
+            "L’entrée d’un overlay animé (yPercent: 0),", 
+            "Un scrollTo top avec délai synchrone (via Promise + setTimeout),",
+            "Et enfin la navigation via navigate()."] },
+      },
+
+
+
+    ],
+  },
+
 ];
 
 export default listingProjects;

@@ -94,8 +94,8 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
           ease: "linear",
           scrollTrigger: {
             trigger: headImgRef.current,
-            start: "top top", // dès que le haut de l'image atteint le haut du viewport
-            end: "bottom top", // jusqu’à ce que le bas de l’image atteigne le haut du viewport
+            start: "top top", 
+            end: "bottom top", 
             scrub: true,
             scroller: scrollContainerRef.current,
           },
@@ -215,14 +215,21 @@ function Project({ triggerSwipe, scrollContainerRef, overlayRef }) {
         </div>
       </div>
 
+
+
+
       {project.content.map((block, index) => {
         const Component = COMPONENTS[block.type];
         if (!Component) {
-          console.warn(`No component for block type "${block.type}"`);
+          console.warn(`pas de bloc flexible pour "${block.type}"`);
           return null;
         }
         return <Component key={index} {...block.props} />;
       })}
+
+
+
+
       <div className="navProjects contentSpacing">
         {prevProject && (
           <div
