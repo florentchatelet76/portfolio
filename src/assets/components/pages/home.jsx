@@ -657,7 +657,7 @@ function Home({ scrollContainerRef, triggerSwipe }) {
                 </a>
               </div>
               <a
-                href="assets/pdf/Florent_Chatelet_CV.pdf"
+                href="assets/pdf/CV_Florent_Chatelet_DEVELOPPEUR_FULL_STACK.pdf"
                 download="Florent_Chatelet_CV_LIGHT.pdf"
                 className="mg-t-24 seeProjectLink primaryButton"
               >
